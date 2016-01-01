@@ -12,7 +12,11 @@ import javax.swing.Timer;
 
 public class Field extends JPanel {
 
-	private ArrayList<BouncingBall> ArrayBalls = new ArrayList<BouncingBall>(5);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9093514227845785559L;
+	private ArrayList<BouncingBall> ArrayBalls = new ArrayList<BouncingBall>();
 	private boolean paused = false;
 	private Timer TimerRepaint = new Timer(10, new ActionListener() {
 
@@ -23,12 +27,24 @@ public class Field extends JPanel {
 		}
 	});
 
-	void addBall() {
+	public void addBall() {
 		ArrayBalls.add(new BouncingBall(this));
 	}
 
-	void canMove(BouncingBall ball) {
+	public synchronized void pause() {
+		paused = true;
+	}
 
+	public synchronized void resume() {
+		paused = false;
+		notifyAll();
+	}
+
+	public synchronized void canMove(BouncingBall ball)
+			throws InterruptedException {
+		if (paused) {
+			wait();
+		}
 	}
 
 	@Override
@@ -47,6 +63,7 @@ public class Field extends JPanel {
 		// TODO Auto-generated constructor stub
 		setBackground(Color.WHITE);
 		TimerRepaint.start();
+		ArrayBalls.add(new BouncingBall(this));
 	}
 
 }

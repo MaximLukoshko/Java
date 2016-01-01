@@ -13,6 +13,10 @@ import javax.swing.JMenuItem;
 
 public class MainFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6148383319193422241L;
 	int WIDTH = 900;
 	int HEIGHT = 700;
 
@@ -22,8 +26,8 @@ public class MainFrame extends JFrame {
 	JMenu MenuControl = new JMenu("Control");
 
 	JMenuItem MenuBallsAdd = new JMenuItem();
-	JMenuItem MenuControlStart = new JMenuItem();
-	JMenuItem MenuControlStop = new JMenuItem();
+	JMenuItem MenuControlResume = new JMenuItem();
+	JMenuItem MenuControlPause = new JMenuItem();
 
 	Field field = new Field();
 
@@ -39,19 +43,26 @@ public class MainFrame extends JFrame {
 		SetListeners();
 
 		MenuBalls.add(MenuBallsAdd);
-		MenuControl.add(MenuControlStart);
-		MenuControl.add(MenuControlStop);
+		MenuControl.add(MenuControlResume);
+		MenuControl.add(MenuControlPause);
 
 		MenuBarMyMenu.add(MenuBalls);
 		MenuBarMyMenu.add(MenuControl);
 
 		this.setJMenuBar(MenuBarMyMenu);
 
+		MenuControlResume.setEnabled(false);
+		
 		this.add(field);
 	}
 
 	void SetListeners() {
 		Action ActionMenuBallsAdd = new AbstractAction("Add") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 7213446475314211005L;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -61,25 +72,39 @@ public class MainFrame extends JFrame {
 		};
 		MenuBallsAdd.setAction(ActionMenuBallsAdd);
 
-		Action ActionMenuControlStart = new AbstractAction("Start") {
+		Action ActionMenuControlResume = new AbstractAction("Resume") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 5144801925819024079L;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-
+				MenuControlResume.setEnabled(false);
+				MenuControlPause.setEnabled(true);
+				field.resume();
 			}
 		};
-		MenuControlStart.setAction(ActionMenuControlStart);
+		MenuControlResume.setAction(ActionMenuControlResume);
 
-		Action ActionMenuControlStop = new AbstractAction("Stop") {
+		Action ActionMenuControlPause = new AbstractAction("Pause") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 8607383871481050813L;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-
+				MenuControlResume.setEnabled(true);
+				MenuControlPause.setEnabled(false);
+				field.pause();
 			}
 		};
-		MenuControlStop.setAction(ActionMenuControlStop);
+		MenuControlPause.setAction(ActionMenuControlPause);
 	}
 
 	public MainFrame() throws HeadlessException {
@@ -87,7 +112,6 @@ public class MainFrame extends JFrame {
 		// TODO Auto-generated constructor stub
 		SetPosition();
 		FillFrame();
-		SetListeners();
 	}
 
 }
