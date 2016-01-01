@@ -25,6 +25,8 @@ public class MainFrame extends JFrame {
 	JMenuItem MenuControlStart = new JMenuItem();
 	JMenuItem MenuControlStop = new JMenuItem();
 
+	Field field = new Field();
+
 	void SetPosition() {
 		setSize(WIDTH, HEIGHT);
 
@@ -44,6 +46,8 @@ public class MainFrame extends JFrame {
 		MenuBarMyMenu.add(MenuControl);
 
 		this.setJMenuBar(MenuBarMyMenu);
+
+		this.add(field);
 	}
 
 	void SetListeners() {
@@ -52,7 +56,7 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-
+				field.addBall();
 			}
 		};
 		MenuBallsAdd.setAction(ActionMenuBallsAdd);

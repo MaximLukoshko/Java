@@ -1,0 +1,52 @@
+package main;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+public class Field extends JPanel {
+
+	private ArrayList<BouncingBall> ArrayBalls = new ArrayList<BouncingBall>(5);
+	private boolean paused = false;
+	private Timer TimerRepaint = new Timer(10, new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			repaint();
+		}
+	});
+
+	void addBall() {
+		ArrayBalls.add(new BouncingBall(this));
+	}
+
+	void canMove(BouncingBall ball) {
+
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		// TODO Auto-generated method stub
+		super.paintComponent(g);
+
+		Graphics2D canvas = (Graphics2D) g;
+		for (BouncingBall ball : ArrayBalls) {
+			ball.Paint(canvas);
+		}
+	}
+
+	public Field() {
+		super();
+		// TODO Auto-generated constructor stub
+		setBackground(Color.WHITE);
+		TimerRepaint.start();
+	}
+
+}
