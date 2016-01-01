@@ -1,5 +1,7 @@
 package main;
 
+import javax.swing.JFrame;
+
 public class MainApplication {
 
 	/**
@@ -7,7 +9,9 @@ public class MainApplication {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Hello");
+		MainFrame FrameLab3 = new MainFrame();
+		FrameLab3.setVisible(true);
+		FrameLab3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 }
