@@ -24,10 +24,12 @@ public class MainFrame extends JFrame {
 
 	JMenu MenuBalls = new JMenu("Balls");
 	JMenu MenuControl = new JMenu("Control");
+	JMenu MenuEffects = new JMenu("Effects");
 
 	JMenuItem MenuBallsAdd = new JMenuItem();
 	JMenuItem MenuControlResume = new JMenuItem();
 	JMenuItem MenuControlPause = new JMenuItem();
+	JMenuItem MenuEffectsCharisma = new JMenuItem();
 
 	Field field = new Field();
 
@@ -45,14 +47,16 @@ public class MainFrame extends JFrame {
 		MenuBalls.add(MenuBallsAdd);
 		MenuControl.add(MenuControlResume);
 		MenuControl.add(MenuControlPause);
+		MenuEffects.add(MenuEffectsCharisma);
 
 		MenuBarMyMenu.add(MenuBalls);
 		MenuBarMyMenu.add(MenuControl);
+		MenuBarMyMenu.add(MenuEffects);
 
 		this.setJMenuBar(MenuBarMyMenu);
 
 		MenuControlResume.setEnabled(false);
-		
+
 		this.add(field);
 	}
 
@@ -66,7 +70,6 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				field.addBall();
 			}
 		};
@@ -81,7 +84,6 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				MenuControlResume.setEnabled(false);
 				MenuControlPause.setEnabled(true);
 				field.resume();
@@ -98,18 +100,31 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				MenuControlResume.setEnabled(true);
 				MenuControlPause.setEnabled(false);
 				field.pause();
 			}
 		};
 		MenuControlPause.setAction(ActionMenuControlPause);
+
+		Action ActionMenuEffectsCharisma = new AbstractAction("Charisma") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -3645263919659057764L;
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		};
+		MenuEffectsCharisma.setAction(ActionMenuEffectsCharisma);
 	}
 
 	public MainFrame() throws HeadlessException {
 		super("Flying Balls");
-		// TODO Auto-generated constructor stub
 		SetPosition();
 		FillFrame();
 	}
