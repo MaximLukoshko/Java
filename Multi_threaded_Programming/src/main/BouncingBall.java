@@ -67,13 +67,7 @@ public class BouncingBall implements Runnable {
 		this.field = field;
 		radius = new Double(Math.random() * (MAX_RADIUS - MIN_RADIUS))
 				.intValue() + MIN_RADIUS;
-		speed = new Double(Math.round(5 * MAX_SPEED / radius)).intValue();
-		if (speed > MAX_SPEED) {
-			speed = MAX_SPEED;
-		}
-		double angle = Math.random() * 2 * Math.PI;
-		speedX = 3 * Math.cos(angle);
-		speedY = 3 * Math.sin(angle);
+		GenerateSpeed();
 		color = new Color((float) Math.random(), (float) Math.random(),
 				(float) Math.random());
 		x = Math.random() * (field.getSize().getWidth() - 2 * radius) + radius;
@@ -82,4 +76,22 @@ public class BouncingBall implements Runnable {
 		thisThread.start();
 	}
 
+	public void GenerateSpeed() {
+		speed = new Double(Math.round(5 * MAX_SPEED / radius)).intValue();
+		if (speed > MAX_SPEED) {
+			speed = MAX_SPEED;
+		}
+		double angle = Math.random() * 2 * Math.PI;
+		speedX = 3 * Math.cos(angle);
+		speedY = 3 * Math.sin(angle);
+	}
+
+	public void CountSpeedXY(int mouseX, int mouseY) {
+		speedX = Math.abs(speed)
+				* ((mouseX - x) / (Math.sqrt((x - mouseX) * (x - mouseX)
+						+ (y - mouseY) * (y - mouseY))));
+		speedY = Math.abs(speed)
+				* ((mouseY - y) / (Math.sqrt((x - mouseX) * (x - mouseX)
+						+ (y - mouseY) * (y - mouseY))));
+	}
 }

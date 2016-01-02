@@ -17,23 +17,25 @@ public class MainFrame extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 6148383319193422241L;
-	int WIDTH = 900;
-	int HEIGHT = 700;
+	private int WIDTH = 900;
+	private int HEIGHT = 700;
 
-	JMenuBar MenuBarMyMenu = new JMenuBar();
+	private boolean charisma = false;
 
-	JMenu MenuBalls = new JMenu("Balls");
-	JMenu MenuControl = new JMenu("Control");
-	JMenu MenuEffects = new JMenu("Effects");
+	private JMenuBar MenuBarMyMenu = new JMenuBar();
 
-	JMenuItem MenuBallsAdd = new JMenuItem();
-	JMenuItem MenuControlResume = new JMenuItem();
-	JMenuItem MenuControlPause = new JMenuItem();
-	JMenuItem MenuEffectsCharisma = new JMenuItem();
+	private JMenu MenuBalls = new JMenu("Balls");
+	private JMenu MenuControl = new JMenu("Control");
+	private JMenu MenuEffects = new JMenu("Effects");
 
-	Field field = new Field();
+	private JMenuItem MenuBallsAdd = new JMenuItem();
+	private JMenuItem MenuControlResume = new JMenuItem();
+	private JMenuItem MenuControlPause = new JMenuItem();
+	private JMenuItem MenuEffectsCharisma = new JMenuItem();
 
-	void SetPosition() {
+	private Field field = new Field();
+
+	private void SetPosition() {
 		setSize(WIDTH, HEIGHT);
 
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -41,7 +43,7 @@ public class MainFrame extends JFrame {
 				(kit.getScreenSize().height - HEIGHT) / 2);
 	}
 
-	void FillFrame() {
+	private void FillFrame() {
 		SetListeners();
 
 		MenuBalls.add(MenuBallsAdd);
@@ -60,7 +62,7 @@ public class MainFrame extends JFrame {
 		this.add(field);
 	}
 
-	void SetListeners() {
+	private void SetListeners() {
 		Action ActionMenuBallsAdd = new AbstractAction("Add") {
 
 			/**
@@ -116,8 +118,8 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-
+				charisma = !charisma;
+				field.Charisma(charisma);
 			}
 		};
 		MenuEffectsCharisma.setAction(ActionMenuEffectsCharisma);
