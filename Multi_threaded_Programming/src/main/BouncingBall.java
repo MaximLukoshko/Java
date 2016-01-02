@@ -23,7 +23,6 @@ public class BouncingBall implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		try {
 			while (true) {
 				field.canMove(this);
@@ -63,7 +62,6 @@ public class BouncingBall implements Runnable {
 
 	public BouncingBall(Field field) {
 		super();
-		// TODO Auto-generated constructor stub
 		this.field = field;
 		radius = new Double(Math.random() * (MAX_RADIUS - MIN_RADIUS))
 				.intValue() + MIN_RADIUS;
