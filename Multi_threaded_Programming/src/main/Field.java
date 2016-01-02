@@ -126,4 +126,12 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 
 	}
 
+	public boolean removeBall() {
+		if (ArrayBalls.isEmpty()) {
+			return false;
+		}
+		ArrayBalls.remove(0);
+		return true;
+	}
+
 }
