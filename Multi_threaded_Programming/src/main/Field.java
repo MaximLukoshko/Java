@@ -22,7 +22,6 @@ public class Field extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			repaint();
 		}
 	});
@@ -49,7 +48,6 @@ public class Field extends JPanel {
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		// TODO Auto-generated method stub
 		super.paintComponent(g);
 
 		Graphics2D canvas = (Graphics2D) g;
@@ -60,10 +58,17 @@ public class Field extends JPanel {
 
 	public Field() {
 		super();
-		// TODO Auto-generated constructor stub
 		setBackground(Color.WHITE);
 		TimerRepaint.start();
 		ArrayBalls.add(new BouncingBall(this));
+	}
+
+	public boolean removeBall() {
+		if (ArrayBalls.isEmpty()) {
+			return false;
+		}
+		ArrayBalls.remove(0);
+		return true;
 	}
 
 }

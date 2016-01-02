@@ -28,6 +28,7 @@ public class MainFrame extends JFrame {
 	private JMenu MenuEffects = new JMenu("Effects");
 
 	private JMenuItem MenuBallsAdd = new JMenuItem();
+	private JMenuItem MenuBallsRemove = new JMenuItem();
 	private JMenuItem MenuControlResume = new JMenuItem();
 	private JMenuItem MenuControlPause = new JMenuItem();
 	private JMenuItem MenuEffectsCharisma = new JMenuItem();
@@ -46,6 +47,7 @@ public class MainFrame extends JFrame {
 		SetListeners();
 
 		MenuBalls.add(MenuBallsAdd);
+		MenuBalls.add(MenuBallsRemove);
 		MenuControl.add(MenuControlResume);
 		MenuControl.add(MenuControlPause);
 		MenuEffects.add(MenuEffectsCharisma);
@@ -90,6 +92,34 @@ public class MainFrame extends JFrame {
 		};
 		MenuBallsAdd.setAction(ActionMenuBallsAdd);
 
+		Action ActionMenuBallsRemove = new AbstractAction("Remove") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 5144801925819024079L;
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String Number = JOptionPane.showInputDialog(
+						"Input Balls Number \n from 0 to 100", "1");
+				try {
+					Integer numberAddingBalls = Integer.parseInt(Number);
+					if (Integer.valueOf(Number) < 0
+							|| Integer.valueOf(Number) > 100) {
+						throw new Exception();
+					}
+					boolean go = true;
+					for (int i = 0; i < numberAddingBalls && go; i++) {
+						go = field.removeBall();
+					}
+				} catch (Exception ex) {
+					JOptionPane
+							.showMessageDialog(MainFrame.this, "Check input");
+				}
+			}
+		};
+		MenuBallsRemove.setAction(ActionMenuBallsRemove);
 		Action ActionMenuControlResume = new AbstractAction("Resume") {
 
 			/**
