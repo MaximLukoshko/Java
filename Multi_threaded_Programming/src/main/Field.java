@@ -19,6 +19,7 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 	 * 
 	 */
 	private static final long serialVersionUID = 9093514227845785559L;
+	private MainFrame frame;
 	private ArrayList<BouncingBall> ArrayBalls = new ArrayList<BouncingBall>();
 	private boolean paused = false;
 	private Timer TimerRepaint = new Timer(10, new ActionListener() {
@@ -35,10 +36,12 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 
 	public synchronized void pause() {
 		paused = true;
+		frame.pause();
 	}
 
 	public synchronized void resume() {
 		paused = false;
+		frame.start();
 		notifyAll();
 	}
 
@@ -59,8 +62,9 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 		}
 	}
 
-	public Field() {
+	public Field(MainFrame F) {
 		super();
+		frame = F;
 		setBackground(Color.WHITE);
 		TimerRepaint.start();
 		ArrayBalls.add(new BouncingBall(this));

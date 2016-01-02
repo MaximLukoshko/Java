@@ -33,7 +33,7 @@ public class MainFrame extends JFrame {
 	private JMenuItem MenuControlPause = new JMenuItem();
 	private JMenuItem MenuEffectsCharisma = new JMenuItem();
 
-	private Field field = new Field();
+	private Field field = new Field(this);
 
 	void SetPosition() {
 		setSize(WIDTH, HEIGHT);
@@ -174,4 +174,13 @@ public class MainFrame extends JFrame {
 		FillFrame();
 	}
 
+	public void pause() {
+		MenuControlResume.setEnabled(true);
+		MenuControlPause.setEnabled(false);
+	}
+
+	public void start() {
+		MenuControlResume.setEnabled(false);
+		MenuControlPause.setEnabled(true);
+	}
 }
