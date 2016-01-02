@@ -98,8 +98,11 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
+		if (paused) {
+			resume();
+		} else {
+			pause();
+		}
 	}
 
 	@Override
