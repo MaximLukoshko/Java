@@ -5,12 +5,15 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class Field extends JPanel {
+public class Field extends JPanel implements MouseMotionListener, MouseListener {
 
 	/**
 	 * 
@@ -61,6 +64,8 @@ public class Field extends JPanel {
 		setBackground(Color.WHITE);
 		TimerRepaint.start();
 		ArrayBalls.add(new BouncingBall(this));
+		addMouseListener(this);
+		addMouseMotionListener(this);
 	}
 
 	public boolean removeBall() {
@@ -69,6 +74,51 @@ public class Field extends JPanel {
 		}
 		ArrayBalls.remove(0);
 		return true;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (paused) {
+			resume();
+		} else {
+			pause();
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
