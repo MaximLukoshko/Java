@@ -17,21 +17,21 @@ public class MainFrame extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 6148383319193422241L;
-	int WIDTH = 900;
-	int HEIGHT = 700;
+	private int WIDTH = 900;
+	private int HEIGHT = 700;
 
-	JMenuBar MenuBarMyMenu = new JMenuBar();
+	private JMenuBar MenuBarMyMenu = new JMenuBar();
 
-	JMenu MenuBalls = new JMenu("Balls");
-	JMenu MenuControl = new JMenu("Control");
-	JMenu MenuEffects = new JMenu("Effects");
+	private JMenu MenuBalls = new JMenu("Balls");
+	private JMenu MenuControl = new JMenu("Control");
+	private JMenu MenuEffects = new JMenu("Effects");
 
-	JMenuItem MenuBallsAdd = new JMenuItem();
-	JMenuItem MenuControlResume = new JMenuItem();
-	JMenuItem MenuControlPause = new JMenuItem();
-	JMenuItem MenuEffectsCharisma = new JMenuItem();
+	private JMenuItem MenuBallsAdd = new JMenuItem();
+	private JMenuItem MenuControlResume = new JMenuItem();
+	private JMenuItem MenuControlPause = new JMenuItem();
+	private JMenuItem MenuEffectsCharisma = new JMenuItem();
 
-	Field field = new Field();
+	private Field field = new Field();
 
 	void SetPosition() {
 		setSize(WIDTH, HEIGHT);
