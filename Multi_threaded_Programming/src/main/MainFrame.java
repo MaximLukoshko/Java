@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 public class MainFrame extends JFrame {
 
@@ -70,7 +71,21 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				field.addBall();
+				String Number = JOptionPane.showInputDialog(
+						"Input Balls Number \n from 0 to 100", "1");
+				try {
+					Integer numberAddingBalls = Integer.parseInt(Number);
+					if (Integer.valueOf(Number) < 0
+							|| Integer.valueOf(Number) > 100) {
+						throw new Exception();
+					}
+					for (int i = 0; i < numberAddingBalls; i++) {
+						field.addBall();
+					}
+				} catch (Exception ex) {
+					JOptionPane
+							.showMessageDialog(MainFrame.this, "Check input");
+				}
 			}
 		};
 		MenuBallsAdd.setAction(ActionMenuBallsAdd);

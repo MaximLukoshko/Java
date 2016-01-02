@@ -72,8 +72,8 @@ public class BouncingBall implements Runnable {
 			speed = MAX_SPEED;
 		}
 		double angle = Math.random() * 2 * Math.PI;
-		speedX = 3 * Math.cos(angle);
-		speedY = 3 * Math.sin(angle);
+		speedX = speed * Math.cos(angle);
+		speedY = speed * Math.sin(angle);
 		color = new Color((float) Math.random(), (float) Math.random(),
 				(float) Math.random());
 		x = Math.random() * (field.getSize().getWidth() - 2 * radius) + radius;
