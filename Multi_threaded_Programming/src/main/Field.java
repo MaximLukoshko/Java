@@ -30,6 +30,9 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 		}
 	});
 
+	private int mouseX;
+	private int mouseY;
+
 	public void addBall() {
 		ArrayBalls.add(new BouncingBall(this));
 	}
@@ -82,6 +85,8 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		mouseX = e.getX();
+		mouseY = e.getY();
 		if (paused) {
 			resume();
 		} else {
