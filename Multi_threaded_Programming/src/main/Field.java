@@ -102,6 +102,8 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
+		mouseX = e.getX();
+		mouseY = e.getY();
 		if (paused) {
 			resume();
 		} else {
