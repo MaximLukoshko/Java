@@ -25,7 +25,8 @@ public class WebChatServlet extends HttpServlet {
 	HashMap<String, ChatUser> activeUsers;
 	ArrayList<ChatMessage> messages;
 
-	public void init(ServletConfig config) throws ServletException {
+	@SuppressWarnings("unchecked")
+	public void init() throws ServletException {
 		super.init();
 		activeUsers = (HashMap<String, ChatUser>) getServletContext()
 				.getAttribute("activeUsers");
