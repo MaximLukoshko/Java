@@ -19,6 +19,8 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 	/**
 	 * Default constructor.
 	 */
+	private int sessionTimeout = 600;
+
 	public LoginServlet() {
 		// TODO Auto-generated constructor stub
 	}
@@ -27,7 +29,12 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
-		// TODO Auto-generated method stub
+		super.init();
+		String value = getServletConfig().getInitParameter("SESSION_TIMEOUT");
+		if (value != null) {
+			sessionTimeout = Integer.parseInt(value);
+		}
+
 	}
 
 	/**
