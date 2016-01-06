@@ -7,8 +7,8 @@ import java.awt.geom.Ellipse2D;
 public class BouncingBall implements Runnable {
 
 	private static final int MAX_SPEED = 15;
-	private static final int MIN_RADIUS = 3;
-	private static final int MAX_RADIUS = 40;
+	private static final int MIN_RADIUS = 5;
+	private static final int MAX_RADIUS = 50;
 
 	private Field field;
 	private int radius;
@@ -65,13 +65,7 @@ public class BouncingBall implements Runnable {
 		this.field = field;
 		radius = new Double(Math.random() * (MAX_RADIUS - MIN_RADIUS))
 				.intValue() + MIN_RADIUS;
-		speed = new Double(Math.round(5 * MAX_SPEED / radius)).intValue();
-		if (speed > MAX_SPEED) {
-			speed = MAX_SPEED;
-		}
-		double angle = Math.random() * 2 * Math.PI;
-		speedX = speed * Math.cos(angle);
-		speedY = speed * Math.sin(angle);
+		GenerateSpeed();
 		color = new Color((float) Math.random(), (float) Math.random(),
 				(float) Math.random());
 		x = Math.random() * (field.getSize().getWidth() - 2 * radius) + radius;
@@ -80,4 +74,22 @@ public class BouncingBall implements Runnable {
 		thisThread.start();
 	}
 
+	public void GenerateSpeed() {
+		speed = new Double(Math.round(5 * MAX_SPEED / radius)).intValue();
+		if (speed > MAX_SPEED) {
+			speed = MAX_SPEED;
+		}
+		double angle = Math.random() * 2 * Math.PI;
+		speedX = speed * Math.cos(angle);
+		speedY = speed * Math.sin(angle);
+	}
+
+	public void CountSpeedXY(int mouseX, int mouseY) {
+		speedX = Math.abs(speed)
+				* ((mouseX - x) / (Math.sqrt((x - mouseX) * (x - mouseX)
+						+ (y - mouseY) * (y - mouseY))));
+		speedY = Math.abs(speed)
+				* ((mouseY - y) / (Math.sqrt((x - mouseX) * (x - mouseX)
+						+ (y - mouseY) * (y - mouseY))));
+	}
 }
