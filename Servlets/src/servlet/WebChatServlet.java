@@ -35,10 +35,13 @@ public class WebChatServlet extends HttpServlet {
 		if (activeUsers == null) {
 			activeUsers = new HashMap<String, ChatUser>();
 			getServletContext().setAttribute("activeUsers", activeUsers);
+			activeUsers.put("Admin", new ChatUser("Admin", 0, "0"));
 		}
 		if (messages == null) {
 			messages = new ArrayList<ChatMessage>();
 			getServletContext().setAttribute("messages", messages);
+			messages.add(new ChatMessage("Hi, everybody", activeUsers
+					.get("Admin"), 0));
 		}
 	}
 
