@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -28,7 +30,7 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
-	public void init(ServletConfig config) throws ServletException {
+	public void init() throws ServletException {
 		super.init();
 		String value = getServletConfig().getInitParameter("SESSION_TIMEOUT");
 		if (value != null) {
@@ -44,6 +46,15 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String name = (String) request.getSession().getAttribute("name");
+
+		response.setCharacterEncoding("utf-8");
+		PrintWriter pw = response.getWriter();
+		pw.println("<html><head><title>Мега-чат!</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/></head>");
+
+		pw.println("<form action='/Servlets' method='post'>Enter your name:<input type='text' name='name' value=''><input type='submit' value='Log in chat'>");
+		pw.println("</form></body></html>");
+
 	}
 
 	/**
