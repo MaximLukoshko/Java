@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entity.ChatMessage;
+import entity.ChatUser;
 
 /**
  * Servlet implementation class NewMessageServlet
@@ -33,20 +34,20 @@ public class NewMessageServlet extends WebChatServlet implements Servlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String name = (String) request.getParameter("name");
+		request.setCharacterEncoding("UTF-8");
+		String name = (String) request.getSession().getAttribute("name");
 		String message = (String) request.getParameter("message");
 		if (name == null || name == "") {
 			PrintWriter pw = response.getWriter();
 			pw.println("You have to log in.(");
 			// response.sendRedirect("Login.html");
 		} else {
-			if (message != null && !message.equals("")) {
+			if (message != null && !"".equals(message)) {
+				ChatUser author = activeUsers.get((String) request.getSession()
+						.getAttribute("name"));
 				synchronized (messages) {
-					ChatMessage currentMessage;
-					messages.add(new ChatMessage(message, activeUsers
-							.get((String) request.getSession().getAttribute(
-									"name")), Calendar.getInstance()
-							.getTimeInMillis()));
+					messages.add(new ChatMessage(message, author, Calendar
+							.getInstance().getTimeInMillis()));
 				}
 			}
 			response.sendRedirect("compose_message.html");

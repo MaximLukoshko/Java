@@ -1,8 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,10 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entity.ChatUser;
+
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet(urlPatterns = { "/login.do" }, initParams = { @WebInitParam(name = "SESSION_TIMEOUT", value = "3600") })
+@WebServlet(urlPatterns = { "/login.do" }, initParams = { @WebInitParam(name = "SESSION_TIMEOUT", value = "600") })
 public class LoginServlet extends WebChatServlet implements Servlet {
 	private static final long serialVersionUID = 1L;
 
@@ -43,6 +43,7 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@SuppressWarnings("deprecation")
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -50,15 +51,17 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 
 		if (name == null || name.equals("")) {
 			response.sendRedirect("Login.html");
-//			response.setCharacterEncoding("utf-8");
-//			PrintWriter pw = response.getWriter();
-//			pw.println("<html><head><title>Mega-Chat</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/></head>");
-//
-//			pw.println("<form action='login.do' method='get'>Enter your name:<input type='text' name='name' value=''><input type='submit' value='Log in chat'>");
-//			pw.println("</form></body></html>");
+			// response.setCharacterEncoding("utf-8");
+			// PrintWriter pw = response.getWriter();
+			// pw.println("<html><head><title>Mega-Chat</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/></head>");
+			//
+			// pw.println("<form action='login.do' method='get'>Enter your name:<input type='text' name='name' value=''><input type='submit' value='Log in chat'>");
+			// pw.println("</form></body></html>");
 
 		} else {
-			response.sendRedirect("view.html");
+			request.getSession().setAttribute("name", name);
+			activeUsers.put(name, new ChatUser(name, 0, request.getSession().getId()));
+			response.sendRedirect(response.encodeRedirectUrl("view.html"));
 		}
 	}
 
@@ -71,5 +74,4 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 		// TODO Auto-generated method stub
 	}
 
-	
 }

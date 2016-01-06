@@ -22,8 +22,8 @@ public class WebChatServlet extends HttpServlet {
 	 * @see Servlet#init(ServletConfig)
 	 */
 
-	HashMap<String, ChatUser> activeUsers;
-	ArrayList<ChatMessage> messages;
+	protected HashMap<String, ChatUser> activeUsers;
+	protected ArrayList<ChatMessage> messages;
 
 	@SuppressWarnings("unchecked")
 	public void init() throws ServletException {
