@@ -2,12 +2,15 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import entity.ChatMessage;
 
 /**
  * Servlet implementation class NewMessageServlet
@@ -37,6 +40,15 @@ public class NewMessageServlet extends WebChatServlet implements Servlet {
 			pw.println("You have to log in.(");
 			// response.sendRedirect("Login.html");
 		} else {
+			if (message != null && !message.equals("")) {
+				synchronized (messages) {
+					ChatMessage currentMessage;
+					messages.add(new ChatMessage(message, activeUsers
+							.get((String) request.getSession().getAttribute(
+									"name")), Calendar.getInstance()
+							.getTimeInMillis()));
+				}
+			}
 			response.sendRedirect("compose_message.html");
 		}
 	}

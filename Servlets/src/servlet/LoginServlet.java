@@ -49,7 +49,6 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 		String name = (String) request.getParameter("name");
 
 		if (name == null || name.equals("")) {
-			System.out.print(1);
 			response.sendRedirect("Login.html");
 //			response.setCharacterEncoding("utf-8");
 //			PrintWriter pw = response.getWriter();
@@ -72,4 +71,5 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 		// TODO Auto-generated method stub
 	}
 
+	
 }
