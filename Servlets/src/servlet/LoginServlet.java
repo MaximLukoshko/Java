@@ -46,15 +46,21 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String name = (String) request.getSession().getAttribute("name");
+		String name = (String) request.getParameter("name");
 
-		response.setCharacterEncoding("utf-8");
-		PrintWriter pw = response.getWriter();
-		pw.println("<html><head><title>Мега-чат!</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/></head>");
+		if (name == null || name.equals("")) {
+			System.out.print(1);
+			response.sendRedirect("Login.html");
+//			response.setCharacterEncoding("utf-8");
+//			PrintWriter pw = response.getWriter();
+//			pw.println("<html><head><title>Mega-Chat</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/></head>");
+//
+//			pw.println("<form action='login.do' method='get'>Enter your name:<input type='text' name='name' value=''><input type='submit' value='Log in chat'>");
+//			pw.println("</form></body></html>");
 
-		pw.println("<form action='/Servlets' method='post'>Enter your name:<input type='text' name='name' value=''><input type='submit' value='Log in chat'>");
-		pw.println("</form></body></html>");
-
+		} else {
+			response.sendRedirect("view.html");
+		}
 	}
 
 	/**

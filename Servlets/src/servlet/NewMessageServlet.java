@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,8 +30,15 @@ public class NewMessageServlet extends WebChatServlet implements Servlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		System.out.println(1);
-		response.sendRedirect("compose_message.html");
+		String name = (String) request.getParameter("name");
+		String message = (String) request.getParameter("message");
+		if (name == null || name == "") {
+			PrintWriter pw = response.getWriter();
+			pw.println("You have to log in.(");
+			// response.sendRedirect("Login.html");
+		} else {
+			response.sendRedirect("compose_message.html");
+		}
 	}
 
 }
