@@ -30,8 +30,18 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 		}
 	});
 
+	private boolean charisma = false;
 	private int mouseX;
 	private int mouseY;
+
+	public void Charisma(boolean flag) {
+		charisma = flag;
+		if (!charisma) {
+			for (BouncingBall ball : ArrayBalls) {
+				ball.GenerateSpeed();
+			}
+		}
+	}
 
 	public void addBall() {
 		ArrayBalls.add(new BouncingBall(this));
@@ -61,6 +71,9 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 
 		Graphics2D canvas = (Graphics2D) g;
 		for (BouncingBall ball : ArrayBalls) {
+			if (charisma) {
+				ball.CountSpeedXY(mouseX, mouseY);
+			}
 			ball.Paint(canvas);
 		}
 	}
@@ -71,16 +84,20 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 		setBackground(Color.WHITE);
 		TimerRepaint.start();
 		ArrayBalls.add(new BouncingBall(this));
-		addMouseListener(this);
 		addMouseMotionListener(this);
+		addMouseListener(this);
 	}
 
-	public boolean removeBall() {
-		if (ArrayBalls.isEmpty()) {
-			return false;
-		}
-		ArrayBalls.remove(0);
-		return true;
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		mouseX = e.getX();
+		mouseY = e.getY();
 	}
 
 	@Override
@@ -118,16 +135,12 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 
 	}
 
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	public boolean removeBall() {
+		if (ArrayBalls.isEmpty()) {
+			return false;
+		}
+		ArrayBalls.remove(0);
+		return true;
 	}
 
 }

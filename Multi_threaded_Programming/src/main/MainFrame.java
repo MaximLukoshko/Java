@@ -21,6 +21,8 @@ public class MainFrame extends JFrame {
 	private int WIDTH = 900;
 	private int HEIGHT = 700;
 
+	private boolean charisma = false;
+
 	private JMenuBar MenuBarMyMenu = new JMenuBar();
 
 	private JMenu MenuBalls = new JMenu("Balls");
@@ -35,7 +37,7 @@ public class MainFrame extends JFrame {
 
 	private Field field = new Field(this);
 
-	void SetPosition() {
+	private void SetPosition() {
 		setSize(WIDTH, HEIGHT);
 
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -43,7 +45,7 @@ public class MainFrame extends JFrame {
 				(kit.getScreenSize().height - HEIGHT) / 2);
 	}
 
-	void FillFrame() {
+	private void FillFrame() {
 		SetListeners();
 
 		MenuBalls.add(MenuBallsAdd);
@@ -63,7 +65,7 @@ public class MainFrame extends JFrame {
 		this.add(field);
 	}
 
-	void SetListeners() {
+	private void SetListeners() {
 		Action ActionMenuBallsAdd = new AbstractAction("Add") {
 
 			/**
@@ -161,8 +163,8 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-
+				charisma = !charisma;
+				field.Charisma(charisma);
 			}
 		};
 		MenuEffectsCharisma.setAction(ActionMenuEffectsCharisma);
