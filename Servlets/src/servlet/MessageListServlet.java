@@ -43,5 +43,6 @@ public class MessageListServlet extends WebChatServlet {
 			}
 		}
 		pw.println("</body></html>");
+
 	}
 }

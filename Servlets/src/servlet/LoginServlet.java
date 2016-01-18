@@ -60,7 +60,8 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 
 		} else {
 			request.getSession().setAttribute("name", name);
-			activeUsers.put(name, new ChatUser(name, 0, request.getSession().getId()));
+			activeUsers.put(name, new ChatUser(name, 0, request.getSession()
+					.getId()));
 			response.sendRedirect(response.encodeRedirectUrl("view.html"));
 		}
 	}
