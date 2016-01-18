@@ -45,6 +45,11 @@ public class NewMessageServlet extends WebChatServlet implements Servlet {
 			if (message != null && !"".equals(message)) {
 				ChatUser author = activeUsers.get((String) request.getSession()
 						.getAttribute("name"));
+				synchronized (activeUsers) {
+					activeUsers.get(request.getSession().getAttribute("name"))
+							.setLastInteractionTime(
+									Calendar.getInstance().getTimeInMillis());
+				}
 				synchronized (messages) {
 					messages.add(new ChatMessage(message, author, Calendar
 							.getInstance().getTimeInMillis()));
