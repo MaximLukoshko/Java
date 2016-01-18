@@ -31,10 +31,7 @@ public class LogoutServlet extends WebChatServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String name = (String) request.getSession().getAttribute("name");
-		// activeUsers.get(name).setLastInteractionTime(
-		// Calendar.getInstance().getTimeInMillis());
 		if (name != null) {
 			ChatUser aUser = activeUsers.get(name);
 			if (aUser.getSessionId().equals(

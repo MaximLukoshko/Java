@@ -96,7 +96,7 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 			}
 		}
 		if (aUser.getSessionId().equals(sessionId)
-				|| aUser.getLastInteractionTime() < (Calendar.getInstance()
+				|| aUser.getLastInteractionTime() <= (Calendar.getInstance()
 						.getTimeInMillis() - sessionTimeout * 1000)) {
 			request.getSession().setAttribute("name", name);
 			aUser.setLastInteractionTime(Calendar.getInstance()
