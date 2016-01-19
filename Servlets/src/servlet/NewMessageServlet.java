@@ -39,7 +39,6 @@ public class NewMessageServlet extends WebChatServlet implements Servlet {
 		if (name == null || name == "") {
 			PrintWriter pw = response.getWriter();
 			pw.println("<font color=red><strong>You have to log in:(</strong></font>");
-//			response.sendRedirect(response.encodeRedirectURL(""));
 		} else {
 			if (message != null && !"".equals(message)) {
 				ChatUser author = activeUsers.get((String) request.getSession()

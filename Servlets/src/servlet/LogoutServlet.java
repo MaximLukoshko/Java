@@ -41,10 +41,10 @@ public class LogoutServlet extends WebChatServlet {
 				response.addCookie(new Cookie("sessionId", null));
 				response.sendRedirect(response.encodeRedirectURL(""));
 			} else {
-				response.sendRedirect(response.encodeRedirectURL("view.html"));
+				response.sendRedirect(response.encodeRedirectURL(""));
 			}
 		} else {
-			response.sendRedirect(response.encodeRedirectURL("view.html"));
+			response.sendRedirect(response.encodeRedirectURL(""));
 		}
 
 	}
