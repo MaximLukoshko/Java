@@ -38,8 +38,10 @@ public class MessageListServlet extends WebChatServlet {
 		synchronized (messages) {
 			for (int i = messages.size() - 1; i >= 0; i--) {
 				ChatMessage aMessage = messages.get(i);
-				pw.println("<div><strong>" + aMessage.getAuthor().getName()
-						+ "</strong>: " + aMessage.getMessage() + "</div>");
+				pw.println("<font color=" + aMessage.getMessageColour() + ">"
+						+ "<div><strong>" + aMessage.getAuthor().getName()
+						+ "</strong>: " + aMessage.getMessage() + "</div>"
+						+ "</font>");
 			}
 		}
 		pw.println("</body></html>");
