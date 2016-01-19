@@ -90,7 +90,8 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 		ChatUser aUser = activeUsers.get(name);
 		if (aUser == null) {
 			aUser = new ChatUser(name,
-					Calendar.getInstance().getTimeInMillis(), sessionId);
+					Calendar.getInstance().getTimeInMillis(), sessionId,
+					"black");
 			synchronized (activeUsers) {
 				activeUsers.put(aUser.getName(), aUser);
 			}

@@ -4,12 +4,23 @@ public class ChatMessage {
 	private String message;
 	private ChatUser author;
 	private long timestamp;
+	private String messageColour;
 
-	public ChatMessage(String message, ChatUser author, long timestamp) {
+	public ChatMessage(String message, ChatUser author, long timestamp,
+			String messageColour) {
 		super();
 		this.message = message;
 		this.author = author;
 		this.timestamp = timestamp;
+		this.messageColour = messageColour;
+	}
+
+	public String getMessageColour() {
+		return messageColour;
+	}
+
+	public void setMessageColour(String messageColour) {
+		this.messageColour = messageColour;
 	}
 
 	public String getMessage() {

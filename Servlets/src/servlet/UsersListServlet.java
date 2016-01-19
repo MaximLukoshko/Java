@@ -34,8 +34,9 @@ public class UsersListServlet extends WebChatServlet {
 		pw.println("<body>");
 		response.setCharacterEncoding("utf8");
 		for (ChatUser user : activeUsers.values()) {
-			pw.println("<div>" + "<strong>" + user.getName() + "</strong>"
-					+ "</div>");
+			pw.println("<div>" + "<strong>" + "<font color="
+					+ user.getLettersColour() + ">" + user.getName()
+					+ "</font>" + "</strong>" + "</div>");
 		}
 	}
 

@@ -50,7 +50,8 @@ public class NewMessageServlet extends WebChatServlet implements Servlet {
 				}
 				synchronized (messages) {
 					messages.add(new ChatMessage(message, author, Calendar
-							.getInstance().getTimeInMillis()));
+							.getInstance().getTimeInMillis(), author
+							.getLettersColour()));
 				}
 			}
 			response.sendRedirect("compose_message.html");
