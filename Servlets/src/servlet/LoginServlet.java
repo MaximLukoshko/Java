@@ -82,9 +82,20 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 		}
 		pw.println("<form action='login.do' method='post'>Enter your name:<input type='text' name='name' value=''><input type='submit' value='Log in'>");
 		pw.println("<p><b>Choose your colour:</b><Br>");
-		pw.println("<input type='radio' name='color' value='black'> black<Br>");
+		pw.println("<input type='radio' checked name='color' value='black'> black<Br>");
 		pw.println("<input type='radio' name='color' value='green'> green<Br>");
-		pw.println("<input type='radio' name='color' value='red'> red<Br>");
+		pw.println("<input type='radio' name='color' value='blue'> blue<Br>");
+		pw.println("<input type='radio' name='color' value='aqua'> aqua<Br>");
+		pw.println("<input type='radio' name='color' value='fuchsia'> fuchsia<Br>");
+		pw.println("<input type='radio' name='color' value='gray'> grey<Br>");
+		pw.println("<input type='radio' name='color' value='lime'> lime<Br>");
+		pw.println("<input type='radio' name='color' value='maroon'> maroon<Br>");
+		pw.println("<input type='radio' name='color' value='navy'> navy<Br>");
+		pw.println("<input type='radio' name='color' value='olive'> olive<Br>");
+		pw.println("<input type='radio' name='color' value='purple'> purple<Br>");
+		pw.println("<input type='radio' name='color' value='silver'> silver<Br>");
+		pw.println("<input type='radio' name='color' value='teal'> teal<Br>");
+		pw.println("<input type='radio' name='color' value='yellow'> yellow<Br>");
 		pw.println("</p>");
 		pw.println("</form></body></html>");
 		request.getSession().setAttribute("error", null);
