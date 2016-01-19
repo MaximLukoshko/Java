@@ -53,7 +53,7 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 		String errorMessage = (String) request.getSession().getAttribute(
 				"error");
 		String previousSessionId = null;
-		if (name == null) {
+		if (name != null) {
 			for (Cookie aCookie : request.getCookies()) {
 				if (aCookie.getName().equals("sessionId")) {
 					previousSessionId = aCookie.getValue();

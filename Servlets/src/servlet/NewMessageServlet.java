@@ -33,14 +33,13 @@ public class NewMessageServlet extends WebChatServlet implements Servlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		String name = (String) request.getSession().getAttribute("name");
 		String message = (String) request.getParameter("message");
 		if (name == null || name == "") {
 			PrintWriter pw = response.getWriter();
-			pw.println("You have to log in.(");
-			// response.sendRedirect("Login.html");
+			pw.println("<font color=red><strong>You have to log in:(</strong></font>");
+//			response.sendRedirect(response.encodeRedirectURL(""));
 		} else {
 			if (message != null && !"".equals(message)) {
 				ChatUser author = activeUsers.get((String) request.getSession()
@@ -58,5 +57,4 @@ public class NewMessageServlet extends WebChatServlet implements Servlet {
 			response.sendRedirect("compose_message.html");
 		}
 	}
-
 }
