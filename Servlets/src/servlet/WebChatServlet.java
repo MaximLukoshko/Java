@@ -36,7 +36,7 @@ public class WebChatServlet extends HttpServlet {
 			activeUsers = new HashMap<String, ChatUser>();
 			getServletContext().setAttribute("activeUsers", activeUsers);
 			activeUsers
-					.put("Admin", new ChatUser("Admin", 0, "0", "green"));
+					.put("Admin", new ChatUser("Admin", 0, "0", "pink"));
 		}
 		if (messages == null) {
 			messages = new ArrayList<ChatMessage>();

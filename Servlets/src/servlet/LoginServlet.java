@@ -50,6 +50,7 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String name = (String) request.getSession().getAttribute("name");
+		String colour = (String) request.getSession().getAttribute("color");
 		String errorMessage = (String) request.getSession().getAttribute(
 				"error");
 		String previousSessionId = null;
@@ -64,13 +65,14 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 				for (ChatUser aUser : activeUsers.values()) {
 					if (aUser.getSessionId().equals(previousSessionId)) {
 						name = aUser.getName();
+						colour = aUser.getLettersColour();
 						aUser.setSessionId(request.getSession().getId());
 					}
 				}
 			}
 		}
 		if (name != null && !"".equals(name)) {
-			errorMessage = processLogonAttempt(name, request, response);
+			errorMessage = processLogonAttempt(name, colour, request, response);
 		}
 		response.setCharacterEncoding("utf8");
 		PrintWriter pw = response.getWriter();
@@ -79,19 +81,24 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 			pw.println("<p><font color='red'>" + errorMessage + "</font></p>");
 		}
 		pw.println("<form action='login.do' method='post'>Enter your name:<input type='text' name='name' value=''><input type='submit' value='Log in'>");
+		pw.println("<p><b>Choose your colour:</b><Br>");
+		pw.println("<input type='radio' name='color' value='black'> black<Br>");
+		pw.println("<input type='radio' name='color' value='green'> green<Br>");
+		pw.println("<input type='radio' name='color' value='red'> red<Br>");
+		pw.println("</p>");
 		pw.println("</form></body></html>");
 		request.getSession().setAttribute("error", null);
 
 	}
 
-	private String processLogonAttempt(String name, HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+	private String processLogonAttempt(String name, String colour,
+			HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 		String sessionId = request.getSession().getId();
 		ChatUser aUser = activeUsers.get(name);
 		if (aUser == null) {
 			aUser = new ChatUser(name,
-					Calendar.getInstance().getTimeInMillis(), sessionId,
-					"black");
+					Calendar.getInstance().getTimeInMillis(), sessionId, colour);
 			synchronized (activeUsers) {
 				activeUsers.put(aUser.getName(), aUser);
 			}
@@ -122,11 +129,12 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String name = (String) request.getParameter("name");
+		String colour = (String) request.getParameter("color");
 		String errorMessage = null;
 		if (name == null || "".equals(name)) {
 			errorMessage = "An User name can not be empty!";
 		} else {
-			errorMessage = processLogonAttempt(name, request, response);
+			errorMessage = processLogonAttempt(name, colour, request, response);
 		}
 		if (errorMessage != null) {
 			request.getSession().setAttribute("name", null);

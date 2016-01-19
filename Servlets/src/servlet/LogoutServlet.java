@@ -38,6 +38,7 @@ public class LogoutServlet extends WebChatServlet {
 					activeUsers.remove(name);
 				}
 				request.getSession().setAttribute("name", null);
+				request.getSession().setAttribute("color", null);
 				response.addCookie(new Cookie("sessionId", null));
 				response.sendRedirect(response.encodeRedirectURL(""));
 			} else {
