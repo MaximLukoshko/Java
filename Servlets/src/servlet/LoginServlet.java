@@ -74,7 +74,7 @@ public class LoginServlet extends WebChatServlet implements Servlet {
 		}
 		response.setCharacterEncoding("utf8");
 		PrintWriter pw = response.getWriter();
-		pw.println("<html><head><title>Mega-Chat</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/></head>");
+		pw.println("<html><head><title>Mega-Chat: log in</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/></head>");
 		if (errorMessage != null) {
 			pw.println("<p><font color='red'>" + errorMessage + "</font></p>");
 		}
