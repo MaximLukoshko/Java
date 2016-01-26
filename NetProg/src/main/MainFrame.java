@@ -6,10 +6,12 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -140,8 +142,51 @@ public class MainFrame extends JFrame {
 	}
 
 	protected void sendMessage() {
-		// TODO Auto-generated method stub
+		try {
+			final String senderName = textFieldFrom.getText();
+			final String destinationAddress = textFieldTo.getText();
+			final String message = textAreaOutgoing.getText();
 
+			if (senderName.isEmpty()) {
+				JOptionPane.showMessageDialog(this, "Enter Sender Name",
+						"Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			if (destinationAddress.isEmpty()) {
+				JOptionPane.showMessageDialog(this,
+						"Enter address of recepient socket", "Error",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			if (message.isEmpty()) {
+				JOptionPane.showMessageDialog(this, "Message is empty",
+						"Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			final Socket socket = new Socket(destinationAddress, SERVER_PORT);
+
+			final DataOutputStream out = new DataOutputStream(
+					socket.getOutputStream());
+			out.writeUTF(senderName);
+			out.writeUTF(message);
+			socket.close();
+			textAreaIncoming.append("Me -> " + destinationAddress + ": "
+					+ message + "\n");
+			textAreaOutgoing.setText("");
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+			JOptionPane
+					.showMessageDialog(
+							MainFrame.this,
+							"Error while sending message: socket-recepient is not found",
+							"Error", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(MainFrame.this,
+					"Error while sending message", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	private void setThread() {
@@ -150,6 +195,7 @@ public class MainFrame extends JFrame {
 			@Override
 			public void run() {
 				try {
+					@SuppressWarnings("resource")
 					final ServerSocket serverSocket = new ServerSocket(
 							SERVER_PORT);
 					while (!Thread.interrupted()) {
@@ -164,26 +210,23 @@ public class MainFrame extends JFrame {
 								.getHostAddress();
 						textAreaIncoming.append(sender + " (" + address + "): "
 								+ message + "\n");
-
+						textAreaOutgoing.setText("");
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
 					JOptionPane.showMessageDialog(MainFrame.this,
 							"Error while working server", "Error",
 							JOptionPane.ERROR_MESSAGE);
-
 				}
 			}
 		}).start();
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				final MainFrame frame = new MainFrame();
 				frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 				frame.setVisible(true);
