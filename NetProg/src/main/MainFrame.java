@@ -3,9 +3,14 @@ package main;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -39,6 +44,7 @@ public class MainFrame extends JFrame {
 	public MainFrame() throws HeadlessException {
 		super(FRAME_TITLE);
 		// TODO Auto-generated constructor stub
+
 		// Центрирование окна
 		setMinimumSize(new Dimension(FRAME_MINIMUM_WIDTH, FRAME_MINIMUM_HEIGHT));
 		final Toolkit kit = Toolkit.getDefaultToolkit();
@@ -52,6 +58,19 @@ public class MainFrame extends JFrame {
 
 		textFieldTo = new JTextField(TO_FIELD_DEFAULT_COLUMNS);
 		textFieldFrom = new JTextField(FROM_FIELD_DEFAULT_COLUMNS);
+
+		final JLabel labelRecepient = new JLabel("Recepient");
+		final JLabel labelSeder = new JLabel("Sender");
+
+		final JButton buttonSend = new JButton("Send");
+		buttonSend.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 
 		// Панель ввода сообщения
 		final JPanel messagePanel = new JPanel();
@@ -67,16 +86,26 @@ public class MainFrame extends JFrame {
 						layout2.createParallelGroup(Alignment.TRAILING)
 								.addGroup(
 										layout2.createSequentialGroup()
+												.addComponent(labelSeder)
+												.addGap(SMALL_GAP)
 												.addComponent(textFieldFrom)
-												.addComponent(textFieldTo)))
-				.addContainerGap());
+												.addGap(LARGE_GAP)
+												.addComponent(labelRecepient)
+												.addGap(SMALL_GAP)
+												.addComponent(textFieldTo))
+								.addComponent(textAreaOutgoing)
+								.addComponent(buttonSend)).addContainerGap());
 		layout2.setVerticalGroup(layout2
 				.createSequentialGroup()
 				.addContainerGap()
 				.addGroup(
 						layout2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(labelSeder)
 								.addComponent(textFieldFrom)
-								.addComponent(textFieldTo)).addContainerGap());
+								.addComponent(labelRecepient)
+								.addComponent(textFieldTo)).addGap(MEDIUM_GAP)
+				.addComponent(textAreaOutgoing).addGap(MEDIUM_GAP)
+				.addComponent(buttonSend).addContainerGap());
 
 		final GroupLayout layout1 = new GroupLayout(getContentPane());
 		setLayout(layout1);
