@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -76,6 +77,9 @@ public class MainFrame extends JFrame {
 		final JPanel messagePanel = new JPanel();
 		messagePanel.setBorder(BorderFactory.createTitledBorder("Message"));
 
+		final JScrollPane scrollPaneOutgoing = new JScrollPane(textAreaOutgoing);
+		final JScrollPane scrollPaneIncoming = new JScrollPane(textAreaIncoming);
+
 		final GroupLayout layout2 = new GroupLayout(messagePanel);
 		messagePanel.setLayout(layout2);
 
@@ -93,7 +97,7 @@ public class MainFrame extends JFrame {
 												.addComponent(labelRecepient)
 												.addGap(SMALL_GAP)
 												.addComponent(textFieldTo))
-								.addComponent(textAreaOutgoing)
+								.addComponent(scrollPaneOutgoing)
 								.addComponent(buttonSend)).addContainerGap());
 		layout2.setVerticalGroup(layout2
 				.createSequentialGroup()
@@ -104,7 +108,7 @@ public class MainFrame extends JFrame {
 								.addComponent(textFieldFrom)
 								.addComponent(labelRecepient)
 								.addComponent(textFieldTo)).addGap(MEDIUM_GAP)
-				.addComponent(textAreaOutgoing).addGap(MEDIUM_GAP)
+				.addComponent(scrollPaneOutgoing).addGap(MEDIUM_GAP)
 				.addComponent(buttonSend).addContainerGap());
 
 		final GroupLayout layout1 = new GroupLayout(getContentPane());
@@ -115,10 +119,10 @@ public class MainFrame extends JFrame {
 				.addContainerGap()
 				.addGroup(
 						layout1.createParallelGroup()
-								.addComponent(textAreaIncoming)
+								.addComponent(scrollPaneIncoming)
 								.addComponent(messagePanel)).addContainerGap());
 		layout1.setVerticalGroup(layout1.createSequentialGroup()
-				.addContainerGap().addComponent(textAreaIncoming)
+				.addContainerGap().addComponent(scrollPaneIncoming)
 				.addComponent(messagePanel).addContainerGap());
 	}
 
