@@ -5,12 +5,18 @@ import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -32,6 +38,8 @@ public class MainFrame extends JFrame {
 	private static final int INCOMING_AREA_DEFAULT_ROWS = 10;
 	private static final int OUTGOING_AREA_DEFAULT_ROWS = 5;
 
+	private static final int SERVER_PORT = 4567;
+
 	private static final int SMALL_GAP = 5;
 	private static final int MEDIUM_GAP = 10;
 	private static final int LARGE_GAP = 15;
@@ -44,7 +52,6 @@ public class MainFrame extends JFrame {
 
 	public MainFrame() throws HeadlessException {
 		super(FRAME_TITLE);
-		// TODO Auto-generated constructor stub
 
 		setLocationAndSize();
 
@@ -138,8 +145,38 @@ public class MainFrame extends JFrame {
 	}
 
 	private void setThread() {
-		// TODO Auto-generated method stub
+		new Thread(new Runnable() {
 
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				try {
+					final ServerSocket serverSocket = new ServerSocket(
+							SERVER_PORT);
+					while (!Thread.interrupted()) {
+						final Socket socket = serverSocket.accept();
+						final DataInputStream in = new DataInputStream(socket
+								.getInputStream());
+						final String sender = in.readUTF();
+						final String message = in.readUTF();
+						socket.close();
+						final String address = ((InetSocketAddress) socket
+								.getRemoteSocketAddress()).getAddress()
+								.getHostAddress();
+						textAreaIncoming.append(sender + " (" + address + "): "
+								+ message + "\n");
+
+					}
+				} catch (IOException e) {
+					// TODO: handle exception
+					e.printStackTrace();
+					JOptionPane.showMessageDialog(MainFrame.this,
+							"Error while working server", "Error",
+							JOptionPane.ERROR_MESSAGE);
+
+				}
+			}
+		}).start();
 	}
 
 	public static void main(String[] args) {
