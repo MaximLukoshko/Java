@@ -149,7 +149,6 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				try {
 					final ServerSocket serverSocket = new ServerSocket(
 							SERVER_PORT);
@@ -168,7 +167,6 @@ public class MainFrame extends JFrame {
 
 					}
 				} catch (IOException e) {
-					// TODO: handle exception
 					e.printStackTrace();
 					JOptionPane.showMessageDialog(MainFrame.this,
 							"Error while working server", "Error",
