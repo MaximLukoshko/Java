@@ -46,11 +46,7 @@ public class MainFrame extends JFrame {
 		super(FRAME_TITLE);
 		// TODO Auto-generated constructor stub
 
-		// Центрирование окна
-		setMinimumSize(new Dimension(FRAME_MINIMUM_WIDTH, FRAME_MINIMUM_HEIGHT));
-		final Toolkit kit = Toolkit.getDefaultToolkit();
-		setLocation((kit.getScreenSize().width - getWidth()) / 2,
-				(kit.getScreenSize().height - getHeight()) / 2);
+		setLocationAndSize();
 
 		textAreaIncoming = new JTextArea(INCOMING_AREA_DEFAULT_ROWS, 0);
 		textAreaIncoming.setEditable(false);
@@ -60,6 +56,18 @@ public class MainFrame extends JFrame {
 		textFieldTo = new JTextField(TO_FIELD_DEFAULT_COLUMNS);
 		textFieldFrom = new JTextField(FROM_FIELD_DEFAULT_COLUMNS);
 
+		fillFrame();
+		setThread();
+	}
+
+	private void setLocationAndSize() {
+		setMinimumSize(new Dimension(FRAME_MINIMUM_WIDTH, FRAME_MINIMUM_HEIGHT));
+		final Toolkit kit = Toolkit.getDefaultToolkit();
+		setLocation((kit.getScreenSize().width - getWidth()) / 2,
+				(kit.getScreenSize().height - getHeight()) / 2);
+	}
+
+	private void fillFrame() {
 		final JLabel labelRecepient = new JLabel("Recepient");
 		final JLabel labelSeder = new JLabel("Sender");
 
@@ -68,12 +76,10 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
+				sendMessage();
 			}
 		});
 
-		// Панель ввода сообщения
 		final JPanel messagePanel = new JPanel();
 		messagePanel.setBorder(BorderFactory.createTitledBorder("Message"));
 
@@ -124,6 +130,16 @@ public class MainFrame extends JFrame {
 		layout1.setVerticalGroup(layout1.createSequentialGroup()
 				.addContainerGap().addComponent(scrollPaneIncoming)
 				.addComponent(messagePanel).addContainerGap());
+	}
+
+	protected void sendMessage() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void setThread() {
+		// TODO Auto-generated method stub
+
 	}
 
 	public static void main(String[] args) {
