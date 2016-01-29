@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.GroupLayout.Alignment;
 
 @SuppressWarnings("serial")
@@ -47,7 +46,7 @@ public class MainFrame extends JFrame {
 
 	private static InstantMessenger instantMessenger;
 
-	public MainFrame() throws HeadlessException, IOException {
+	public MainFrame(final InstantMessenger IM) throws HeadlessException, IOException {
 		super(FRAME_TITLE);
 
 		setLocationAndSize();
@@ -61,7 +60,7 @@ public class MainFrame extends JFrame {
 		textFieldFrom = new JTextField(FROM_FIELD_DEFAULT_COLUMNS);
 
 		fillFrame();
-		instantMessenger = new InstantMessenger();
+		instantMessenger = IM;
 		new MessageListener(MainFrame.this);
 	}
 
@@ -163,8 +162,8 @@ public class MainFrame extends JFrame {
 				return;
 			}
 
-			instantMessenger.sendMessage(new Peer(senderName, destinationAddress),
-					message);
+			instantMessenger.sendMessage(new Peer(senderName,
+					destinationAddress), message);
 
 			textAreaIncoming.append("Me -> " + destinationAddress + ": "
 					+ message + "\n");
@@ -184,20 +183,20 @@ public class MainFrame extends JFrame {
 		}
 	}
 
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
+	public static void main(final InstantMessenger IM) {
+		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 				try {
-					final MainFrame frame = new MainFrame();
+					final MainFrame frame = new MainFrame(IM);
 					frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 					frame.setVisible(true);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-		});
+		}).start();
 	}
 
 	public InstantMessenger getInstantMessenger() {

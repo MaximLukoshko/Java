@@ -1,7 +1,9 @@
 package main;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -21,7 +23,6 @@ public class InstantMessenger {
 	public void sendMessage(Peer sender, String message)
 			throws UnknownHostException, IOException {
 		final Socket socket = new Socket(sender.getAddress(), SERVER_PORT);
-
 		final DataOutputStream out = new DataOutputStream(
 				socket.getOutputStream());
 		out.writeUTF(sender.getSenderName());
@@ -38,7 +39,18 @@ public class InstantMessenger {
 					serverSocket = new ServerSocket(SERVER_PORT);
 
 					while (!Thread.interrupted()) {
-						notifyListeners(new Peer(null, null), new String());
+						final Socket socket = serverSocket.accept();
+						final DataInputStream in = new DataInputStream(
+								socket.getInputStream());
+						Peer sender = new Peer(null, null);
+						sender.setSenderName(in.readUTF());
+						sender.setAddress(((InetSocketAddress) socket
+								.getRemoteSocketAddress()).getAddress()
+								.getHostAddress());
+						String message = new String();
+						message = in.readUTF();
+						socket.close();
+						notifyListeners(sender, message);
 					}
 				} catch (IOException e) {
 					e.printStackTrace();

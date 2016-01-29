@@ -17,20 +17,7 @@ public class MessageListener {
 	}
 
 	void messageReceived(Peer sender, String message) throws IOException {
-		try {
-			final Socket socket = frame.getInstantMessenger().getSocket();
-			final DataInputStream in = new DataInputStream(
-					socket.getInputStream());
-			sender.setSenderName(in.readUTF());
-			message = in.readUTF();
-			socket.close();
-			sender.setAddress(((InetSocketAddress) socket
-					.getRemoteSocketAddress()).getAddress().getHostAddress());
-			frame.appendIncoming(sender.toString() + ": " + message + "\n");
-			frame.clearOutgoing();
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(frame, "Error while working server",
-					"Error", JOptionPane.ERROR_MESSAGE);
-		}
+		frame.appendIncoming(sender.toString() + ": " + message + "\n");
+		frame.clearOutgoing();
 	}
 }
