@@ -5,12 +5,7 @@ import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.net.UnknownHostException;
 
 import javax.swing.BorderFactory;
@@ -39,8 +34,6 @@ public class MainFrame extends JFrame {
 
 	private static final int INCOMING_AREA_DEFAULT_ROWS = 10;
 	private static final int OUTGOING_AREA_DEFAULT_ROWS = 5;
-
-	private static final int SERVER_PORT = 4567;
 
 	private static final int SMALL_GAP = 5;
 	private static final int MEDIUM_GAP = 10;
@@ -193,21 +186,15 @@ public class MainFrame extends JFrame {
 			@Override
 			public void run() {
 				try {
-					@SuppressWarnings("resource")
-					final ServerSocket serverSocket = new ServerSocket(
-							SERVER_PORT);
+					instantMessenger = new InstantMessenger();
+					MessageListener listener = new MessageListener(
+							MainFrame.this);
 					while (!Thread.interrupted()) {
-						final Socket socket = serverSocket.accept();
-						final DataInputStream in = new DataInputStream(socket
-								.getInputStream());
-						final String sender = in.readUTF();
-						final String message = in.readUTF();
-						socket.close();
-						final String address = ((InetSocketAddress) socket
-								.getRemoteSocketAddress()).getAddress()
-								.getHostAddress();
-						textAreaIncoming.append(sender + " (" + address + "): "
-								+ message + "\n");
+						String sender = null;
+						String message = null;
+						instantMessenger.notifyListeners(sender, message);
+						textAreaIncoming.append(sender + " ("
+								+ /* address + */"): " + message + "\n");
 						textAreaOutgoing.setText("");
 					}
 				} catch (IOException e) {
@@ -230,5 +217,9 @@ public class MainFrame extends JFrame {
 				frame.setVisible(true);
 			}
 		});
+	}
+
+	public InstantMessenger getInstantMessenger() {
+		return instantMessenger;
 	}
 }

@@ -2,6 +2,7 @@ package main;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -9,10 +10,12 @@ import java.util.ArrayList;
 public class InstantMessenger {
 	private static final int SERVER_PORT = 4567;
 	private ArrayList<MessageListener> listeners;
+	private ServerSocket serverSocket;
 
-	public InstantMessenger() {
+	public InstantMessenger() throws IOException {
 		super();
-		// TODO Auto-generated constructor stub
+		listeners = new ArrayList<MessageListener>();
+		startServer();
 	}
 
 	public void sendMessage(String senderName, String destinationAddress,
@@ -26,9 +29,8 @@ public class InstantMessenger {
 		socket.close();
 	}
 
-	@SuppressWarnings("unused")
-	private void startServer() {
-
+	private void startServer() throws IOException {
+		serverSocket = new ServerSocket(SERVER_PORT);
 	}
 
 	public void addMessageListener(MessageListener listener) {
@@ -43,13 +45,17 @@ public class InstantMessenger {
 		}
 	}
 
-	@SuppressWarnings("unused")
-	private void notifyListeners(Peer sender, String message) {
+	public void notifyListeners(String sender, String message)
+			throws IOException {
 		synchronized (listeners) {
 			for (MessageListener listener : listeners) {
 				listener.messageReceived(sender, message);
 			}
 		}
+	}
+
+	public Socket getSocket() throws IOException {
+		return serverSocket.accept();
 	}
 
 }
