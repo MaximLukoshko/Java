@@ -63,7 +63,7 @@ public class MainFrame extends JFrame {
 		fillFrame();
 		// setThread();
 		instantMessenger = new InstantMessenger();
-		MessageListener listener = new MessageListener(MainFrame.this);
+		new MessageListener(MainFrame.this);
 	}
 
 	private void setLocationAndSize() {
