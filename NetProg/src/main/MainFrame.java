@@ -134,6 +134,9 @@ public class MainFrame extends JFrame {
 		layout1.setVerticalGroup(layout1.createSequentialGroup()
 				.addContainerGap().addComponent(scrollPaneIncoming)
 				.addComponent(messagePanel).addContainerGap());
+		textFieldFrom.setText("Maxim");
+		textFieldTo.setText("127.0.0.1");
+		textAreaOutgoing.setText("HI:)");
 	}
 
 	protected void sendMessage() {
@@ -187,8 +190,7 @@ public class MainFrame extends JFrame {
 			public void run() {
 				try {
 					instantMessenger = new InstantMessenger();
-					MessageListener listener = new MessageListener(
-							MainFrame.this);
+					new MessageListener(MainFrame.this);
 					while (!Thread.interrupted()) {
 						String sender = null;
 						String message = null;
