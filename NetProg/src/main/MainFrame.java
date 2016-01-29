@@ -45,7 +45,7 @@ public class MainFrame extends JFrame {
 	private final JTextArea textAreaIncoming;
 	private final JTextArea textAreaOutgoing;
 
-	private InstantMessenger instantMessenger;
+	private static InstantMessenger instantMessenger;
 
 	public MainFrame() throws HeadlessException, IOException {
 		super(FRAME_TITLE);

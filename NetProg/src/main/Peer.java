@@ -26,4 +26,8 @@ public class Peer {
 		this.address = address;
 	}
 
+	@Override
+	public String toString() {
+		return getSenderName() + " (" + getAddress() + ")";
+	}
 }

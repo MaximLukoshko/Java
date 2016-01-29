@@ -7,10 +7,12 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+import javax.swing.SwingUtilities;
+
 public class InstantMessenger {
 	private static final int SERVER_PORT = 4567;
 	private ArrayList<MessageListener> listeners;
-	private ServerSocket serverSocket;
+	private static ServerSocket serverSocket;
 
 	public InstantMessenger() throws IOException {
 		super();
@@ -74,4 +76,17 @@ public class InstantMessenger {
 		return serverSocket.accept();
 	}
 
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					new InstantMessenger();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 }

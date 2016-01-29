@@ -26,8 +26,7 @@ public class MessageListener {
 			socket.close();
 			sender.setAddress(((InetSocketAddress) socket
 					.getRemoteSocketAddress()).getAddress().getHostAddress());
-			frame.appendIncoming(sender.getSenderName() + " ("
-					+ sender.getAddress() + "): " + message + "\n");
+			frame.appendIncoming(sender.toString() + ": " + message + "\n");
 			frame.clearOutgoing();
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(frame, "Error while working server",
