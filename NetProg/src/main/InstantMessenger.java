@@ -18,13 +18,13 @@ public class InstantMessenger {
 		startServer();
 	}
 
-	public void sendMessage(String senderName, String destinationAddress,
-			String message) throws UnknownHostException, IOException {
-		final Socket socket = new Socket(destinationAddress, SERVER_PORT);
+	public void sendMessage(Peer sender, String message)
+			throws UnknownHostException, IOException {
+		final Socket socket = new Socket(sender.getAddress(), SERVER_PORT);
 
 		final DataOutputStream out = new DataOutputStream(
 				socket.getOutputStream());
-		out.writeUTF(senderName);
+		out.writeUTF(sender.getSenderName());
 		out.writeUTF(message);
 		socket.close();
 	}
@@ -38,10 +38,7 @@ public class InstantMessenger {
 					serverSocket = new ServerSocket(SERVER_PORT);
 
 					while (!Thread.interrupted()) {
-						String senderName = null;
-						String message = null;
-
-						notifyListeners(senderName, message);
+						notifyListeners(new Peer(null, null), new String());
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -65,8 +62,7 @@ public class InstantMessenger {
 		}
 	}
 
-	public void notifyListeners(String sender, String message)
-			throws IOException {
+	public void notifyListeners(Peer sender, String message) throws IOException {
 		synchronized (listeners) {
 			for (MessageListener listener : listeners) {
 				listener.messageReceived(sender, message);

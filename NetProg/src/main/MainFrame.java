@@ -61,7 +61,6 @@ public class MainFrame extends JFrame {
 		textFieldFrom = new JTextField(FROM_FIELD_DEFAULT_COLUMNS);
 
 		fillFrame();
-		// setThread();
 		instantMessenger = new InstantMessenger();
 		new MessageListener(MainFrame.this);
 	}
@@ -164,7 +163,7 @@ public class MainFrame extends JFrame {
 				return;
 			}
 
-			instantMessenger.sendMessage(senderName, destinationAddress,
+			instantMessenger.sendMessage(new Peer(senderName, destinationAddress),
 					message);
 
 			textAreaIncoming.append("Me -> " + destinationAddress + ": "
