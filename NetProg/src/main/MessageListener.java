@@ -1,11 +1,6 @@
 package main;
 
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-
-import javax.swing.JOptionPane;
 
 public class MessageListener {
 	MainFrame frame;
