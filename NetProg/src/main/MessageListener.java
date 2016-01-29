@@ -16,9 +16,12 @@ public class MessageListener {
 	void messageReceived(String senderName, String message) throws IOException {
 		final Socket socket = frame.getInstantMessenger().getSocket();
 		final DataInputStream in = new DataInputStream(socket.getInputStream());
-		senderName = new String(in.readUTF());
-		message = new String(in.readUTF());
+		senderName = in.readUTF();
+		message = in.readUTF();
 		socket.close();
+		frame.appendIncoming(senderName + " (" + /* address + */"): " + message
+				+ "\n");
+		frame.clearOutgoing();
 		// final String address = ((InetSocketAddress) socket
 		// .getRemoteSocketAddress()).getAddress().getHostAddress();
 	}

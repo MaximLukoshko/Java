@@ -30,7 +30,27 @@ public class InstantMessenger {
 	}
 
 	private void startServer() throws IOException {
-		serverSocket = new ServerSocket(SERVER_PORT);
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					serverSocket = new ServerSocket(SERVER_PORT);
+
+					while (!Thread.interrupted()) {
+						String senderName = null;
+						String message = null;
+
+						notifyListeners(senderName, message);
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+					// JOptionPane.showMessageDialog(MainFrame.this,
+					// "Error while working server", "Error",
+					// JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}).start();
 	}
 
 	public void addMessageListener(MessageListener listener) {

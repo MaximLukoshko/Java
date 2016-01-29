@@ -47,7 +47,7 @@ public class MainFrame extends JFrame {
 
 	private InstantMessenger instantMessenger;
 
-	public MainFrame() throws HeadlessException {
+	public MainFrame() throws HeadlessException, IOException {
 		super(FRAME_TITLE);
 
 		setLocationAndSize();
@@ -61,7 +61,9 @@ public class MainFrame extends JFrame {
 		textFieldFrom = new JTextField(FROM_FIELD_DEFAULT_COLUMNS);
 
 		fillFrame();
-		setThread();
+		// setThread();
+		instantMessenger = new InstantMessenger();
+		MessageListener listener = new MessageListener(MainFrame.this);
 	}
 
 	private void setLocationAndSize() {
@@ -183,45 +185,33 @@ public class MainFrame extends JFrame {
 		}
 	}
 
-	private void setThread() {
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				try {
-					instantMessenger = new InstantMessenger();
-					new MessageListener(MainFrame.this);
-					while (!Thread.interrupted()) {
-						String sender = null;
-						String message = null;
-						instantMessenger.notifyListeners(sender, message);
-						textAreaIncoming.append(sender + " ("
-								+ /* address + */"): " + message + "\n");
-						textAreaOutgoing.setText("");
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-					JOptionPane.showMessageDialog(MainFrame.this,
-							"Error while working server", "Error",
-							JOptionPane.ERROR_MESSAGE);
-				}
-			}
-		}).start();
-	}
-
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
 			public void run() {
-				final MainFrame frame = new MainFrame();
-				frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-				frame.setVisible(true);
+				try {
+					final MainFrame frame = new MainFrame();
+					frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+					frame.setVisible(true);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	}
 
 	public InstantMessenger getInstantMessenger() {
 		return instantMessenger;
+	}
+
+	public void appendIncoming(String string) {
+		// TODO Auto-generated method stub
+		textAreaIncoming.append(string);
+
+	}
+
+	public void clearOutgoing() {
+		textAreaOutgoing.setText("");
 	}
 }
