@@ -1,4 +1,3 @@
-
 package main;
 
 import java.awt.Dimension;
@@ -52,7 +51,7 @@ public class MainFrame extends JFrame {
 
 	private final JTextArea textAreaIncoming;
 	private final JTextArea textAreaOutgoing;
-	
+
 	private InstantMessenger instantMessenger;
 
 	public MainFrame() throws HeadlessException {
@@ -167,13 +166,9 @@ public class MainFrame extends JFrame {
 				return;
 			}
 
-			final Socket socket = new Socket(destinationAddress, SERVER_PORT);
+			instantMessenger.sendMessage(senderName, destinationAddress,
+					message);
 
-			final DataOutputStream out = new DataOutputStream(
-					socket.getOutputStream());
-			out.writeUTF(senderName);
-			out.writeUTF(message);
-			socket.close();
 			textAreaIncoming.append("Me -> " + destinationAddress + ": "
 					+ message + "\n");
 			textAreaOutgoing.setText("");
