@@ -22,7 +22,6 @@ public class MessageListener {
 
 	void messageReceived(Peer sender, String message) throws IOException {
 		frame.appendIncoming(sender.toString() + ": " + message + "\n");
-		frame.clearOutgoing();
 	}
 
 	public String getName() {

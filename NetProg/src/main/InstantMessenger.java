@@ -3,7 +3,6 @@ package main;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -55,8 +54,8 @@ public class InstantMessenger {
 						Peer recepient = new Peer(null, null);
 						sender.setSenderName(in.readUTF());
 						sender.setAddress(in.readUTF());
-						sender.setAddress(
-								((InetSocketAddress) socket.getRemoteSocketAddress()).getAddress().getHostAddress());
+						// sender.setAddress(
+						// ((InetSocketAddress) socket.getRemoteSocketAddress()).getAddress().getHostAddress());
 						String message = new String();
 						message = in.readUTF();
 						recepient.setSenderName(in.readUTF());
