@@ -190,7 +190,7 @@ public class MainFrame extends JFrame {
 			public void run() {
 				try {
 					final MainFrame frame = new MainFrame(IM);
-					frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+//					frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 					frame.setVisible(true);
 				} catch (IOException e) {
 					e.printStackTrace();
