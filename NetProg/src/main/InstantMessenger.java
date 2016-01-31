@@ -40,17 +40,27 @@ public class InstantMessenger {
 
 					while (!Thread.interrupted()) {
 						final Socket socket = serverSocket.accept();
-						final DataInputStream in = new DataInputStream(
-								socket.getInputStream());
-						Peer sender = new Peer(null, null);
-						sender.setSenderName(in.readUTF());
-						sender.setAddress(((InetSocketAddress) socket
-								.getRemoteSocketAddress()).getAddress()
-								.getHostAddress());
-						String message = new String();
-						message = in.readUTF();
-						socket.close();
-						notifyListeners(sender, message);
+						new Thread(new Runnable() {
+
+							@Override
+							public void run() {
+								try {
+									final DataInputStream in = new DataInputStream(
+											socket.getInputStream());
+									Peer sender = new Peer(null, null);
+									sender.setSenderName(in.readUTF());
+									sender.setAddress(((InetSocketAddress) socket
+											.getRemoteSocketAddress())
+											.getAddress().getHostAddress());
+									String message = new String();
+									message = in.readUTF();
+									socket.close();
+									notifyListeners(sender, message);
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							}
+						}).start();
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
