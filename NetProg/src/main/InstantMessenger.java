@@ -22,9 +22,13 @@ public class InstantMessenger {
 	public void sendMessage(Peer sender, String message, Peer recepient) throws UnknownHostException, IOException {
 
 		if (recepient.getAddress().isEmpty()) {
-			for (MessageListener messageListener : listeners) {
-				if (recepient.getSenderName().equals(messageListener.getName())) {
-					recepient.setAddress(messageListener.getIP());
+			if ((recepient.getSenderName().toLowerCase()).equals("all")) {
+				recepient.setAddress(sender.getAddress());
+			} else {
+				for (MessageListener messageListener : listeners) {
+					if (recepient.getSenderName().equals(messageListener.getName())) {
+						recepient.setAddress(messageListener.getIP());
+					}
 				}
 			}
 		}
@@ -55,7 +59,8 @@ public class InstantMessenger {
 						sender.setSenderName(in.readUTF());
 						sender.setAddress(in.readUTF());
 						// sender.setAddress(
-						// ((InetSocketAddress) socket.getRemoteSocketAddress()).getAddress().getHostAddress());
+						// ((InetSocketAddress)
+						// socket.getRemoteSocketAddress()).getAddress().getHostAddress());
 						String message = new String();
 						message = in.readUTF();
 						recepient.setSenderName(in.readUTF());
@@ -85,7 +90,8 @@ public class InstantMessenger {
 	public void notifyListeners(Peer sender, String message, Peer recepient) throws IOException {
 		synchronized (listeners) {
 			for (MessageListener listener : listeners) {
-				if (listener.getIP().equals(recepient.getAddress())) {
+				if (listener.getIP().equals(recepient.getAddress())
+						|| recepient.getSenderName().toLowerCase().equals("all")) {
 					listener.messageReceived(sender, message);
 				}
 			}

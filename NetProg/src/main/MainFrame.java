@@ -128,8 +128,10 @@ public class MainFrame extends JFrame {
 				.addComponent(messagePanel).addContainerGap());
 
 		textFieldToIP.setText("127.0.0.1");
-		textFieldFrom.setText(JOptionPane.showInputDialog(MainFrame.this, "Enter your name:", "Log in dialog",
-				JOptionPane.INFORMATION_MESSAGE));
+		do {
+			textFieldFrom.setText(JOptionPane.showInputDialog(MainFrame.this, "Enter your name:\n", "Log in dialog",
+					JOptionPane.INFORMATION_MESSAGE));
+		} while (textFieldFrom.getText().toLowerCase().equals("all"));
 		textFieldFromIP.setText(listener.getIP());
 
 		textFieldFrom.setEditable(false);
