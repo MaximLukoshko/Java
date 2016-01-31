@@ -65,11 +65,9 @@ public class MainFrame extends JFrame {
 		textFieldFrom = new JTextField(FROM_FIELD_DEFAULT_COLUMNS);
 		textFieldToIP = new JTextField(FROM_FIELD_DEFAULT_COLUMNS);
 
-		fillFrame();
 		instantMessenger = IM;
 		listener = new MessageListener(MainFrame.this);
-
-		this.setTitle(FRAME_TITLE + " <" + textFieldFrom.getText() + "> (" + listener.getIP() + ")");
+		fillFrame();
 	}
 
 	private void setLocationAndSize() {
@@ -103,7 +101,7 @@ public class MainFrame extends JFrame {
 		layout2.setHorizontalGroup(layout2.createSequentialGroup().addContainerGap()
 				.addGroup(layout2.createParallelGroup(Alignment.TRAILING)
 						.addGroup(layout2.createSequentialGroup().addComponent(labelSender).addGap(SMALL_GAP)
-								.addGroup(layout2.createSequentialGroup().addComponent(textFieldFrom)
+								.addGroup(layout2.createParallelGroup().addComponent(textFieldFrom)
 										.addComponent(textFieldFromIP))
 								.addGap(LARGE_GAP).addComponent(labelRecepient).addGap(SMALL_GAP)
 								.addGroup(layout2.createParallelGroup().addComponent(textFieldTo)
@@ -114,8 +112,8 @@ public class MainFrame extends JFrame {
 				.addGroup(layout2.createParallelGroup(Alignment.BASELINE).addComponent(labelSender)
 						.addGroup(layout2.createSequentialGroup().addComponent(textFieldFrom)
 								.addComponent(textFieldFromIP))
-						.addComponent(labelRecepient)
-						.addGroup(layout2.createParallelGroup().addComponent(textFieldTo).addComponent(textFieldToIP)))
+						.addComponent(labelRecepient).addGroup(
+								layout2.createSequentialGroup().addComponent(textFieldTo).addComponent(textFieldToIP)))
 				.addGap(MEDIUM_GAP).addComponent(scrollPaneOutgoing).addGap(MEDIUM_GAP).addComponent(buttonSend)
 				.addContainerGap());
 
@@ -127,17 +125,22 @@ public class MainFrame extends JFrame {
 				.addContainerGap());
 		layout1.setVerticalGroup(layout1.createSequentialGroup().addContainerGap().addComponent(scrollPaneIncoming)
 				.addComponent(messagePanel).addContainerGap());
-		textFieldTo.setText("127.0.0.1");
-
+		
+		textFieldToIP.setText("127.0.0.1");
 		textFieldFrom.setText(JOptionPane.showInputDialog(MainFrame.this, "Enter your name:", "Log in dialog",
 				JOptionPane.INFORMATION_MESSAGE));
+		textFieldFromIP.setText(listener.getIP());
+		
 		textFieldFrom.setEditable(false);
+		textFieldFromIP.setEditable(false);
+		
+		this.setTitle(FRAME_TITLE + " <" + textFieldFrom.getText() + "> (" + listener.getIP() + ")");
 	}
 
 	protected void sendMessage() {
 		try {
 			final String senderName = textFieldFrom.getText();
-			final String destinationAddress = textFieldTo.getText();
+			final String destinationAddress = textFieldToIP.getText();
 			final String message = textAreaOutgoing.getText();
 
 			if (senderName.isEmpty()) {
