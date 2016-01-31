@@ -39,7 +39,9 @@ public class MainFrame extends JFrame {
 	private static final int LARGE_GAP = 15;
 
 	private final JTextField textFieldFrom;
+	private final JTextField textFieldFromIP;
 	private final JTextField textFieldTo;
+	private final JTextField textFieldToIP;
 
 	private final JTextArea textAreaIncoming;
 	private final JTextArea textAreaOutgoing;
@@ -59,7 +61,9 @@ public class MainFrame extends JFrame {
 		textAreaOutgoing = new JTextArea(OUTGOING_AREA_DEFAULT_ROWS, 0);
 
 		textFieldTo = new JTextField(TO_FIELD_DEFAULT_COLUMNS);
+		textFieldFromIP = new JTextField(TO_FIELD_DEFAULT_COLUMNS);
 		textFieldFrom = new JTextField(FROM_FIELD_DEFAULT_COLUMNS);
+		textFieldToIP = new JTextField(FROM_FIELD_DEFAULT_COLUMNS);
 
 		fillFrame();
 		instantMessenger = IM;
@@ -76,7 +80,7 @@ public class MainFrame extends JFrame {
 
 	private void fillFrame() {
 		final JLabel labelRecepient = new JLabel("Recepient");
-		final JLabel labelSeder = new JLabel("Sender");
+		final JLabel labelSender = new JLabel("Sender");
 
 		final JButton buttonSend = new JButton("Send");
 		buttonSend.addActionListener(new ActionListener() {
@@ -98,14 +102,20 @@ public class MainFrame extends JFrame {
 
 		layout2.setHorizontalGroup(layout2.createSequentialGroup().addContainerGap()
 				.addGroup(layout2.createParallelGroup(Alignment.TRAILING)
-						.addGroup(layout2.createSequentialGroup().addComponent(labelSeder).addGap(SMALL_GAP)
-								.addComponent(textFieldFrom).addGap(LARGE_GAP).addComponent(labelRecepient)
-								.addGap(SMALL_GAP).addComponent(textFieldTo))
+						.addGroup(layout2.createSequentialGroup().addComponent(labelSender).addGap(SMALL_GAP)
+								.addGroup(layout2.createSequentialGroup().addComponent(textFieldFrom)
+										.addComponent(textFieldFromIP))
+								.addGap(LARGE_GAP).addComponent(labelRecepient).addGap(SMALL_GAP)
+								.addGroup(layout2.createParallelGroup().addComponent(textFieldTo)
+										.addComponent(textFieldToIP)))
 						.addComponent(scrollPaneOutgoing).addComponent(buttonSend))
 				.addContainerGap());
 		layout2.setVerticalGroup(layout2.createSequentialGroup().addContainerGap()
-				.addGroup(layout2.createParallelGroup(Alignment.BASELINE).addComponent(labelSeder)
-						.addComponent(textFieldFrom).addComponent(labelRecepient).addComponent(textFieldTo))
+				.addGroup(layout2.createParallelGroup(Alignment.BASELINE).addComponent(labelSender)
+						.addGroup(layout2.createSequentialGroup().addComponent(textFieldFrom)
+								.addComponent(textFieldFromIP))
+						.addComponent(labelRecepient)
+						.addGroup(layout2.createParallelGroup().addComponent(textFieldTo).addComponent(textFieldToIP)))
 				.addGap(MEDIUM_GAP).addComponent(scrollPaneOutgoing).addGap(MEDIUM_GAP).addComponent(buttonSend)
 				.addContainerGap());
 
@@ -121,6 +131,7 @@ public class MainFrame extends JFrame {
 
 		textFieldFrom.setText(JOptionPane.showInputDialog(MainFrame.this, "Enter your name:", "Log in dialog",
 				JOptionPane.INFORMATION_MESSAGE));
+		textFieldFrom.setEditable(false);
 	}
 
 	protected void sendMessage() {
