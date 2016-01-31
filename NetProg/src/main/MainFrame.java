@@ -162,11 +162,11 @@ public class MainFrame extends JFrame {
 				JOptionPane.showMessageDialog(this, "Message is empty", "Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
+			Peer recepient = new Peer(destinationName, destinationAddress);
 
-			instantMessenger.sendMessage(new Peer(senderName, listener.getIP()), message,
-					new Peer(destinationName, destinationAddress));
+			instantMessenger.sendMessage(new Peer(senderName, new String(listener.getIP())), message, recepient);
 
-			textAreaIncoming.append("Me -> " + destinationAddress + ": " + message + "\n");
+			textAreaIncoming.append("Me -> " + recepient.toString() + ": " + message + "\n");
 			textAreaOutgoing.setText("");
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
