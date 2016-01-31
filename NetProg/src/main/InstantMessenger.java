@@ -39,8 +39,10 @@ public class InstantMessenger {
 			public void run() {
 				try {
 					serverSocket = new ServerSocket(SERVER_PORT);
-					ExecutorService executorService = Executors
-							.newCachedThreadPool();
+					 ExecutorService executorService = Executors
+					 .newCachedThreadPool();
+					// ExecutorService executorService = Executors
+					// .newFixedThreadPool(2);
 					while (!Thread.interrupted()) {
 						final Socket socket = serverSocket.accept();
 						executorService.submit(new Runnable() {
