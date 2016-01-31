@@ -137,9 +137,7 @@ public class MainFrame extends JFrame {
 		layout1.setVerticalGroup(layout1.createSequentialGroup()
 				.addContainerGap().addComponent(scrollPaneIncoming)
 				.addComponent(messagePanel).addContainerGap());
-		textFieldFrom.setText("Maxim");
 		textFieldTo.setText("127.0.0.1");
-		textAreaOutgoing.setText("HI:)");
 	}
 
 	protected void sendMessage() {
@@ -153,12 +151,14 @@ public class MainFrame extends JFrame {
 						"Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
+
 			if (destinationAddress.isEmpty()) {
 				JOptionPane.showMessageDialog(this,
 						"Enter address of recepient socket", "Error",
 						JOptionPane.ERROR_MESSAGE);
 				return;
 			}
+
 			if (message.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "Message is empty",
 						"Error", JOptionPane.ERROR_MESSAGE);
@@ -207,7 +207,10 @@ public class MainFrame extends JFrame {
 
 	public void appendIncoming(String string) {
 		textAreaIncoming.append(string);
+	}
 
+	public void clearOutgoing() {
+		textAreaOutgoing.setText("");
 	}
 
 	@Override
@@ -215,9 +218,5 @@ public class MainFrame extends JFrame {
 	public void hide() {
 		super.hide();
 		instantMessenger.removeMessageListener(listener);
-	}
-
-	public void clearOutgoing() {
-		textAreaOutgoing.setText("");
 	}
 }
