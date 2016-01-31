@@ -44,9 +44,12 @@ public class MainFrame extends JFrame {
 	private final JTextArea textAreaIncoming;
 	private final JTextArea textAreaOutgoing;
 
+	private MessageListener listener;
+
 	private static InstantMessenger instantMessenger;
 
-	public MainFrame(final InstantMessenger IM) throws HeadlessException, IOException {
+	public MainFrame(final InstantMessenger IM) throws HeadlessException,
+			IOException {
 		super(FRAME_TITLE);
 
 		setLocationAndSize();
@@ -61,7 +64,7 @@ public class MainFrame extends JFrame {
 
 		fillFrame();
 		instantMessenger = IM;
-		new MessageListener(MainFrame.this);
+		listener = new MessageListener(MainFrame.this);
 	}
 
 	private void setLocationAndSize() {
@@ -190,7 +193,6 @@ public class MainFrame extends JFrame {
 			public void run() {
 				try {
 					final MainFrame frame = new MainFrame(IM);
-//					frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 					frame.setVisible(true);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -204,9 +206,15 @@ public class MainFrame extends JFrame {
 	}
 
 	public void appendIncoming(String string) {
-		// TODO Auto-generated method stub
 		textAreaIncoming.append(string);
 
+	}
+
+	@Override
+	@Deprecated
+	public void hide() {
+		super.hide();
+		instantMessenger.removeMessageListener(listener);
 	}
 
 	public void clearOutgoing() {

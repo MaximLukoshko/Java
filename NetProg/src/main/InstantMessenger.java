@@ -54,9 +54,6 @@ public class InstantMessenger {
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
-					// JOptionPane.showMessageDialog(MainFrame.this,
-					// "Error while working server", "Error",
-					// JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}).start();

@@ -38,7 +38,6 @@ public class Main extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				MainFrame.main(IM);
 			}
 		});
