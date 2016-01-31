@@ -20,13 +20,14 @@ public class InstantMessenger {
 		startServer();
 	}
 
-	public void sendMessage(Peer sender, String message)
-			throws UnknownHostException, IOException {
-		final Socket socket = new Socket(sender.getAddress(), SERVER_PORT);
-		final DataOutputStream out = new DataOutputStream(
-				socket.getOutputStream());
+	public void sendMessage(Peer sender, String message, Peer recepient) throws UnknownHostException, IOException {
+		final Socket socket = new Socket(recepient.getAddress(), SERVER_PORT);
+		final DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 		out.writeUTF(sender.getSenderName());
+		out.writeUTF(sender.getAddress());
 		out.writeUTF(message);
+		out.writeUTF(recepient.getSenderName());
+		out.writeUTF(recepient.getAddress());
 		socket.close();
 	}
 
@@ -40,17 +41,19 @@ public class InstantMessenger {
 
 					while (!Thread.interrupted()) {
 						final Socket socket = serverSocket.accept();
-						final DataInputStream in = new DataInputStream(
-								socket.getInputStream());
+						final DataInputStream in = new DataInputStream(socket.getInputStream());
 						Peer sender = new Peer(null, null);
+						Peer recepient = new Peer(null, null);
 						sender.setSenderName(in.readUTF());
-						sender.setAddress(((InetSocketAddress) socket
-								.getRemoteSocketAddress()).getAddress()
-								.getHostAddress());
+						sender.setAddress(in.readUTF());
+						sender.setAddress(
+								((InetSocketAddress) socket.getRemoteSocketAddress()).getAddress().getHostAddress());
 						String message = new String();
 						message = in.readUTF();
+						recepient.setSenderName(in.readUTF());
+						recepient.setAddress(in.readUTF());
 						socket.close();
-						notifyListeners(sender, message);
+						notifyListeners(sender, message, recepient);
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -71,10 +74,12 @@ public class InstantMessenger {
 		}
 	}
 
-	public void notifyListeners(Peer sender, String message) throws IOException {
+	public void notifyListeners(Peer sender, String message, Peer recepient) throws IOException {
 		synchronized (listeners) {
 			for (MessageListener listener : listeners) {
-				listener.messageReceived(sender, message);
+				if (listener.getIP().equals(recepient.getAddress())) {
+					listener.messageReceived(sender, message);
+				}
 			}
 		}
 	}
