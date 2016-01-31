@@ -22,6 +22,19 @@ public class InstantMessenger {
 	}
 
 	public void sendMessage(Peer sender, String message, Peer recepient) throws UnknownHostException, IOException {
+
+		if (recepient.getAddress().isEmpty()) {
+			if ((recepient.getSenderName().toLowerCase()).equals("all")) {
+				recepient.setAddress(sender.getAddress());
+			} else {
+				for (MessageListener messageListener : listeners) {
+					if (recepient.getSenderName().equals(messageListener.getName())) {
+						recepient.setAddress(messageListener.getIP());
+					}
+				}
+			}
+		}
+
 		final Socket socket = new Socket(recepient.getAddress(), SERVER_PORT);
 		final DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 		out.writeUTF(sender.getSenderName());
@@ -92,7 +105,8 @@ public class InstantMessenger {
 	public void notifyListeners(Peer sender, String message, Peer recepient) throws IOException {
 		synchronized (listeners) {
 			for (MessageListener listener : listeners) {
-				if (listener.getIP().equals(recepient.getAddress())) {
+				if (listener.getIP().equals(recepient.getAddress())
+						|| recepient.getSenderName().toLowerCase().equals("all")) {
 					listener.messageReceived(sender, message);
 				}
 			}
