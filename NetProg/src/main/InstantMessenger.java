@@ -8,6 +8,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class InstantMessenger {
 	private static final int SERVER_PORT = 4567;
@@ -37,15 +39,16 @@ public class InstantMessenger {
 			public void run() {
 				try {
 					serverSocket = new ServerSocket(SERVER_PORT);
-
+					ExecutorService executorService = Executors
+							.newCachedThreadPool();
 					while (!Thread.interrupted()) {
 						final Socket socket = serverSocket.accept();
-						new Thread(new Runnable() {
+						executorService.submit(new Runnable() {
 
 							@Override
 							public void run() {
 								try {
-									final DataInputStream in = new DataInputStream(
+									DataInputStream in = new DataInputStream(
 											socket.getInputStream());
 									Peer sender = new Peer(null, null);
 									sender.setSenderName(in.readUTF());
@@ -60,8 +63,9 @@ public class InstantMessenger {
 									e.printStackTrace();
 								}
 							}
-						}).start();
+						});
 					}
+					executorService.shutdown();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
