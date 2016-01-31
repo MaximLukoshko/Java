@@ -65,6 +65,8 @@ public class MainFrame extends JFrame {
 		fillFrame();
 		instantMessenger = IM;
 		listener = new MessageListener(MainFrame.this);
+
+		this.setTitle(FRAME_TITLE + " <" + textFieldFrom.getText() + ">");
 	}
 
 	private void setLocationAndSize() {
