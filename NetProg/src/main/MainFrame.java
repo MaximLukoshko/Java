@@ -39,7 +39,9 @@ public class MainFrame extends JFrame {
 	private static final int LARGE_GAP = 15;
 
 	private final JTextField textFieldFrom;
+	private final JTextField textFieldFromIP;
 	private final JTextField textFieldTo;
+	private final JTextField textFieldToIP;
 
 	private final JTextArea textAreaIncoming;
 	private final JTextArea textAreaOutgoing;
@@ -48,8 +50,7 @@ public class MainFrame extends JFrame {
 
 	private static InstantMessenger instantMessenger;
 
-	public MainFrame(final InstantMessenger IM) throws HeadlessException,
-			IOException {
+	public MainFrame(final InstantMessenger IM) throws HeadlessException, IOException {
 		super(FRAME_TITLE);
 
 		setLocationAndSize();
@@ -60,25 +61,25 @@ public class MainFrame extends JFrame {
 		textAreaOutgoing = new JTextArea(OUTGOING_AREA_DEFAULT_ROWS, 0);
 
 		textFieldTo = new JTextField(TO_FIELD_DEFAULT_COLUMNS);
+		textFieldFromIP = new JTextField(TO_FIELD_DEFAULT_COLUMNS);
 		textFieldFrom = new JTextField(FROM_FIELD_DEFAULT_COLUMNS);
+		textFieldToIP = new JTextField(FROM_FIELD_DEFAULT_COLUMNS);
 
-		fillFrame();
 		instantMessenger = IM;
 		listener = new MessageListener(MainFrame.this);
-
-		this.setTitle(FRAME_TITLE + " <" + textFieldFrom.getText() + ">");
+		fillFrame();
+		listener.setName(textFieldFrom.getText());
 	}
 
 	private void setLocationAndSize() {
 		setMinimumSize(new Dimension(FRAME_MINIMUM_WIDTH, FRAME_MINIMUM_HEIGHT));
 		final Toolkit kit = Toolkit.getDefaultToolkit();
-		setLocation((kit.getScreenSize().width - getWidth()) / 2,
-				(kit.getScreenSize().height - getHeight()) / 2);
+		setLocation((kit.getScreenSize().width - getWidth()) / 2, (kit.getScreenSize().height - getHeight()) / 2);
 	}
 
 	private void fillFrame() {
 		final JLabel labelRecepient = new JLabel("Recepient");
-		final JLabel labelSeder = new JLabel("Sender");
+		final JLabel labelSender = new JLabel("Sender");
 
 		final JButton buttonSend = new JButton("Send");
 		buttonSend.addActionListener(new ActionListener() {
@@ -98,96 +99,82 @@ public class MainFrame extends JFrame {
 		final GroupLayout layout2 = new GroupLayout(messagePanel);
 		messagePanel.setLayout(layout2);
 
-		layout2.setHorizontalGroup(layout2
-				.createSequentialGroup()
-				.addContainerGap()
-				.addGroup(
-						layout2.createParallelGroup(Alignment.TRAILING)
-								.addGroup(
-										layout2.createSequentialGroup()
-												.addComponent(labelSeder)
-												.addGap(SMALL_GAP)
-												.addComponent(textFieldFrom)
-												.addGap(LARGE_GAP)
-												.addComponent(labelRecepient)
-												.addGap(SMALL_GAP)
-												.addComponent(textFieldTo))
-								.addComponent(scrollPaneOutgoing)
-								.addComponent(buttonSend)).addContainerGap());
-		layout2.setVerticalGroup(layout2
-				.createSequentialGroup()
-				.addContainerGap()
-				.addGroup(
-						layout2.createParallelGroup(Alignment.BASELINE)
-								.addComponent(labelSeder)
-								.addComponent(textFieldFrom)
-								.addComponent(labelRecepient)
-								.addComponent(textFieldTo)).addGap(MEDIUM_GAP)
-				.addComponent(scrollPaneOutgoing).addGap(MEDIUM_GAP)
-				.addComponent(buttonSend).addContainerGap());
+		layout2.setHorizontalGroup(layout2.createSequentialGroup().addContainerGap()
+				.addGroup(layout2.createParallelGroup(Alignment.TRAILING)
+						.addGroup(layout2.createSequentialGroup().addComponent(labelSender).addGap(SMALL_GAP)
+								.addGroup(layout2.createParallelGroup().addComponent(textFieldFrom)
+										.addComponent(textFieldFromIP))
+								.addGap(LARGE_GAP).addComponent(labelRecepient).addGap(SMALL_GAP)
+								.addGroup(layout2.createParallelGroup().addComponent(textFieldTo)
+										.addComponent(textFieldToIP)))
+						.addComponent(scrollPaneOutgoing).addComponent(buttonSend))
+				.addContainerGap());
+		layout2.setVerticalGroup(layout2.createSequentialGroup().addContainerGap()
+				.addGroup(layout2.createParallelGroup(Alignment.BASELINE).addComponent(labelSender)
+						.addGroup(layout2.createSequentialGroup().addComponent(textFieldFrom)
+								.addComponent(textFieldFromIP))
+						.addComponent(labelRecepient).addGroup(
+								layout2.createSequentialGroup().addComponent(textFieldTo).addComponent(textFieldToIP)))
+				.addGap(MEDIUM_GAP).addComponent(scrollPaneOutgoing).addGap(MEDIUM_GAP).addComponent(buttonSend)
+				.addContainerGap());
 
 		final GroupLayout layout1 = new GroupLayout(getContentPane());
 		setLayout(layout1);
 
-		layout1.setHorizontalGroup(layout1
-				.createSequentialGroup()
-				.addContainerGap()
-				.addGroup(
-						layout1.createParallelGroup()
-								.addComponent(scrollPaneIncoming)
-								.addComponent(messagePanel)).addContainerGap());
-		layout1.setVerticalGroup(layout1.createSequentialGroup()
-				.addContainerGap().addComponent(scrollPaneIncoming)
+		layout1.setHorizontalGroup(layout1.createSequentialGroup().addContainerGap()
+				.addGroup(layout1.createParallelGroup().addComponent(scrollPaneIncoming).addComponent(messagePanel))
+				.addContainerGap());
+		layout1.setVerticalGroup(layout1.createSequentialGroup().addContainerGap().addComponent(scrollPaneIncoming)
 				.addComponent(messagePanel).addContainerGap());
-		textFieldTo.setText("127.0.0.1");
 
-		textFieldFrom.setText(JOptionPane.showInputDialog(MainFrame.this,
-				"Enter your name:", "Log in dialog",
-				JOptionPane.INFORMATION_MESSAGE));
+		textFieldToIP.setText("127.0.0.1");
+		do {
+			textFieldFrom.setText(JOptionPane.showInputDialog(MainFrame.this, "Enter your name:\n", "Log in dialog",
+					JOptionPane.INFORMATION_MESSAGE));
+		} while (textFieldFrom.getText().toLowerCase().equals("all"));
+		textFieldFromIP.setText(listener.getIP());
+
+		textFieldFrom.setEditable(false);
+		textFieldFromIP.setEditable(false);
+
+		this.setTitle(FRAME_TITLE + " <" + textFieldFrom.getText() + "> (" + listener.getIP() + ")");
 	}
 
 	protected void sendMessage() {
 		try {
 			final String senderName = textFieldFrom.getText();
-			final String destinationAddress = textFieldTo.getText();
+			final String destinationName = textFieldTo.getText();
+			final String destinationAddress = textFieldToIP.getText();
 			final String message = textAreaOutgoing.getText();
 
 			if (senderName.isEmpty()) {
-				JOptionPane.showMessageDialog(this, "Enter Sender Name",
-						"Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Enter Sender Name", "Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 
-			if (destinationAddress.isEmpty()) {
-				JOptionPane.showMessageDialog(this,
-						"Enter address of recepient socket", "Error",
+			if (destinationAddress.isEmpty() && destinationName.isEmpty()) {
+				JOptionPane.showMessageDialog(this, "Enter address of recepient socket", "Error",
 						JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 
 			if (message.isEmpty()) {
-				JOptionPane.showMessageDialog(this, "Message is empty",
-						"Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Message is empty", "Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
+			Peer recepient = new Peer(destinationName, destinationAddress);
 
-			instantMessenger.sendMessage(new Peer(senderName,
-					destinationAddress), message);
+			instantMessenger.sendMessage(new Peer(senderName, new String(listener.getIP())), message, recepient);
 
-			textAreaIncoming.append("Me -> " + destinationAddress + ": "
-					+ message + "\n");
+			textAreaIncoming.append("Me -> " + recepient.toString() + ": " + message + "\n");
 			textAreaOutgoing.setText("");
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
-			JOptionPane
-					.showMessageDialog(
-							MainFrame.this,
-							"Error while sending message: socket-recepient is not found",
-							"Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(MainFrame.this, "Error while sending message: socket-recepient is not found",
+					"Error", JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(MainFrame.this,
-					"Error while sending message", "Error",
+			JOptionPane.showMessageDialog(MainFrame.this, "Error while sending message", "Error",
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}

@@ -3,7 +3,6 @@ package main;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -22,13 +21,27 @@ public class InstantMessenger {
 		startServer();
 	}
 
-	public void sendMessage(Peer sender, String message)
-			throws UnknownHostException, IOException {
-		final Socket socket = new Socket(sender.getAddress(), SERVER_PORT);
-		final DataOutputStream out = new DataOutputStream(
-				socket.getOutputStream());
+	public void sendMessage(Peer sender, String message, Peer recepient) throws UnknownHostException, IOException {
+
+		if (recepient.getAddress().isEmpty()) {
+			if ((recepient.getSenderName().toLowerCase()).equals("all")) {
+				recepient.setAddress(sender.getAddress());
+			} else {
+				for (MessageListener messageListener : listeners) {
+					if (recepient.getSenderName().equals(messageListener.getName())) {
+						recepient.setAddress(messageListener.getIP());
+					}
+				}
+			}
+		}
+
+		final Socket socket = new Socket(recepient.getAddress(), SERVER_PORT);
+		final DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 		out.writeUTF(sender.getSenderName());
+		out.writeUTF(sender.getAddress());
 		out.writeUTF(message);
+		out.writeUTF(recepient.getSenderName());
+		out.writeUTF(recepient.getAddress());
 		socket.close();
 	}
 
@@ -39,8 +52,7 @@ public class InstantMessenger {
 			public void run() {
 				try {
 					serverSocket = new ServerSocket(SERVER_PORT);
-					 ExecutorService executorService = Executors
-					 .newCachedThreadPool();
+					ExecutorService executorService = Executors.newCachedThreadPool();
 					// ExecutorService executorService = Executors
 					// .newFixedThreadPool(2);
 					while (!Thread.interrupted()) {
@@ -50,17 +62,20 @@ public class InstantMessenger {
 							@Override
 							public void run() {
 								try {
-									DataInputStream in = new DataInputStream(
-											socket.getInputStream());
+									DataInputStream in = new DataInputStream(socket.getInputStream());
 									Peer sender = new Peer(null, null);
+									Peer recepient = new Peer(null, null);
 									sender.setSenderName(in.readUTF());
-									sender.setAddress(((InetSocketAddress) socket
-											.getRemoteSocketAddress())
-											.getAddress().getHostAddress());
+									sender.setAddress(in.readUTF());
+									// sender.setAddress(((InetSocketAddress)
+									// socket.getRemoteSocketAddress()).getAddress()
+									// .getHostAddress());
 									String message = new String();
 									message = in.readUTF();
+									recepient.setSenderName(in.readUTF());
+									recepient.setAddress(in.readUTF());
 									socket.close();
-									notifyListeners(sender, message);
+									notifyListeners(sender, message, recepient);
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
@@ -87,10 +102,13 @@ public class InstantMessenger {
 		}
 	}
 
-	public void notifyListeners(Peer sender, String message) throws IOException {
+	public void notifyListeners(Peer sender, String message, Peer recepient) throws IOException {
 		synchronized (listeners) {
 			for (MessageListener listener : listeners) {
-				listener.messageReceived(sender, message);
+				if (listener.getIP().equals(recepient.getAddress())
+						|| recepient.getSenderName().toLowerCase().equals("all")) {
+					listener.messageReceived(sender, message);
+				}
 			}
 		}
 	}
