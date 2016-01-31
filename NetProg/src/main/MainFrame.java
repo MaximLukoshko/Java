@@ -68,6 +68,7 @@ public class MainFrame extends JFrame {
 		instantMessenger = IM;
 		listener = new MessageListener(MainFrame.this);
 		fillFrame();
+		listener.setName(textFieldFrom.getText());
 	}
 
 	private void setLocationAndSize() {
@@ -125,21 +126,22 @@ public class MainFrame extends JFrame {
 				.addContainerGap());
 		layout1.setVerticalGroup(layout1.createSequentialGroup().addContainerGap().addComponent(scrollPaneIncoming)
 				.addComponent(messagePanel).addContainerGap());
-		
+
 		textFieldToIP.setText("127.0.0.1");
 		textFieldFrom.setText(JOptionPane.showInputDialog(MainFrame.this, "Enter your name:", "Log in dialog",
 				JOptionPane.INFORMATION_MESSAGE));
 		textFieldFromIP.setText(listener.getIP());
-		
+
 		textFieldFrom.setEditable(false);
 		textFieldFromIP.setEditable(false);
-		
+
 		this.setTitle(FRAME_TITLE + " <" + textFieldFrom.getText() + "> (" + listener.getIP() + ")");
 	}
 
 	protected void sendMessage() {
 		try {
 			final String senderName = textFieldFrom.getText();
+			final String destinationName = textFieldTo.getText();
 			final String destinationAddress = textFieldToIP.getText();
 			final String message = textAreaOutgoing.getText();
 
@@ -148,7 +150,7 @@ public class MainFrame extends JFrame {
 				return;
 			}
 
-			if (destinationAddress.isEmpty()) {
+			if (destinationAddress.isEmpty() && destinationName.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "Enter address of recepient socket", "Error",
 						JOptionPane.ERROR_MESSAGE);
 				return;
@@ -159,8 +161,8 @@ public class MainFrame extends JFrame {
 				return;
 			}
 
-			instantMessenger.sendMessage(new Peer(senderName, new String("127.0.0." + listener.getIP())), message,
-					new Peer("123", destinationAddress));
+			instantMessenger.sendMessage(new Peer(senderName, new String(listener.getIP())), message,
+					new Peer(destinationName, destinationAddress));
 
 			textAreaIncoming.append("Me -> " + destinationAddress + ": " + message + "\n");
 			textAreaOutgoing.setText("");

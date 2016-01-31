@@ -6,6 +6,7 @@ public class MessageListener {
 	private MainFrame frame;
 	private static int CURRENT_FREE_IP = 1;
 	private int IP;
+	private String name;
 
 	public MessageListener(MainFrame frame) {
 		super();
@@ -22,5 +23,13 @@ public class MessageListener {
 	void messageReceived(Peer sender, String message) throws IOException {
 		frame.appendIncoming(sender.toString() + ": " + message + "\n");
 		frame.clearOutgoing();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String text) {
+		name = text;
 	}
 }
