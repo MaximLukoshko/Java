@@ -138,6 +138,10 @@ public class MainFrame extends JFrame {
 				.addContainerGap().addComponent(scrollPaneIncoming)
 				.addComponent(messagePanel).addContainerGap());
 		textFieldTo.setText("127.0.0.1");
+
+		textFieldFrom.setText(JOptionPane.showInputDialog(MainFrame.this,
+				"Enter your name:", "Log in dialog",
+				JOptionPane.INFORMATION_MESSAGE));
 	}
 
 	protected void sendMessage() {
