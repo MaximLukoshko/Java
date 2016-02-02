@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -48,7 +49,7 @@ public class MainFrame extends JFrame {
 
 	private MessageListener listener;
 
-	private static InstantMessenger instantMessenger;
+	private InstantMessenger instantMessenger;
 
 	public MainFrame(final InstantMessenger IM) throws HeadlessException, IOException {
 		super(FRAME_TITLE);
@@ -90,6 +91,15 @@ public class MainFrame extends JFrame {
 			}
 		});
 
+		final JButton buttonShowUsers = new JButton("Show all Users");
+		buttonShowUsers.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ShowUsers();
+			}
+		});
+
 		final JPanel messagePanel = new JPanel();
 		messagePanel.setBorder(BorderFactory.createTitledBorder("Message"));
 
@@ -107,7 +117,8 @@ public class MainFrame extends JFrame {
 								.addGap(LARGE_GAP).addComponent(labelRecepient).addGap(SMALL_GAP)
 								.addGroup(layout2.createParallelGroup().addComponent(textFieldTo)
 										.addComponent(textFieldToIP)))
-						.addComponent(scrollPaneOutgoing).addComponent(buttonSend))
+						.addComponent(scrollPaneOutgoing).addGroup(layout2.createSequentialGroup()
+								.addComponent(buttonShowUsers).addGap(LARGE_GAP).addComponent(buttonSend)))
 				.addContainerGap());
 		layout2.setVerticalGroup(layout2.createSequentialGroup().addContainerGap()
 				.addGroup(layout2.createParallelGroup(Alignment.BASELINE).addComponent(labelSender)
@@ -115,7 +126,8 @@ public class MainFrame extends JFrame {
 								.addComponent(textFieldFromIP))
 						.addComponent(labelRecepient).addGroup(
 								layout2.createSequentialGroup().addComponent(textFieldTo).addComponent(textFieldToIP)))
-				.addGap(MEDIUM_GAP).addComponent(scrollPaneOutgoing).addGap(MEDIUM_GAP).addComponent(buttonSend)
+				.addGap(MEDIUM_GAP).addComponent(scrollPaneOutgoing).addGap(MEDIUM_GAP).addGroup(layout2
+						.createParallelGroup().addComponent(buttonShowUsers).addGap(LARGE_GAP).addComponent(buttonSend))
 				.addContainerGap());
 
 		final GroupLayout layout1 = new GroupLayout(getContentPane());
@@ -128,16 +140,34 @@ public class MainFrame extends JFrame {
 				.addComponent(messagePanel).addContainerGap());
 
 		textFieldToIP.setText("127.0.0.1");
-		do {
-			textFieldFrom.setText(JOptionPane.showInputDialog(MainFrame.this, "Enter your name:\n", "Log in dialog",
-					JOptionPane.INFORMATION_MESSAGE));
-		} while (textFieldFrom.getText().toLowerCase().equals("all"));
+		{
+			String userName;
+			String userPassword;
+			do {
+				userName = "";
+				userPassword = "";
+				while (userName.toLowerCase().equals("all") || userName.isEmpty()) {
+					userName = JOptionPane.showInputDialog(MainFrame.this, "Enter your name:\n", "Log in dialog",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+				while (userPassword.isEmpty()) {
+					userPassword = JOptionPane.showInputDialog(MainFrame.this, "Password for '" + userName + "':\n",
+							"Log in dialog", JOptionPane.INFORMATION_MESSAGE);
+				}
+			} while (!InstantMessenger.logIn(userName, userPassword));
+			textFieldFrom.setText(userName);
+		}
 		textFieldFromIP.setText(listener.getIP());
 
 		textFieldFrom.setEditable(false);
 		textFieldFromIP.setEditable(false);
 
 		this.setTitle(FRAME_TITLE + " <" + textFieldFrom.getText() + "> (" + listener.getIP() + ")");
+	}
+
+	protected void ShowUsers() {
+		JOptionPane.showMessageDialog(this, instantMessenger.getActiveUsers(), "Active Users",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	protected void sendMessage() {
@@ -210,6 +240,12 @@ public class MainFrame extends JFrame {
 	@Deprecated
 	public void hide() {
 		super.hide();
+		try {
+			instantMessenger.logOut(this.listener.getName());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		instantMessenger.removeMessageListener(listener);
 	}
 }

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -15,9 +16,12 @@ public class InstantMessenger {
 	private ArrayList<MessageListener> listeners;
 	private static ServerSocket serverSocket;
 
+	private static UserPasswordBase userPasswordBase;
+
 	public InstantMessenger() throws IOException {
 		super();
 		listeners = new ArrayList<MessageListener>();
+		userPasswordBase = new UserPasswordBase();
 		startServer();
 	}
 
@@ -83,6 +87,7 @@ public class InstantMessenger {
 						});
 					}
 					executorService.shutdown();
+					userPasswordBase.stopConnection();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -113,7 +118,22 @@ public class InstantMessenger {
 		}
 	}
 
-	public Socket getSocket() throws IOException {
-		return serverSocket.accept();
+	public static boolean logIn(String username, String password) {
+		return UserPasswordBase.authorize(username.toLowerCase(), password);
+	}
+
+	public void logOut(String username) throws SQLException {
+		UserPasswordBase.logOut(username.toLowerCase());
+	}
+
+	public String getActiveUsers() {
+		String activeUsers = new String();
+		Peer user = new Peer(null, null);
+		for (MessageListener messageListener : listeners) {
+			user.setSenderName(messageListener.getName());
+			user.setAddress(messageListener.getIP());
+			activeUsers += user.toString() + "\n";
+		}
+		return activeUsers;
 	}
 }
