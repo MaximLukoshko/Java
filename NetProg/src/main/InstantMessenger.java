@@ -16,11 +16,12 @@ public class InstantMessenger {
 	private static ServerSocket serverSocket;
 
 	@SuppressWarnings("unused")
-	private UserPasswordBase userPasswordBase;
+	private static UserPasswordBase userPasswordBase;
 
 	public InstantMessenger() throws IOException {
 		super();
 		listeners = new ArrayList<MessageListener>();
+		userPasswordBase = new UserPasswordBase();
 		startServer();
 	}
 
