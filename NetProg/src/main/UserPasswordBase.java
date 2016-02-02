@@ -39,10 +39,7 @@ public class UserPasswordBase {
 		try {
 			con = DriverManager.getConnection(url, user, password);
 			stmt = con.createStatement();
-			String refreshQuery = "update " + table + " set " + userOnlineStatusField
-					+ "='0'"/*
-							 * + " where " + userNameField + "=*"
-							 */;
+			String refreshQuery = "update " + table + " set " + userOnlineStatusField + "='0'";
 			stmt.executeUpdate(refreshQuery);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -100,6 +97,27 @@ public class UserPasswordBase {
 		String setOfflineQuerry = "update " + table + " set " + userOnlineStatusField + "='0'" + " where "
 				+ userNameField + "='" + userName + "'";
 		stmt.executeUpdate(setOfflineQuerry);
+	}
+
+	public void stopConnection() {
+		try {
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

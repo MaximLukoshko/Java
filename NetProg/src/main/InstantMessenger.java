@@ -88,6 +88,7 @@ public class InstantMessenger {
 						});
 					}
 					executorService.shutdown();
+					userPasswordBase.stopConnection();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -117,10 +118,6 @@ public class InstantMessenger {
 			}
 		}
 	}
-
-//	public Socket getSocket() throws IOException {
-//		return serverSocket.accept();
-//	}
 
 	public static boolean logIn(String username, String password) {
 		return UserPasswordBase.authorize(username, password);
