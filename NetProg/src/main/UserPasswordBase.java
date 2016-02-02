@@ -17,10 +17,10 @@ public class UserPasswordBase {
 	// DataBase Variables
 	private static String table = "authentic_data";
 	@SuppressWarnings("unused")
-	private static String idField = "id";
-	private static String userNameField = "userName";
-	private static String userPasswordField = "userPassword";
-	private static String userOnlineStatusField = "userOnlineStatus";
+	private static final String idField = "id";
+	private static final String userNameField = "userName";
+	private static final String userPasswordField = "userPassword";
+	private static final String userOnlineStatusField = "userOnlineStatus";
 
 	// JDBC variables for opening and managing connection
 	private static Connection con;
@@ -32,51 +32,40 @@ public class UserPasswordBase {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Driver loading success!");
+
 		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
+			con = DriverManager.getConnection(url, user, password);
+			stmt = con.createStatement();
+			String refreshQuery = "update " + table + " set " + userOnlineStatusField
+					+ "='0'"/*
+							 * + " where " + userNameField + "=*"
+							 */;
+			stmt.executeUpdate(refreshQuery);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
 
 	public static boolean authorize(String userName, String userPassword) {
-		boolean result = false;
-		;
+		boolean userExist = false;
 		try {
-			con = DriverManager.getConnection(url, user, password);
-			stmt = con.createStatement();
-			result = findUser(userName, userPassword);
-			con.close();
+			userExist = findUser(userName, userPassword);
 		} catch (SQLException sqlEx) {
 			sqlEx.printStackTrace();
-		} finally {
-			// close connection ,stmt and resultset here
-			try {
-				con.close();
-			} catch (SQLException se) {
-				/* can't do anything */ }
-			try {
-				stmt.close();
-			} catch (SQLException se) {
-				/* can't do anything */ }
-			try {
-				rs.close();
-			} catch (SQLException se) {
-				/* can't do anything */ }
 		}
-		return result;
+		return userExist;
 	}
 
 	private static boolean findUser(String userName, String userPassword) throws SQLException {
-		String query = "select * from " + table;
+		String query = "select * from " + table + " where " + userNameField + "='" + userName + "'";
 		rs = stmt.executeQuery(query);
-		boolean found = false;
-		while (rs.next()) {
-			System.out.println(rs.getString(userNameField));
-			if (rs.getString(userNameField).equals(userName)) {
-				found = true;
-				break;
-			}
-		}
+		boolean found = rs.first();
+
 		if (found && rs.getString(userPasswordField).equals(userPassword)) {
 			if (rs.getBoolean(userOnlineStatusField)) {
 				return false;
@@ -97,17 +86,20 @@ public class UserPasswordBase {
 		stmt.executeUpdate(addQuery);
 	}
 
-	private static void setOnline(String userName) {
-		// TODO Auto-generated method stub
+	private static void setOnline(String userName) throws SQLException {
+		String setOnlineQuerry = "update " + table + " set " + userOnlineStatusField + "='1'" + " where "
+				+ userNameField + "='" + userName + "'";
+		stmt.executeUpdate(setOnlineQuerry);
 	}
 
-	public static void logOut(String username) {
-		setOffline(username);
+	public static void logOut(String userName) throws SQLException {
+		setOffline(userName);
 	}
 
-	private static void setOffline(String username) {
-		// TODO Auto-generated method stub
-
+	private static void setOffline(String userName) throws SQLException {
+		String setOfflineQuerry = "update " + table + " set " + userOnlineStatusField + "='0'" + " where "
+				+ userNameField + "='" + userName + "'";
+		stmt.executeUpdate(setOfflineQuerry);
 	}
 
 }

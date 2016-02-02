@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -117,15 +118,15 @@ public class InstantMessenger {
 		}
 	}
 
-	public Socket getSocket() throws IOException {
-		return serverSocket.accept();
-	}
+//	public Socket getSocket() throws IOException {
+//		return serverSocket.accept();
+//	}
 
 	public static boolean logIn(String username, String password) {
 		return UserPasswordBase.authorize(username, password);
 	}
 
-	public void logOut(String username) {
+	public void logOut(String username) throws SQLException {
 		UserPasswordBase.logOut(username);
 	}
 }

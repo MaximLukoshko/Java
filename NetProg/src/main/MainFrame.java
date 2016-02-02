@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -214,7 +215,12 @@ public class MainFrame extends JFrame {
 	@Deprecated
 	public void hide() {
 		super.hide();
-		instantMessenger.logOut(this.listener.getName());
+		try {
+			instantMessenger.logOut(this.listener.getName());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		instantMessenger.removeMessageListener(listener);
 	}
 }
