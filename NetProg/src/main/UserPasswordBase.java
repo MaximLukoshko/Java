@@ -1,6 +1,7 @@
 package main;
 
 import java.sql.Statement;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -19,8 +20,7 @@ public class UserPasswordBase {
 	private static String idField = "id";
 	private static String userNameField = "userName";
 	private static String userPasswordField = "userPassword";
-	@SuppressWarnings("unused")
-	private static String userOnlineStatusField = "userNameOnlineStatus";
+	private static String userOnlineStatusField = "userOnlineStatus";
 
 	// JDBC variables for opening and managing connection
 	private static Connection con;
@@ -42,18 +42,10 @@ public class UserPasswordBase {
 		boolean result = false;
 		;
 		try {
-			String query = "select * from " + table;
-			// opening database connection to MySQL server
 			con = DriverManager.getConnection(url, user, password);
-
-			// getting Statement object to execute query
 			stmt = con.createStatement();
-			rs = stmt.executeQuery(query);
-
-			result = findUser(rs, userName, userPassword);
-
+			result = findUser(userName, userPassword);
 			con.close();
-
 		} catch (SQLException sqlEx) {
 			sqlEx.printStackTrace();
 		} finally {
@@ -74,18 +66,24 @@ public class UserPasswordBase {
 		return result;
 	}
 
-	private static boolean findUser(ResultSet rs2, String userName, String userPassword) throws SQLException {
+	private static boolean findUser(String userName, String userPassword) throws SQLException {
+		String query = "select * from " + table;
+		rs = stmt.executeQuery(query);
 		boolean found = false;
-		while (rs2.next()) {
-			System.out.println(rs2.getString(userNameField));
-			if (rs2.getString(userNameField).equals(userName)) {
+		while (rs.next()) {
+			System.out.println(rs.getString(userNameField));
+			if (rs.getString(userNameField).equals(userName)) {
 				found = true;
 				break;
 			}
 		}
-		if (found && rs2.getString(userPasswordField).equals(userPassword)) {
-			setOnline(userName);
-			return true;
+		if (found && rs.getString(userPasswordField).equals(userPassword)) {
+			if (rs.getBoolean(userOnlineStatusField)) {
+				return false;
+			} else {
+				setOnline(userName);
+				return true;
+			}
 		} else if (found) {
 			return false;
 		} else {
@@ -94,17 +92,20 @@ public class UserPasswordBase {
 		}
 	}
 
-	private static void addOnlineUser(String userName, String userPassword) {
-		// TODO Auto-generated method stub
-
+	private static void addOnlineUser(String userName, String userPassword) throws SQLException {
+		String addQuery = "insert into authentic_data values (null, '" + userName + "', '" + userPassword + "', '1')";
+		stmt.executeUpdate(addQuery);
 	}
 
 	private static void setOnline(String userName) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public static void logOut(String username) {
+		setOffline(username);
+	}
+
+	private static void setOffline(String username) {
 		// TODO Auto-generated method stub
 
 	}
