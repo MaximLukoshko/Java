@@ -125,4 +125,15 @@ public class InstantMessenger {
 	public void logOut(String username) throws SQLException {
 		UserPasswordBase.logOut(username);
 	}
+
+	public String getActiveUsers() {
+		String activeUsers = new String();
+		Peer user = new Peer(null, null);
+		for (MessageListener messageListener : listeners) {
+			user.setSenderName(messageListener.getName());
+			user.setAddress(messageListener.getIP());
+			activeUsers += user.toString() + "\n";
+		}
+		return activeUsers;
+	}
 }

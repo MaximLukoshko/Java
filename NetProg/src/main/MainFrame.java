@@ -91,6 +91,15 @@ public class MainFrame extends JFrame {
 			}
 		});
 
+		final JButton buttonShowUsers = new JButton("Show all Users");
+		buttonShowUsers.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ShowUsers();
+			}
+		});
+
 		final JPanel messagePanel = new JPanel();
 		messagePanel.setBorder(BorderFactory.createTitledBorder("Message"));
 
@@ -108,7 +117,8 @@ public class MainFrame extends JFrame {
 								.addGap(LARGE_GAP).addComponent(labelRecepient).addGap(SMALL_GAP)
 								.addGroup(layout2.createParallelGroup().addComponent(textFieldTo)
 										.addComponent(textFieldToIP)))
-						.addComponent(scrollPaneOutgoing).addComponent(buttonSend))
+						.addComponent(scrollPaneOutgoing).addGroup(layout2.createSequentialGroup()
+								.addComponent(buttonShowUsers).addGap(LARGE_GAP).addComponent(buttonSend)))
 				.addContainerGap());
 		layout2.setVerticalGroup(layout2.createSequentialGroup().addContainerGap()
 				.addGroup(layout2.createParallelGroup(Alignment.BASELINE).addComponent(labelSender)
@@ -116,7 +126,8 @@ public class MainFrame extends JFrame {
 								.addComponent(textFieldFromIP))
 						.addComponent(labelRecepient).addGroup(
 								layout2.createSequentialGroup().addComponent(textFieldTo).addComponent(textFieldToIP)))
-				.addGap(MEDIUM_GAP).addComponent(scrollPaneOutgoing).addGap(MEDIUM_GAP).addComponent(buttonSend)
+				.addGap(MEDIUM_GAP).addComponent(scrollPaneOutgoing).addGap(MEDIUM_GAP).addGroup(layout2
+						.createParallelGroup().addComponent(buttonShowUsers).addGap(LARGE_GAP).addComponent(buttonSend))
 				.addContainerGap());
 
 		final GroupLayout layout1 = new GroupLayout(getContentPane());
@@ -152,6 +163,11 @@ public class MainFrame extends JFrame {
 		textFieldFromIP.setEditable(false);
 
 		this.setTitle(FRAME_TITLE + " <" + textFieldFrom.getText() + "> (" + listener.getIP() + ")");
+	}
+
+	protected void ShowUsers() {
+		JOptionPane.showMessageDialog(this, instantMessenger.getActiveUsers(), "Active Users",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	protected void sendMessage() {
