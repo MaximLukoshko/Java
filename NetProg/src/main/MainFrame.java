@@ -129,14 +129,23 @@ public class MainFrame extends JFrame {
 				.addComponent(messagePanel).addContainerGap());
 
 		textFieldToIP.setText("127.0.0.1");
-		do {
-			textFieldFrom.setText(JOptionPane.showInputDialog(MainFrame.this, "Enter your name:\n", "Log in dialog",
-					JOptionPane.INFORMATION_MESSAGE));
-		} while (textFieldFrom.getText().toLowerCase().equals("all"));
-
-		while (!InstantMessenger.logIn(textFieldFrom.getText(), JOptionPane.showInputDialog(MainFrame.this,
-				"Password for '" + textFieldFrom.getText() + "':\n", "Log in dialog", JOptionPane.INFORMATION_MESSAGE)))
-			;
+		{
+			String userName;
+			String userPassword;
+			do {
+				userName = "";
+				userPassword = "";
+				while (userName.toLowerCase().equals("all") || userName.isEmpty()) {
+					userName = JOptionPane.showInputDialog(MainFrame.this, "Enter your name:\n", "Log in dialog",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+				while (userPassword.isEmpty()) {
+					userPassword = JOptionPane.showInputDialog(MainFrame.this, "Password for '" + userName + "':\n",
+							"Log in dialog", JOptionPane.INFORMATION_MESSAGE);
+				}
+			} while (!InstantMessenger.logIn(userName, userPassword));
+			textFieldFrom.setText(userName);
+		}
 		textFieldFromIP.setText(listener.getIP());
 
 		textFieldFrom.setEditable(false);

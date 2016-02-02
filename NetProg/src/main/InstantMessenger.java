@@ -16,7 +16,6 @@ public class InstantMessenger {
 	private ArrayList<MessageListener> listeners;
 	private static ServerSocket serverSocket;
 
-	@SuppressWarnings("unused")
 	private static UserPasswordBase userPasswordBase;
 
 	public InstantMessenger() throws IOException {

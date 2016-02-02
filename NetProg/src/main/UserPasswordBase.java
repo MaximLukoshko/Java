@@ -64,6 +64,7 @@ public class UserPasswordBase {
 		boolean found = rs.first();
 
 		if (found && rs.getString(userPasswordField).equals(userPassword)) {
+
 			if (rs.getBoolean(userOnlineStatusField)) {
 				return false;
 			} else {
@@ -71,6 +72,7 @@ public class UserPasswordBase {
 				return true;
 			}
 		} else if (found) {
+			System.out.println("entered\n");
 			return false;
 		} else {
 			addOnlineUser(userName, userPassword);
