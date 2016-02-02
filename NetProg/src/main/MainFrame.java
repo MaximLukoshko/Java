@@ -48,7 +48,7 @@ public class MainFrame extends JFrame {
 
 	private MessageListener listener;
 
-	private static InstantMessenger instantMessenger;
+	private InstantMessenger instantMessenger;
 
 	public MainFrame(final InstantMessenger IM) throws HeadlessException, IOException {
 		super(FRAME_TITLE);
@@ -132,6 +132,10 @@ public class MainFrame extends JFrame {
 			textFieldFrom.setText(JOptionPane.showInputDialog(MainFrame.this, "Enter your name:\n", "Log in dialog",
 					JOptionPane.INFORMATION_MESSAGE));
 		} while (textFieldFrom.getText().toLowerCase().equals("all"));
+
+		while (!InstantMessenger.logIn(textFieldFrom.getText(), JOptionPane.showInputDialog(MainFrame.this,
+				"Password for '" + textFieldFrom.getText() + "':\n", "Log in dialog", JOptionPane.INFORMATION_MESSAGE)))
+			;
 		textFieldFromIP.setText(listener.getIP());
 
 		textFieldFrom.setEditable(false);
@@ -210,6 +214,7 @@ public class MainFrame extends JFrame {
 	@Deprecated
 	public void hide() {
 		super.hide();
+		instantMessenger.logOut(this.listener.getName());
 		instantMessenger.removeMessageListener(listener);
 	}
 }

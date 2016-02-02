@@ -15,6 +15,9 @@ public class InstantMessenger {
 	private ArrayList<MessageListener> listeners;
 	private static ServerSocket serverSocket;
 
+	@SuppressWarnings("unused")
+	private UserPasswordBase userPasswordBase;
+
 	public InstantMessenger() throws IOException {
 		super();
 		listeners = new ArrayList<MessageListener>();
@@ -115,5 +118,13 @@ public class InstantMessenger {
 
 	public Socket getSocket() throws IOException {
 		return serverSocket.accept();
+	}
+
+	public static boolean logIn(String username, String password) {
+		return UserPasswordBase.authorize(username, password);
+	}
+
+	public void logOut(String username) {
+		UserPasswordBase.logOut(username);
 	}
 }
