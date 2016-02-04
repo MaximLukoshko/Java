@@ -41,7 +41,6 @@ public class StartupServlet extends HttpServlet {
 			// Инициализировать значения свойства lastModifiedDate
 			ad.setLastModified(ad.getLastModified());
 		}
-		
 	}
 
 }

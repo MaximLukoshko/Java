@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<Resource name="jdbc/jsp" type="javax.sql.DataSource" 
-maxActive="100" maxIdle="30" maxWait="10000" 
-username="maxim" password="maxim" 
-driverClassName="com.mysql.jdbc.Driver" 
-auth="Container" url="jdbc:mysql://localhost/UsersAdsDB"/>
+<Context>
+    <!-- Specify a JDBC datasource -->
+    <Resource name="jdbc/jsp" auth="Container"
+        type="javax.sql.DataSource" username="maxim" password="maxim"
+        driverClassName="com.mysql.jdbc.Driver"
+        url="jdbc:mysql://localhost:3306/users"
+        maxActive="10" maxIdle="4" />
+</Context>
