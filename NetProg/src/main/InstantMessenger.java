@@ -119,11 +119,15 @@ public class InstantMessenger {
 	}
 
 	public static boolean logIn(String username, String password) {
-		return UserPasswordBase.authorize(username.toLowerCase(), password);
+		synchronized (userPasswordBase) {
+			return userPasswordBase.authorize(username.toLowerCase(), password);
+		}
 	}
 
 	public void logOut(String username) throws SQLException {
-		UserPasswordBase.logOut(username.toLowerCase());
+		synchronized (userPasswordBase) {
+			userPasswordBase.logOut(username.toLowerCase());
+		}
 	}
 
 	public String getActiveUsers() {
