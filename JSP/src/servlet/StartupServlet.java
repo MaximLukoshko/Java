@@ -35,8 +35,13 @@ public class StartupServlet extends HttpServlet {
 		// (для JSP это тождественно равно applicationContext)
 		getServletContext().setAttribute("ads", adList);
 		for (Ad ad : adList.getAds()) {
-
+			// Т.к. в сообщениях изначально присутствует только id
+			// автора, для удобства установим ссылки
+			ad.setAuthor(userList.findUser(ad.getAuthorId()));
+			// Инициализировать значения свойства lastModifiedDate
+			ad.setLastModified(ad.getLastModified());
 		}
+		
 	}
 
 }

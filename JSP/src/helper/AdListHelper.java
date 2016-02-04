@@ -7,8 +7,12 @@ import entity.AdList;
 public abstract class AdListHelper {
 
 	public static AdList readAdList(ServletContext servletContext) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
+	public static void saveAdList(AdList ads) {
+		// TODO Auto-generated method stub
+
+	}
 }

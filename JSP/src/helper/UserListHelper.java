@@ -11,4 +11,8 @@ public abstract class UserListHelper {
 		return null;
 	}
 
+	public static void saveUserList(UserList users) {
+		// TODO Auto-generated method stub
+
+	}
 }
