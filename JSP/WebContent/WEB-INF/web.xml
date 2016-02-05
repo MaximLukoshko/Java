@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>JSP</display-name><web:servlet>
-  	<web:servlet-name>/StartupServlet.do</web:servlet-name>
-  	<web:servlet-class>servlet.StartupServlet</web:servlet-class>
-  	<web:load-on-startup>1</web:load-on-startup>
-</web:servlet>
+<web-app id="WebApp_ID" version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd ">
+  <display-name>JSP</display-name>
+<servlet>
+	<display-name>StartupServlet</display-name>
+	<servlet-name>StartupServlet</servlet-name>
+	<servlet-class>servlet.StartupServlet</servlet-class>
+	<load-on-startup>1</load-on-startup>
+</servlet>
+
   <welcome-file-list>
     <welcome-file>/StartupServlet.do</welcome-file><welcome-file>jsp_pages/index.jsp</welcome-file>
   </welcome-file-list>
-  <web:jsp-config>
-  	<web:taglib>
-  		<web:taglib-uri>token</web:taglib-uri>
-  		<web:taglib-location>tags/taglib.tld</web:taglib-location>
-  	</web:taglib><web:taglib>
-  		<web:taglib-uri>http://java.sun.com/jsp/jstl/core</web:taglib-uri>
-  		<web:taglib-location>tags/c.tld</web:taglib-location>
-  	</web:taglib>
+  <jsp-config>
+  	<taglib>
+  		<taglib-uri>token</taglib-uri>
+  		<taglib-location>tags/taglib.tld</taglib-location>
+  	</taglib><taglib>
+  		<taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
+  		<taglib-location>tags/c.tld</taglib-location>
+  	</taglib>
 	<taglib>
 		<taglib-uri>http://java.sun.com/jsp/jstl/fmt</taglib-uri>
 		<taglib-location>/WEB-INF/tlds/standart/fmt.tld</taglib-location>
@@ -32,6 +35,5 @@
 		<taglib-uri>http://java.sun.com/jsp/jstl/xml</taglib-uri>
 		<taglib-location>/WEB-INF/tlds/standart/x.tld</taglib-location>
 	</taglib>
-  </web:jsp-config>
-  
+  </jsp-config>
 </web-app>
