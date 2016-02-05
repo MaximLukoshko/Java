@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>JSP</display-name>
   <welcome-file-list>
-    <welcome-file>StartupServlet</welcome-file><welcome-file>index.jsp</welcome-file>
+    <welcome-file>/StartupServlet.do</welcome-file><welcome-file>jsp_pages/index.jsp</welcome-file>
     
   </welcome-file-list>
   <web:jsp-config>
@@ -15,19 +15,19 @@
   	</web:taglib>
 	<taglib>
 		<taglib-uri>http://java.sun.com/jsp/jstl/fmt</taglib-uri>
-		<taglib-location>/WEB-INF/tlds/fmt.tld</taglib-location>
+		<taglib-location>/WEB-INF/tlds/standart/fmt.tld</taglib-location>
 	</taglib>
 	<taglib>
 		<taglib-uri>http://java.sun.com/jsp/jstl/functions</taglib-uri>
-		<taglib-location>/WEB-INF/tlds/fn.tld</taglib-location>
+		<taglib-location>/WEB-INF/tlds/standart/fn.tld</taglib-location>
 	</taglib>
 	<taglib>
 		<taglib-uri>http://java.sun.com/jsp/jstl/sql</taglib-uri>
-		<taglib-location>/WEB-INF/tlds/sql.tld</taglib-location>
+		<taglib-location>/WEB-INF/tlds/standart/sql.tld</taglib-location>
 	</taglib>
 	<taglib>
 		<taglib-uri>http://java.sun.com/jsp/jstl/xml</taglib-uri>
-		<taglib-location>/WEB-INF/tlds/x.tld</taglib-location>
+		<taglib-location>/WEB-INF/tlds/standart/x.tld</taglib-location>
 	</taglib>
   </web:jsp-config>
 </web-app>

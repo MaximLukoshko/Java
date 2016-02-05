@@ -22,7 +22,7 @@
 <c:if test="${sessionScope.authUser!=null}">
 	<div style="background-color: #ccc; padding: 5px">
 		<div style="float: right; margin-right: 5px">
-			[ <a href="<c:url value="/doLogout.jsp" />">Выйти</a>
+			[ <a href="<c:url value="/doLogout.jsp" />">Выйти</a>]
 		</div>
 		Вы вошли как:
 		<c:out value="${sessionScope.authUser.name}" />
@@ -31,4 +31,3 @@
 		)
 	</div>
 </c:if>
-]

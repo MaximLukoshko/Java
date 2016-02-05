@@ -14,7 +14,7 @@ import helper.UserListHelper;
 /**
  * Servlet implementation class StartupServlet
  */
-@WebServlet("/StartupServlet")
+@WebServlet("/StartupServlet.do")
 public class StartupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -41,6 +41,7 @@ public class StartupServlet extends HttpServlet {
 			// Инициализировать значения свойства lastModifiedDate
 			ad.setLastModified(ad.getLastModified());
 		}
+		System.out.println("Servlet is loaded");
 	}
 	
 }
