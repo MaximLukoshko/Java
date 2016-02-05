@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>JSP</display-name>
+  <display-name>JSP</display-name><web:servlet>
+  	<web:servlet-name>/StartupServlet.do</web:servlet-name>
+  	<web:servlet-class>servlet.StartupServlet</web:servlet-class>
+  	<web:load-on-startup>1</web:load-on-startup>
+</web:servlet>
   <welcome-file-list>
     <welcome-file>/StartupServlet.do</welcome-file><welcome-file>jsp_pages/index.jsp</welcome-file>
-    
   </welcome-file-list>
   <web:jsp-config>
   	<web:taglib>
@@ -30,7 +33,5 @@
 		<taglib-location>/WEB-INF/tlds/standart/x.tld</taglib-location>
 	</taglib>
   </web:jsp-config>
-  <web:servlet>
-  	<web:servlet-name>StartupServlet</web:servlet-name>
-  </web:servlet>
+  
 </web-app>

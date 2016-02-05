@@ -22,7 +22,6 @@ public class StartupServlet extends HttpServlet {
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
-		// TODO Auto-generated method stub
 		super.init(config);
 		// Загрузить список пользователей
 		UserList userList = UserListHelper.readUserList(getServletContext());
