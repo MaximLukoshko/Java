@@ -10,6 +10,10 @@
 <body>
 	<jsp:include page="static/header.jsp"></jsp:include>
 	<h1>Main Page</h1>
-	<my:layout2Columns leftColumnWidth="68%" rightColumnWidth="28"></my:layout2Columns>
+	<my:layout2Columns leftColumnWidth="68%" rightColumnWidth="28">
+	
+	</my:layout2Columns>
+	<%-- Вставить нижний заголовок страницы --%>
+	<%@ include file="static/footer.jsp" %>
 </body>
 </html>
