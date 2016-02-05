@@ -8,8 +8,7 @@
 	<load-on-startup>1</load-on-startup>
 </servlet>
 
-  <welcome-file-list>
-    <welcome-file>/StartupServlet.do</welcome-file><welcome-file>jsp_pages/index.jsp</welcome-file>
+  <welcome-file-list><welcome-file>jsp_pages/index.jsp</welcome-file>
   </welcome-file-list>
   <jsp-config>
   	<taglib>
@@ -17,23 +16,23 @@
   		<taglib-location>tags/taglib.tld</taglib-location>
   	</taglib><taglib>
   		<taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
-  		<taglib-location>tags/c.tld</taglib-location>
+  		<taglib-location>tags/standart/c.tld</taglib-location>
   	</taglib>
 	<taglib>
 		<taglib-uri>http://java.sun.com/jsp/jstl/fmt</taglib-uri>
-		<taglib-location>/WEB-INF/tlds/standart/fmt.tld</taglib-location>
+		<taglib-location>tags/standart/fmt.tld</taglib-location>
 	</taglib>
 	<taglib>
 		<taglib-uri>http://java.sun.com/jsp/jstl/functions</taglib-uri>
-		<taglib-location>/WEB-INF/tlds/standart/fn.tld</taglib-location>
+		<taglib-location>tags/standart/fn.tld</taglib-location>
 	</taglib>
 	<taglib>
 		<taglib-uri>http://java.sun.com/jsp/jstl/sql</taglib-uri>
-		<taglib-location>/WEB-INF/tlds/standart/sql.tld</taglib-location>
+		<taglib-location>tags/standart/sql.tld</taglib-location>
 	</taglib>
 	<taglib>
 		<taglib-uri>http://java.sun.com/jsp/jstl/xml</taglib-uri>
-		<taglib-location>/WEB-INF/tlds/standart/x.tld</taglib-location>
+		<taglib-location>tags/standart/x.tld</taglib-location>
 	</taglib>
   </jsp-config>
 </web-app>
