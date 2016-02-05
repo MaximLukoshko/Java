@@ -23,7 +23,6 @@ public class DeleteAd extends SimpleTagSupport {
 
 	@Override
 	public void doTag() throws JspException, IOException {
-		// TODO Auto-generated method stub
 		// Изначально описание ошибки = null (т.е. ошибки нет)
 		String errorMessage = null;
 		// Извлечь из контекста приложения общий список объявлений
@@ -31,7 +30,7 @@ public class DeleteAd extends SimpleTagSupport {
 		// Извлечь из сессии описание текущего пользователя
 		User currentUser = (User) getJspContext().getAttribute("authUser", PageContext.SESSION_SCOPE);
 		// Проверить, что объявление изменяется его автором, а не чужаком
-		if (currentUser == null || currentUser.getId() != ad.getAuthorId()) {
+		if (currentUser == null || (ad.getId() > 0 && currentUser.getId() != ad.getAuthorId())) {
 			errorMessage = "You can not change this add";
 		}
 		if (errorMessage == null) {
