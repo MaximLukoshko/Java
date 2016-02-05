@@ -30,4 +30,7 @@
 		<taglib-location>/WEB-INF/tlds/standart/x.tld</taglib-location>
 	</taglib>
   </web:jsp-config>
+  <web:servlet>
+  	<web:servlet-name>StartupServlet</web:servlet-name>
+  </web:servlet>
 </web-app>
