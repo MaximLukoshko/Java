@@ -6,10 +6,10 @@
 	rtexprvalue="false"%>
 
 <div style="clear: both; width: 100%">
-	<div style="float: left; width: ${leftColumnBody}%">
+	<div style="float: left; width: ${leftColumnWidth}%">
 		<div style="padding: 15px">${leftColumnBody}</div>
 	</div>
-	<div style="float: right; width: ${rightColumnBody}%">
+	<div style="float: right; width: ${rightColumnWidth}%">
 		<div style="padding: 15px">${rightColumnBody}</div>
 	</div>
 	<div style="clear: both; width: 100%"></div>
