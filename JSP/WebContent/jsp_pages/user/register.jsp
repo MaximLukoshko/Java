@@ -11,6 +11,7 @@
 <title>Register new user</title>
 </head>
 <body>
+	<jsp:include page="../static/header.jsp"></jsp:include>
 	<comp:layout1Column>
 		<h1>Register new user</h1>
 		<comp:errorMessage />
@@ -45,5 +46,6 @@
 			</table>
 		</form>
 	</comp:layout1Column>
+	<%@ include file="../static/footer.jsp"%>
 </body>
 </html>
