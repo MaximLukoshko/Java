@@ -33,6 +33,7 @@
 						<c:url value="user/register.jsp" />
 					</jsp:attribute>
 				</comp:registerButton>
+			
 			</c:if>
 		</jsp:attribute>
 

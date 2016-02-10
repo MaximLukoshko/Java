@@ -22,9 +22,10 @@
 <c:if test="${sessionScope.authUser!=null}">
 	<div style="background-color: #ccc; padding: 5px">
 		<div style="float: right; margin-right: 5px">
-			[ <a href="<c:url value="/doLogout.jsp" />">Выйти</a>]
+			[ <a
+				href="<c:url value= "/jsp_pages/user/doLogout.jsp" />">Log Out</a>]
 		</div>
-		Вы вошли как:
+		You entered as:
 		<c:out value="${sessionScope.authUser.name}" />
 		(
 		<c:out value="${sessionScope.authUser.login}" />
