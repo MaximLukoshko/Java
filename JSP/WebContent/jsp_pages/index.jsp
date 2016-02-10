@@ -21,18 +21,19 @@
 		</jsp:attribute>
 		<jsp:attribute name="rightColumnBody">
 			<comp:errorMessage />
-			<comp:loginForm>
-				<jsp:attribute name="processor">
-					<c:url value="user/doLogin.jsp" />
-				</jsp:attribute>
-			</comp:loginForm>
-			<p>
-			<comp:registerButton>
-				 <jsp:attribute name="processor">
-					<c:url value="user/register.jsp" />
-				</jsp:attribute>
-			</comp:registerButton>
-		
+			<c:if test="${sessionScope.authUser==null }">
+				<comp:loginForm>
+					<jsp:attribute name="processor">
+						<c:url value="user/doLogin.jsp" />
+					</jsp:attribute>
+				</comp:loginForm>
+				<p>
+				<comp:registerButton>
+					 <jsp:attribute name="processor">
+						<c:url value="user/register.jsp" />
+					</jsp:attribute>
+				</comp:registerButton>
+			</c:if>
 		</jsp:attribute>
 
 
