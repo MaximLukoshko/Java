@@ -23,7 +23,7 @@
 			<comp:errorMessage />
 			<comp:loginForm>
 				<jsp:attribute name="processor">
-					<c:url value="/jsp_pages/users/doLogin.jsp" />
+					<c:url value="user/doLogin.jsp" />
 				</jsp:attribute>
 			</comp:loginForm>
 			<p>
