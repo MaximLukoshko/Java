@@ -3,7 +3,7 @@
   <description>description</description>
   <tlib-version>1.0</tlib-version>
   <short-name>NMTOKEN</short-name>
-  <uri>http://maxim.lukoshko.rfe.bsu.by/lab9/mytags</uri>
+  <uri></uri>
   <tag>
   	<description>Adding new User</description>
   	<name>addUser</name>

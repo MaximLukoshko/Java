@@ -4,7 +4,7 @@
 
 <c:if test="${sessionScope.authUser==null }">
 	<form action="${processor }" method="post">
-		<table border="0" cellspacing="0" cellpading="5">
+		<table border="0">
 			<tr>
 				<td>Login:</td>
 				<td><input type="text" name="login" value=""></td>
@@ -15,7 +15,7 @@
 				value=""></td>
 			</tr>
 			<tr>
-				<td>&nbsp;</td>
+				<%-- <td>&nbsp;</td> --%>
 				<td><input type="submit" value="Войти"></td>
 			</tr>
 			
