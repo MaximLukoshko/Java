@@ -29,9 +29,10 @@
 			<p>
 			<comp:registerButton>
 				 <jsp:attribute name="processor">
-					<c:url value="/jsp_pages/users/register.jsp" />
+					<c:url value="user/register.jsp" />
 				</jsp:attribute>
 			</comp:registerButton>
+		
 		</jsp:attribute>
 
 
