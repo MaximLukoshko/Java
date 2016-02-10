@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib prefix="my" tagdir="/WEB-INF/tags/taglib.tld"%>
+<%@taglib prefix="my" uri="/WEB-INF/taglibs/taglib.tld"%>
 
 <fmt:requestEncoding value="UTF-8" />
 
@@ -13,6 +13,6 @@
 		<c:redirect url="cabinet.jsp"></c:redirect>
 	</c:when>
 	<c:otherwise>
-		<c:redirect url="/index.jsp"></c:redirect>
+		<c:redirect url="../index.jsp"></c:redirect>
 	</c:otherwise>
 </c:choose>
