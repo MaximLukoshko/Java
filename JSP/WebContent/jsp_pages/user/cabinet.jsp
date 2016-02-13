@@ -9,10 +9,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Expires" content="Mon, 11 May 1998 0:00:00 GMT">
+<meta http-equiv="Last-Modified" content="Fri, Jan 25 2099 23:59:59 GMT">
 <title>Cabinet</title>
 </head>
 <body>
 	<jsp:include page="../static/header.jsp"></jsp:include>
+	<comp:newButton />
 
 	<%@ include file="../static/footer.jsp"%>
 </body>

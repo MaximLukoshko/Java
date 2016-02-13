@@ -24,13 +24,13 @@
 			<c:if test="${sessionScope.authUser==null }">
 				<comp:loginForm>
 					<jsp:attribute name="processor">
-						<c:url value="jsp_pages/user/doLogin.jsp" />
+						<c:url value="/jsp_pages/user/doLogin.jsp" />
 					</jsp:attribute>
 				</comp:loginForm>
 				<p>
 				<comp:registerButton>
 					 <jsp:attribute name="processor">
-						<c:url value="jsp_pages/user/register.jsp" />
+						<c:url value="/jsp_pages/user/register.jsp" />
 					</jsp:attribute>
 				</comp:registerButton>
 			
