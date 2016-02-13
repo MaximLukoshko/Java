@@ -16,6 +16,7 @@
 <body>
 	<jsp:include page="../static/header.jsp"></jsp:include>
 	<comp:newButton />
+	<h1>Personal cabinet</h1>
 
 	<%@ include file="../static/footer.jsp"%>
 </body>
