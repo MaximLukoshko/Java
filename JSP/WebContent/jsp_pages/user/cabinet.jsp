@@ -17,7 +17,11 @@
 	<jsp:include page="../static/header.jsp"></jsp:include>
 	<comp:newButton />
 	<h1>Personal cabinet</h1>
-
+	<comp:layout1Column>
+		<my:getAds var="adListing" range="all" sort="${sessionScope.sort}"
+			dir="${sessionScope.dir}" />
+		<comp:adListing adListing="${adListing}" editMode="false" />
+	</comp:layout1Column>
 	<%@ include file="../static/footer.jsp"%>
 </body>
 </html>

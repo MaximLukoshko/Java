@@ -58,10 +58,10 @@
 				<td>
 					<%-- Вывести тему объявления, являющуюся гиперссылкой на страницу детального просмотра объявления --%>
 					<a
-					href="<c:url value="/jsp_pages/ad/viewAd.jsp"><c:param
-name="id" value="${ad.id}" /></c:url>"><c:out
-							value="${ad.subject}" /></a> <%-- Кнопки редактирования / удаления объявлений показываются только в случае включенного режима редактирования --%>
-					<c:if test="${editMode==true}">
+					href="<c:url value="/jsp_pages/ad/viewAd.jsp">
+					<c:param name="id" value="${ad.id}" /></c:url>">
+						<c:out value="${ad.subject}" />
+				</a> <c:if test="${editMode==true}">
 						<comp:editButton ad="${ad}" />
 						<comp:deleteButton ad="${ad}" />
 					</c:if>
