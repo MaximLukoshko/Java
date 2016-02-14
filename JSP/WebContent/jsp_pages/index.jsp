@@ -16,7 +16,9 @@
 		<jsp:attribute name="leftColumnBody">
 			 <ad:getAds var="adListing" range="all" sort="${sessionScope.sort}"
 				dir="${sessionScope.dir}" />
-			<comp:adListing adListing="adListing" editMode="false"/>	
+				<%-- 
+				--%>
+			<comp:adListing adListing="${adListing}" editMode="false" />	
 		</jsp:attribute>
 		<jsp:attribute name="rightColumnBody">
 			<comp:errorMessage />
@@ -32,6 +34,8 @@
 						<c:url value="/jsp_pages/user/register.jsp" />
 					</jsp:attribute>
 				</comp:registerButton>
+			
+			
 			
 			
 			</c:if>
