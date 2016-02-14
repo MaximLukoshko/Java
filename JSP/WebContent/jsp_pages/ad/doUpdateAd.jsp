@@ -6,7 +6,9 @@
 
 <fmt:requestEncoding value="UTF-8" />
 
+<%-- 
 <c:remove var="adData" />
+--%>
 <c:choose>
 	<c:when test="${param.id>0 }">
 		<my:getAds id="${param.id }" var="ad" />

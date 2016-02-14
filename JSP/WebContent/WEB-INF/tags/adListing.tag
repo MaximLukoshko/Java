@@ -56,7 +56,6 @@
 		<c:forEach items="${adListing}" var="ad">
 			<tr valign="top">
 				<td>
-					<%-- Вывести тему объявления, являющуюся гиперссылкой на страницу детального просмотра объявления --%>
 					<a
 					href="<c:url value="/jsp_pages/ad/viewAd.jsp">
 					<c:param name="id" value="${ad.id}" /></c:url>">
@@ -66,7 +65,6 @@
 						<comp:deleteButton ad="${ad}" />
 					</c:if>
 				</td>
-				<%-- Вывести автора объявления --%>
 				<td><c:out value="${ad.author.name}" /></td>
 				<td><fmt:formatDate pattern="hh:mm:ss dd-MM-yyyy"
 						value="${ad.lastModifiedDate}" /></td>

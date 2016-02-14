@@ -13,7 +13,7 @@
 		<c:set var="title" value="Changing ad" scope="page" />
 		<c:if test="${sessionScope.errorMessage==null }">
 			<my:getAds id="${param.id }" var="ad" />
-			<c:set var="adData" value="${ad }]" scope="session" />
+			<c:set var="adData" value="${ad }" scope="session" />
 		</c:if>
 	</c:otherwise>
 </c:choose>
