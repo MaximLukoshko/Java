@@ -14,7 +14,7 @@
 		<c:set var="title" value="Changing ad" scope="page" />
 		<c:if test="${sessionScope.errorMessage==null }">
 			<my:getAds id="${param.id }" var="ad" />
-			<c:set var="addata" value="${ad }]" scope="session" />
+			<c:set var="adData" value="${ad }]" scope="session" />
 		</c:if>
 	</c:otherwise>
 </c:choose>
@@ -27,9 +27,11 @@
 <body>
 	<jsp:include page="../static/header.jsp"></jsp:include>
 	<comp:layout1Column>
-		<h1>Register new user</h1>
+		<h1>
+			<c:out value="${title }" />
+		</h1>
 		<comp:errorMessage />
-		<form action="doRegister.jsp" method="post">
+		<form action="doUpdateAd.jsp" method="post">
 			<table>
 				<tr>
 					<td>Login:</td>
@@ -52,7 +54,7 @@
 						value="${sessionScope.userData.email }"></td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="Sign In"></td>
+					<td><input type="submit" value="Save"></td>
 					<td><input type="button" value="Cancel"
 						onclick="window.location='<c:url value="../index.jsp" />';"></td>
 				</tr>
