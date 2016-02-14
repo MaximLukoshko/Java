@@ -14,10 +14,9 @@
 	<h1>Main Page</h1>
 	<comp:layout2Columns leftColumnWidth="68%" rightColumnWidth="28">
 		<jsp:attribute name="leftColumnBody">
-			left
-			<%-- <ad:getAds var="adListing" range="all" sort="${sessionScope.sort}"
-				dir="${sessionScope.dir}" />--%>
-			<comp:adListing />	
+			 <ad:getAds var="adListing" range="all" sort="${sessionScope.sort}"
+				dir="${sessionScope.dir}" />
+			<comp:adListing adListing="adListing" editMode="false"/>	
 		</jsp:attribute>
 		<jsp:attribute name="rightColumnBody">
 			<comp:errorMessage />
@@ -33,6 +32,7 @@
 						<c:url value="/jsp_pages/user/register.jsp" />
 					</jsp:attribute>
 				</comp:registerButton>
+			
 			
 			</c:if>
 		</jsp:attribute>
