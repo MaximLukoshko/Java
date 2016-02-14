@@ -7,7 +7,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <c:choose>
-	<c:when test="${param.id==null || param.id==null}">
+	<c:when test="${param.id==null || param.id==0}">
 		<c:set var="title" value="Creating ad" scope="page" />
 	</c:when>
 	<c:otherwise>
@@ -32,26 +32,20 @@
 		</h1>
 		<comp:errorMessage />
 		<form action="doUpdateAd.jsp" method="post">
+			<c:if test="${param.id>0 }">
+				<input type="hidden" name="id" value="${param.id }">
+			</c:if>
 			<table>
 				<tr>
-					<td>Login:</td>
-					<td><input type="text" name="login"
-						value="${sessionScope.userData.login }"></td>
+					<td>Subject:</td>
+					<td><input type="text" name="subject" style="width: 90%"
+						value="${sessionScope.adData.subject }"></td>
 				</tr>
 				<tr>
-					<td>Password:</td>
-					<td><input type="password" name="password"
-						value="${sessionScope.userData.password }"></td>
-				</tr>
-				<tr>
-					<td>Name:</td>
-					<td><input type="text" name="name"
-						value="${sessionScope.userData.name }"></td>
-				</tr>
-				<tr>
-					<td>E-mail:</td>
-					<td><input type="text" name="email"
-						value="${sessionScope.userData.email }"></td>
+					<td>Body:</td>
+					<td><textarea name="body" rows="10" style="width: 90%">
+					<c:out value="${sessionScope.adData.body}" />
+								</textarea></td>
 				</tr>
 				<tr>
 					<td><input type="submit" value="Save"></td>

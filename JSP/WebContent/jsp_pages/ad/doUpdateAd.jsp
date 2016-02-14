@@ -30,4 +30,3 @@
 		<c:redirect url="/jsp_pages/ad/updateAd.jsp" />
 	</c:otherwise>
 </c:choose>
-doUpdateAd

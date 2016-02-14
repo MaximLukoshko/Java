@@ -30,7 +30,7 @@ public class UpdateAd extends SimpleTagSupport {
 		if (ad.getSubject() == null || ad.getSubject().equals("")) {
 			errorMessage = "Subject can not be empty!";
 		} else {
-			if (currentUser == null || currentUser.getId() != ad.getAuthorId()) {
+			if (currentUser == null || (ad.getId() > 0 && currentUser.getId() != ad.getAuthorId())) {
 				errorMessage = "You can not change this add";
 			}
 		}
