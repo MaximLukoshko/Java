@@ -29,7 +29,7 @@ public class Login extends SimpleTagSupport {
 		String errorMessage = null;
 		UserList userList = (UserList) getJspContext().getAttribute("users", PageContext.APPLICATION_SCOPE);
 		if (login == null || login.equals("")) {
-			errorMessage = "Lgin can not be empty!";
+			errorMessage = "Login can not be empty!";
 		} else {
 			User user = userList.findUser(login);
 			if (user == null || !user.getPassword().equals(password)) {

@@ -4,22 +4,19 @@
 
 <c:if test="${sessionScope.authUser==null }">
 	<form action="${processor }" method="post">
-		<table border="0">
+		<table>
 			<tr>
 				<td>Login:</td>
 				<td><input type="text" name="login" value=""></td>
 			</tr>
 			<tr>
 				<td>Password:</td>
-				<td><input type="password" name="password"
-				value=""></td>
+				<td><input type="password" name="password" value=""></td>
 			</tr>
 			<tr>
 				<%-- <td>&nbsp;</td> --%>
-				<td><input type="submit" value="Войти"></td>
+				<td><input type="submit" value="Log In"></td>
 			</tr>
-			
-			
 		</table>
 	</form>
 </c:if>

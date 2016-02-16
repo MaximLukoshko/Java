@@ -12,18 +12,18 @@
 </c:if>
 <%-- Общая декоративная "шапка" для всех страниц --%>
 <div style="background-color: #a0c8ff; padding: 10px;">
-	<img src="/ad/resources/ad.png" width="50" height="53" border="0"
-		align="left">
+	<img src="<c:url  value="/resources/figa.png"/>" width="60" height="60"
+		border="0" align="left">
 	<div
 		style="font-family: 'Trebuchet'; font-size: 30px; height: 53px; margin-left: 80px;">
-		Доска объявлений "Фиговый листок" v.1.0.0</div>
+		Bulletin Board "Figa List:)" v.1.0.0</div>
 </div>
 <%-- Панель отображается если пользователь аутентифицирован --%>
 <c:if test="${sessionScope.authUser!=null}">
 	<div style="background-color: #ccc; padding: 5px">
 		<div style="float: right; margin-right: 5px">
-			[ <a
-				href="<c:url value= "/jsp_pages/user/doLogout.jsp" />">Log Out</a>]
+			[ <a href="<c:url value= "/jsp_pages/user/doLogout.jsp" />">Log
+				Out</a>]
 		</div>
 		You entered as:
 		<c:out value="${sessionScope.authUser.name}" />
