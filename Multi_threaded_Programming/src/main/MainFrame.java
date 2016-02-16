@@ -20,6 +20,7 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 6148383319193422241L;
 	private int WIDTH = 900;
 	private int HEIGHT = 700;
+	private int MAX_BALLS_NUMBER_AT_ADDING = 1000;
 
 	private boolean charisma = false;
 
@@ -76,11 +77,12 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String Number = JOptionPane.showInputDialog(
-						"Input Balls Number \n from 0 to 100", "1");
+						"Input Balls Number \n from 0 to "
+								+ MAX_BALLS_NUMBER_AT_ADDING, "1");
 				try {
 					Integer numberAddingBalls = Integer.parseInt(Number);
 					if (Integer.valueOf(Number) < 0
-							|| Integer.valueOf(Number) > 100) {
+							|| Integer.valueOf(Number) > MAX_BALLS_NUMBER_AT_ADDING) {
 						throw new Exception();
 					}
 					for (int i = 0; i < numberAddingBalls; i++) {
