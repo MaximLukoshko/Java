@@ -79,8 +79,8 @@ public class GetAds extends SimpleTagSupport {
 						result = ad1.getSubject().compareTo(ad2.getSubject());
 					} else if (GetAds.this.sort != null && GetAds.this.sort.equals("author")) {
 						result = ad1.getAuthor().getName().compareTo(ad2.getAuthor().getName());
-//					} else {
-//						result = ad1.getType().compareTo(ad2.getType());
+					} else {
+						result = ad1.getType().compareTo(ad2.getType());
 					}
 
 					if (GetAds.this.dir == 'd') {
