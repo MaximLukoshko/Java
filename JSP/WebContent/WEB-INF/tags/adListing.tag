@@ -40,7 +40,7 @@
 					src="<c:url value="/resources/desc.png"/>" width="20" height="19"
 					border="0"></a>
 			</td>
-			<td>Author<br> <a
+			<td style="width: 20%">Author<br> <a
 				href="<c:url value="${pageContext.request.requestURL}">
 				<c:param name="sort" value="author"/>
 				<c:param name="dir" value="asc"/>
@@ -51,7 +51,7 @@
 					src="<c:url value="/resources/desc.png"/>" width="20" height="19"
 					border="0"></a>
 			</td>
-			<td>Last-Modified Date<br> <a
+			<td style="width: 30%">Last-Modified Date<br> <a
 				href="<c:url value="${pageContext.request.requestURL}">
 				<c:param name="sort" value="date"/>
 				<c:param name="dir" value="asc"/>
@@ -71,7 +71,7 @@
 				<td><c:out value="${ad.type }" /></td>
 				<td><table>
 						<tr valign="middle" align="center">
-							<td style="width: 60%;"><a
+							<td style="width: 30%;"><a
 								href="<c:url value="/jsp_pages/ad/viewAd.jsp"><c:param name="id" value="${ad.id}" /></c:url>">
 									<c:out value="${ad.subject}" />
 							</a></td>
