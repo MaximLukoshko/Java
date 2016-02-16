@@ -12,5 +12,5 @@
 	<div style="float: right; width: ${rightColumnWidth}%">
 		<div style="padding: 15px">${rightColumnBody}</div>
 	</div>
-	<div style="clear: both; width: 100%"></div>
 </div>
+<div style="clear: both;"></div>

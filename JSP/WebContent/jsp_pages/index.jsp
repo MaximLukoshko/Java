@@ -12,7 +12,7 @@
 <body>
 	<jsp:include page="static/header.jsp"></jsp:include>
 	<h1>Main Page</h1>
-	<comp:layout2Columns leftColumnWidth="68%" rightColumnWidth="28">
+	<comp:layout2Columns leftColumnWidth="70" rightColumnWidth="30">
 		<jsp:attribute name="leftColumnBody">
 			 <ad:getAds var="adListing" range="all" sort="${sessionScope.sort}"
 				dir="${sessionScope.dir}" />

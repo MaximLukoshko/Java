@@ -89,9 +89,6 @@ public class GetAds extends SimpleTagSupport {
 				}
 
 			};
-			if (authUser != null) {
-				System.out.println(authUser.getName());
-			}
 			if (sortedList.size() == 0) {
 				sortedList = null;
 			} else {

@@ -12,7 +12,7 @@
 
 
 <c:if test="${adListing!=null }">
-	<table>
+	<table style="width: 100%;">
 		<tr bgcolor="#cccccc" align="center">
 			<td>Subject<br> <a
 				href="<c:url value="${pageContext.request.requestURL}">
