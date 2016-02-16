@@ -34,7 +34,7 @@
 			<c:if test="${param.id>0 }">
 				<input type="hidden" name="id" value="${param.id }">
 			</c:if>
-			<table>
+			<table style="width: 100%">
 				<tr>
 					<td>Subject:</td>
 					<td><input type="text" name="subject" style="width: 90%"

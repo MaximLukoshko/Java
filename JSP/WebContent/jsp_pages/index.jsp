@@ -11,14 +11,24 @@
 </head>
 <body>
 	<jsp:include page="static/header.jsp"></jsp:include>
-	<h1>Main Page</h1>
-	<comp:layout2Columns leftColumnWidth="70" rightColumnWidth="30">
-		<jsp:attribute name="leftColumnBody">
+	<h1>List of Ads</h1>
+	<c:choose>
+		<c:when test="${sessionScope.authUser!=null	 }">
+			<comp:layout1Column>
+				<comp:errorMessage />
+				<ad:getAds var="adListing" range="all" sort="${sessionScope.sort}"
+					dir="${sessionScope.dir}" />
+				<comp:adListing adListing="${adListing}" editMode="false" />
+			</comp:layout1Column>
+		</c:when>
+		<c:otherwise>
+			<comp:layout2Columns leftColumnWidth="70" rightColumnWidth="30">
+				<jsp:attribute name="leftColumnBody">
 			 <ad:getAds var="adListing" range="all" sort="${sessionScope.sort}"
-				dir="${sessionScope.dir}" />
+						dir="${sessionScope.dir}" />
 			<comp:adListing adListing="${adListing}" editMode="false" />	
 		</jsp:attribute>
-		<jsp:attribute name="rightColumnBody">
+				<jsp:attribute name="rightColumnBody">
 			<comp:errorMessage />
 			<c:if test="${sessionScope.authUser==null }">
 				<comp:loginForm>
@@ -32,15 +42,13 @@
 						<c:url value="/jsp_pages/user/register.jsp" />
 					</jsp:attribute>
 				</comp:registerButton>
-			
-			
-			
-			
-			</c:if>
+					
+					
+					</c:if>
 		</jsp:attribute>
-
-
-	</comp:layout2Columns>
+			</comp:layout2Columns>
+		</c:otherwise>
+	</c:choose>
 	<%-- Вставить нижний заголовок страницы --%>
 	<%@ include file="static/footer.jsp"%>
 </body>
