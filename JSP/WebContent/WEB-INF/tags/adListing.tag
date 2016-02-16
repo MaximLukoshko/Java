@@ -14,7 +14,7 @@
 <c:if test="${adListing!=null }">
 	<table style="width: 100%;">
 		<tr bgcolor="#cccccc" align="center">
-			<td>Type:<br> <a
+			<td style="width: 8%">Type:<br> <a
 				href="<c:url value="${pageContext.request.requestURL}">
 				<c:param name="sort" value="type"/>
 				<c:param name="dir" value="asc"/></c:url>"><img
@@ -71,7 +71,7 @@
 				<td><c:out value="${ad.type }" /></td>
 				<td><table>
 						<tr valign="middle" align="center">
-							<td style="width: 30%;"><a
+							<td style="width: 70%;"><a
 								href="<c:url value="/jsp_pages/ad/viewAd.jsp"><c:param name="id" value="${ad.id}" /></c:url>">
 									<c:out value="${ad.subject}" />
 							</a></td>
