@@ -43,9 +43,9 @@
 					</td>
 					--%>
 					<td><label><input type="radio" checked="checked"
-							name="type" value="sell">Sell</label><br> <label><input
-							type="radio" value="buy" name="type">Buy</label><br> <label><input
-							type="radio" value="exchange" name="type">Exchange</label><br></td>
+							name="type" value="Sell">Sell</label><br> <label><input
+							type="radio" value="Buy" name="type">Buy</label><br> <label><input
+							type="radio" value="Exchange" name="type">Exchange</label><br></td>
 					<%-- 
 					--%>
 				</tr>

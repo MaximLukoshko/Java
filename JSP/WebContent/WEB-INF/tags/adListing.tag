@@ -67,7 +67,7 @@
 			</td>
 		</tr>
 		<c:forEach items="${adListing}" var="ad">
-			<tr valign="top" align="center">
+			<tr valign="middle" align="center">
 				<td><c:out value="${ad.type }" /></td>
 				<td><table>
 						<tr valign="middle" align="center">
