@@ -66,35 +66,38 @@ public class GetAds extends SimpleTagSupport {
 					// Добавить объявление в список
 					sortedList.add(ad);
 				}
+			}
+			Comparator<Ad> comparator = new Comparator<Ad>() {
 
-				Comparator<Ad> comparator = new Comparator<Ad>() {
-
-					@Override
-					public int compare(Ad ad1, Ad ad2) {
-						int result = 0;
-						if (GetAds.this.sort != null && GetAds.this.sort.equals("date")) {
-							result = ad1.getLastModified() < ad2.getLastModified() ? -1
-									: ad1.getLastModified() > ad2.getLastModified() ? 1 : 0;
-						} else if (GetAds.this.sort != null && GetAds.this.sort.equals("subject")) {
-							result = ad1.getSubject().compareTo(ad2.getSubject());
-						} else {
-							result = ad1.getAuthor().getName().compareTo(ad2.getAuthor().getName());
-						}
-
-						if (GetAds.this.dir == 'd') {
-							result = -result;
-						}
-
-						return result;
+				@Override
+				public int compare(Ad ad1, Ad ad2) {
+					int result = 0;
+					if (GetAds.this.sort != null && GetAds.this.sort.equals("date")) {
+						result = ad1.getLastModified() < ad2.getLastModified() ? -1
+								: ad1.getLastModified() > ad2.getLastModified() ? 1 : 0;
+					} else if (GetAds.this.sort != null && GetAds.this.sort.equals("subject")) {
+						result = ad1.getSubject().compareTo(ad2.getSubject());
+					} else {
+						result = ad1.getAuthor().getName().compareTo(ad2.getAuthor().getName());
 					}
 
-				};
-				if (sortedList.size() == 0) {
-					sortedList = null;
-				} else {
-					Collections.sort(sortedList, comparator);
+					if (GetAds.this.dir == 'd') {
+						result = -result;
+					}
+
+					return result;
 				}
+
+			};
+			if (authUser != null) {
+				System.out.println(authUser.getName());
 			}
+			if (sortedList.size() == 0) {
+				sortedList = null;
+			} else {
+				Collections.sort(sortedList, comparator);
+			}
+
 			getJspContext().setAttribute(GetAds.this.var, sortedList, PageContext.PAGE_SCOPE);
 		}
 	}
