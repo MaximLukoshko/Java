@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="comp" tagdir="/WEB-INF/tags/"%>
 <%@taglib prefix="my" uri="/WEB-INF/taglibs/taglib.tld"%>
 
@@ -43,9 +43,10 @@
 					</td>
 					--%>
 					<td><label><input type="radio" checked="checked"
-							name="type" value="Sell">Sell</label><br> <label><input
-							type="radio" value="Buy" name="type">Buy</label><br> <label><input
-							type="radio" value="Exchange" name="type">Exchange</label><br></td>
+							name="type" id="1" value="Sell">Sell</label><br> <label><input
+							id="2" type="radio" value="Buy" name="type"
+							<c:if test="${fn:contains(sessionScope.adData.type, 'Buy')}">checked="checked"</c:if>>Buy</label><br>
+						<label><input type="radio" value="Exchange" name="type" <c:if test="${fn:contains(sessionScope.adData.type, 'Exchange')}">checked="checked"</c:if>>Exchange</label><br></td>
 					<%-- 
 					--%>
 				</tr>
