@@ -14,7 +14,7 @@
 <c:if test="${adListing!=null }">
 	<table style="width: 100%;">
 		<tr bgcolor="#cccccc" align="center">
-			<td style="width: 8%">Type:<br> <a
+			<td style="width: 8%">Category:<br> <a
 				href="<c:url value="${pageContext.request.requestURL}">
 				<c:param name="sort" value="type"/>
 				<c:param name="dir" value="asc"/></c:url>"><img
@@ -68,7 +68,7 @@
 		</tr>
 		<c:forEach items="${adListing}" var="ad">
 			<tr valign="middle" align="center">
-				<td><c:out value="${ad.type }" /></td>
+				<td><c:out value="${ad.category }" /></td>
 				<td><table>
 						<tr valign="middle" align="center">
 							<td style="width: 70%;"><a
