@@ -48,7 +48,7 @@ public class UserPasswordBase {
 
 	}
 
-	public static boolean authorize(String userName, String userPassword) {
+	public boolean authorize(String userName, String userPassword) {
 		boolean userExist = false;
 		try {
 			userExist = findUser(userName, userPassword);
@@ -91,7 +91,7 @@ public class UserPasswordBase {
 		stmt.executeUpdate(setOnlineQuerry);
 	}
 
-	public static void logOut(String userName) throws SQLException {
+	public void logOut(String userName) throws SQLException {
 		setOffline(userName);
 	}
 

@@ -23,7 +23,7 @@ public class Main extends JFrame {
 			@Override
 			public void run() {
 				final Main frame = new Main();
-				frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+				 frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 				frame.setVisible(true);
 			}
 		}).start();

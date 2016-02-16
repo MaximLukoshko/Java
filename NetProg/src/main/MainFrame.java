@@ -146,7 +146,7 @@ public class MainFrame extends JFrame {
 			do {
 				userName = "";
 				userPassword = "";
-				while (userName.toLowerCase().equals("all") || userName.isEmpty()) {
+				while (userName == null || userName.toLowerCase().equals("all") || userName.isEmpty()) {
 					userName = JOptionPane.showInputDialog(MainFrame.this, "Enter your name:\n", "Log in dialog",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
@@ -155,7 +155,7 @@ public class MainFrame extends JFrame {
 							"Log in dialog", JOptionPane.INFORMATION_MESSAGE);
 				}
 			} while (!InstantMessenger.logIn(userName, userPassword));
-			textFieldFrom.setText(userName);
+			textFieldFrom.setText(userName.toLowerCase());
 		}
 		textFieldFromIP.setText(listener.getIP());
 
