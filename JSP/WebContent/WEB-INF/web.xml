@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd ">
+  <display-name>JSP</display-name>
+<servlet>
+	<display-name>StartupServlet</display-name>
+	<servlet-name>StartupServlet</servlet-name>
+	<servlet-class>servlet.StartupServlet</servlet-class>
+	<load-on-startup>1</load-on-startup>
+</servlet>
+
+  <welcome-file-list><welcome-file>jsp_pages/index.jsp</welcome-file>
+  </welcome-file-list>
+  <jsp-config>
+  	<taglib>
+  		<taglib-uri>token</taglib-uri>
+  		<taglib-location>tags/taglib.tld</taglib-location>
+  	</taglib><taglib>
+  		<taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
+  		<taglib-location>tags/standart/c.tld</taglib-location>
+  	</taglib>
+	<taglib>
+		<taglib-uri>http://java.sun.com/jsp/jstl/fmt</taglib-uri>
+		<taglib-location>tags/standart/fmt.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>http://java.sun.com/jsp/jstl/functions</taglib-uri>
+		<taglib-location>tags/standart/fn.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>http://java.sun.com/jsp/jstl/sql</taglib-uri>
+		<taglib-location>tags/standart/sql.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>http://java.sun.com/jsp/jstl/xml</taglib-uri>
+		<taglib-location>tags/standart/x.tld</taglib-location>
+	</taglib>
+  </jsp-config>
+</web-app>
