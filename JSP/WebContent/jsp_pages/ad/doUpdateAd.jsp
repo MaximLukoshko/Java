@@ -19,6 +19,7 @@
 	</c:otherwise>
 </c:choose>
 
+<jsp:setProperty property="type" name="adData" />
 <jsp:setProperty property="subject" name="adData" />
 <jsp:setProperty property="body" name="adData" />
 <my:updateAd ad="${adData }" />

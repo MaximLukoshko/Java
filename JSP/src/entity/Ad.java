@@ -21,6 +21,8 @@ public class Ad implements Identifiable, Serializable {
 	// Последнее время модификации сообщения как объект Date
 	transient private Date lastModifiedDate;
 
+	private String type;
+
 	public Ad() {
 		lastModified = Calendar.getInstance().getTimeInMillis();
 	}
@@ -83,6 +85,14 @@ public class Ad implements Identifiable, Serializable {
 	@Override
 	public int getId() {
 		return id;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

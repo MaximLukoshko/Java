@@ -36,6 +36,20 @@
 			</c:if>
 			<table style="width: 100%">
 				<tr>
+					<td>Type:</td>
+					<%-- 
+					<td>
+					<select n/>>
+					</td>
+					--%>
+					<td><label><input type="radio" checked="checked"
+							name="type" value="sell">Sell</label><br> <label><input
+							type="radio" value="buy" name="type">Buy</label><br> <label><input
+							type="radio" value="exchange" name="type">Exchange</label><br></td>
+					<%-- 
+					--%>
+				</tr>
+				<tr>
 					<td>Subject:</td>
 					<td><input type="text" name="subject" style="width: 90%"
 						value="${sessionScope.adData.subject }"></td>
