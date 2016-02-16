@@ -37,18 +37,12 @@
 			<table style="width: 100%">
 				<tr>
 					<td>Type:</td>
-					<%-- 
-					<td>
-					<select n/>>
-					</td>
-					--%>
 					<td><label><input type="radio" checked="checked"
 							name="type" id="1" value="Sell">Sell</label><br> <label><input
 							id="2" type="radio" value="Buy" name="type"
 							<c:if test="${fn:contains(sessionScope.adData.type, 'Buy')}">checked="checked"</c:if>>Buy</label><br>
-						<label><input type="radio" value="Exchange" name="type" <c:if test="${fn:contains(sessionScope.adData.type, 'Exchange')}">checked="checked"</c:if>>Exchange</label><br></td>
-					<%-- 
-					--%>
+						<label><input type="radio" value="Exchange" name="type"
+							<c:if test="${fn:contains(sessionScope.adData.type, 'Exchange')}">checked="checked"</c:if>>Exchange</label><br></td>
 				</tr>
 				<tr>
 					<td>Subject:</td>

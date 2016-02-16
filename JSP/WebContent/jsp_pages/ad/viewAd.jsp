@@ -26,6 +26,9 @@
 			<fmt:formatDate value="${ad.lastModifiedDate }"
 				pattern="hh:mm:ss dd.MM.yyyy" />
 		</div>
+		<div style="border: 1px solid black; padding: 3px;">
+			Type: <c:out value="${ad.type }" />
+		</div>
 		<div style="border: 1px solid black; padding: 20px;">
 			<c:out value="${ad.body }" />
 		</div>
