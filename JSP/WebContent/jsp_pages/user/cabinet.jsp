@@ -18,7 +18,7 @@
 	<comp:newButton />
 	<h1>Personal cabinet</h1>
 	<comp:layout1Column>
-		<my:getAds var="adListing" range="all" sort="${sessionScope.sort}"
+		<my:getAds var="adListing" range="my" sort="${sessionScope.sort}"
 			dir="${sessionScope.dir}" />
 		<comp:adListing adListing="${adListing}" editMode="true" />
 	</comp:layout1Column>
