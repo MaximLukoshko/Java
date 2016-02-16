@@ -27,7 +27,7 @@
 				pattern="hh:mm:ss dd.MM.yyyy" />
 		</div>
 		<div style="border: 1px solid black; padding: 3px;">
-			Type: <c:out value="${ad.type }" />
+			Category: <c:out value="${ad.category }" />
 		</div>
 		<div style="border: 1px solid black; padding: 20px;">
 			<c:out value="${ad.body }" />
