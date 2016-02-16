@@ -93,4 +93,9 @@
 <rtexprvalue>true</rtexprvalue>
 </attribute>
 </tag>
+	<tag>
+		<name>clearErrorMessage</name>
+		<tag-class>tag.ClearErrorMessage</tag-class>
+		<body-content>empty</body-content>
+	</tag>
 </taglib>
