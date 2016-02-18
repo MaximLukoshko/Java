@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="comp" tagdir="/WEB-INF/tags/"%>
 
 <%-- Обработать параметр сортировки --%>
 <c:if test="${param.sort!=null}">
@@ -21,14 +22,20 @@
 <%-- Панель отображается если пользователь аутентифицирован --%>
 <c:if test="${sessionScope.authUser!=null}">
 	<div style="background-color: #ccc; padding: 5px">
-		<div style="float: right; margin-right: 5px">
-			[ <a href="<c:url value= "/jsp_pages/user/doLogout.jsp" />">Log
-				Out</a>]
+		<div
+			style="background-color: #ccc; border: 1px solid black; float: right; margin: 1px; margin-top: 1px; padding: 1px 0px; text-align: center; width: 150px;">
+			<a href="<c:url value= "/jsp_pages/user/doLogout.jsp" />">Log Out</a>
 		</div>
-		You entered as:
-		<c:out value="${sessionScope.authUser.name}" />
-		(
-		<c:out value="${sessionScope.authUser.login}" />
-		)
+		<div style="float: left;">
+			You entered as:
+			<c:out value="${sessionScope.authUser.name}" />
+			(
+			<c:out value="${sessionScope.authUser.login}" />
+			)
+		</div>
+
+		<comp:mainButton />
+		<comp:cabinetButton />
+		<div style="clear: both;"></div>
 	</div>
 </c:if>

@@ -41,7 +41,8 @@
 							name="category" id="1" value="Sell">Sell</label><br> <label><input
 							id="2" type="radio" value="Buy" name="category"
 							<c:if test="${fn:contains(sessionScope.adData.category, 'Buy')}">checked="checked"</c:if>>Buy</label><br>
-						<label><input type="radio" value="Exchange" name="category"
+						<label><input type="radio" value="Exchange"
+							name="category"
 							<c:if test="${fn:contains(sessionScope.adData.category, 'Exchange')}">checked="checked"</c:if>>Exchange</label><br></td>
 				</tr>
 				<tr>
@@ -58,7 +59,7 @@
 				<tr>
 					<td><input type="submit" value="Save"></td>
 					<td><input type="button" value="Cancel"
-						onclick="window.location='<c:url value="../index.jsp" />';"></td>
+						onclick="window.location='<c:url value="/jsp_pages/user/cabinet.jsp" />';"></td>
 				</tr>
 
 			</table>
