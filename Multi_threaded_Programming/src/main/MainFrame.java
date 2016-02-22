@@ -110,7 +110,7 @@ public class MainFrame extends JFrame {
 				try {
 					Integer numberAddingBalls = Integer.parseInt(Number);
 					if (Integer.valueOf(Number) < 0
-							|| Integer.valueOf(Number) > 100) {
+							|| Integer.valueOf(Number) > MAX_BALLS_NUMBER_AT_ADDING) {
 						throw new Exception();
 					}
 					boolean go = true;
