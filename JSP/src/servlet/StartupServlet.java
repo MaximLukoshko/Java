@@ -14,7 +14,7 @@ import helper.UserListHelper;
 /**
  * Servlet implementation class StartupServlet
  */
-@WebServlet("/StartupServlet")
+@WebServlet("/StartupServlet.do")
 public class StartupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,6 @@ public class StartupServlet extends HttpServlet {
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
-		// TODO Auto-generated method stub
 		super.init(config);
 		// Загрузить список пользователей
 		UserList userList = UserListHelper.readUserList(getServletContext());
@@ -41,6 +40,7 @@ public class StartupServlet extends HttpServlet {
 			// Инициализировать значения свойства lastModifiedDate
 			ad.setLastModified(ad.getLastModified());
 		}
+		System.out.println("Servlet is loaded");
 	}
-
+	
 }
