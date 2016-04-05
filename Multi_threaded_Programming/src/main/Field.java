@@ -30,6 +30,7 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 		}
 	});
 
+	private boolean ChangingSpeed = false;
 	private int mouseX;
 	private int mouseY;
 	private int mouseX_UP;
@@ -109,7 +110,9 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		this.pause();
+		if (ChangingSpeed) {
+			this.pause();
+		}
 		mouseX = e.getX();
 		mouseY = e.getY();
 	}
@@ -118,7 +121,12 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 	public void mouseReleased(MouseEvent e) {
 		mouseX_UP = e.getX();
 		mouseY_UP = e.getY();
-		this.resume();
+		if (ChangingSpeed) {
+			for (BouncingBall bouncingBall : ArrayBalls) {
+				bouncingBall.onChangeSpeed(mouseX, mouseY, mouseX_UP, mouseY_UP);
+			}
+			this.resume();
+		}
 	}
 
 	@Override

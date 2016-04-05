@@ -53,8 +53,7 @@ public class BouncingBall implements Runnable {
 	public void Paint(Graphics2D canvas) {
 		canvas.setColor(color);
 		canvas.setPaint(color);
-		Ellipse2D.Double ball = new Ellipse2D.Double(x - radius, y - radius,
-				2 * radius, 2 * radius);
+		Ellipse2D.Double ball = new Ellipse2D.Double(x - radius, y - radius, 2 * radius, 2 * radius);
 		canvas.draw(ball);
 		canvas.fill(ball);
 
@@ -63,8 +62,7 @@ public class BouncingBall implements Runnable {
 	public BouncingBall(Field field) {
 		super();
 		this.field = field;
-		radius = new Double(Math.random() * (MAX_RADIUS - MIN_RADIUS))
-				.intValue() + MIN_RADIUS;
+		radius = new Double(Math.random() * (MAX_RADIUS - MIN_RADIUS)).intValue() + MIN_RADIUS;
 		speed = new Double(Math.round(5 * MAX_SPEED / radius)).intValue();
 		if (speed > MAX_SPEED) {
 			speed = MAX_SPEED;
@@ -72,12 +70,18 @@ public class BouncingBall implements Runnable {
 		double angle = Math.random() * 2 * Math.PI;
 		speedX = speed * Math.cos(angle);
 		speedY = speed * Math.sin(angle);
-		color = new Color((float) Math.random(), (float) Math.random(),
-				(float) Math.random());
+		color = new Color((float) Math.random(), (float) Math.random(), (float) Math.random());
 		x = Math.random() * (field.getSize().getWidth() - 2 * radius) + radius;
 		y = Math.random() * (field.getSize().getHeight() - 2 * radius) + radius;
 		Thread thisThread = new Thread(this);
 		thisThread.start();
 	}
 
+	public void onChangeSpeed(int x1, int y1, int x2, int y2) {
+		if (Math.sqrt((x - x1) * (x - x1 + (y - y1) * (y - y1))) < radius) {
+			speedX = (x2 - x1) / 16;
+			speedY = (y1 - y2) / 16;
+			speed = (int) Math.sqrt(speedX * speedX + speedY * speedY);
+		}
+	}
 }
