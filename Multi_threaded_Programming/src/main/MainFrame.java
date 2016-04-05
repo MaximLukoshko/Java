@@ -32,7 +32,7 @@ public class MainFrame extends JFrame {
 	private JMenuItem MenuBallsRemove = new JMenuItem();
 	private JMenuItem MenuControlResume = new JMenuItem();
 	private JMenuItem MenuControlPause = new JMenuItem();
-	private JMenuItem MenuEffectsCharisma = new JMenuItem();
+	private JMenuItem MenuEffectsChangingSpeed = new JMenuItem();
 
 	private Field field = new Field(this);
 
@@ -51,7 +51,7 @@ public class MainFrame extends JFrame {
 		MenuBalls.add(MenuBallsRemove);
 		MenuControl.add(MenuControlResume);
 		MenuControl.add(MenuControlPause);
-		MenuEffects.add(MenuEffectsCharisma);
+		MenuEffects.add(MenuEffectsChangingSpeed);
 
 		MenuBarMyMenu.add(MenuBalls);
 		MenuBarMyMenu.add(MenuControl);
@@ -154,7 +154,7 @@ public class MainFrame extends JFrame {
 		};
 		MenuControlPause.setAction(ActionMenuControlPause);
 
-		Action ActionMenuEffectsCharisma = new AbstractAction("Charisma") {
+		Action ActionMenuEffectsChangingSpeed = new AbstractAction("Changing Speed") {
 
 			/**
 			 * 
@@ -167,7 +167,7 @@ public class MainFrame extends JFrame {
 
 			}
 		};
-		MenuEffectsCharisma.setAction(ActionMenuEffectsCharisma);
+		MenuEffectsChangingSpeed.setAction(ActionMenuEffectsChangingSpeed);
 	}
 
 	public MainFrame() throws HeadlessException {

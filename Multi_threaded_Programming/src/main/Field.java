@@ -32,6 +32,8 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 
 	private int mouseX;
 	private int mouseY;
+	private int mouseX_UP;
+	private int mouseY_UP;
 
 	public void addBall() {
 		ArrayBalls.add(new BouncingBall(this));
@@ -48,8 +50,7 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 		notifyAll();
 	}
 
-	public synchronized void canMove(BouncingBall ball)
-			throws InterruptedException {
+	public synchronized void canMove(BouncingBall ball) throws InterruptedException {
 		if (paused) {
 			wait();
 		}
@@ -108,14 +109,16 @@ public class Field extends JPanel implements MouseMotionListener, MouseListener 
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		this.pause();
+		mouseX = e.getX();
+		mouseY = e.getY();
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		mouseX_UP = e.getX();
+		mouseY_UP = e.getY();
+		this.resume();
 	}
 
 	@Override
