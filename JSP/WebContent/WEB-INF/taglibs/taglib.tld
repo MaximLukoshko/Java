@@ -7,7 +7,7 @@
   <tag>
   	<description>Adding new User</description>
   	<name>addUser</name>
-  	<tag-class>tag.AddUser</tag-class>
+  	<tag-class>controller.tag.AddUser</tag-class>
   	<body-content>empty</body-content>
   	<attribute>
   		<description>User Bean</description>
@@ -19,7 +19,7 @@
 <tag>
 <description>Aunthentificate user</description>
 <name>login</name>
-<tag-class>tag.Login</tag-class>
+<tag-class>controller.tag.Login</tag-class>
 <body-content>empty</body-content>
 <attribute>
 <description>User login</description>
@@ -72,7 +72,7 @@
 <tag>
 <description>Update or create Ad</description>
 <name>updateAd</name>
-<tag-class>tag.UpdateAd</tag-class>
+<tag-class>controller.tag.UpdateAd</tag-class>
 <body-content>empty</body-content>
 <attribute>
 <description>Ad Bean</description>
@@ -84,7 +84,7 @@
 <tag>
 <description>Delete Ad from system</description>
 <name>deleteAd</name>
-<tag-class>tag.DeleteAd</tag-class>
+<tag-class>controller.tag.DeleteAd</tag-class>
 <body-content>empty</body-content>
 <attribute>
   <description>Ad Bean</description>
@@ -95,7 +95,7 @@
 </tag>
 	<tag>
 		<name>clearErrorMessage</name>
-		<tag-class>tag.ClearErrorMessage</tag-class>
+		<tag-class>controller.tag.ClearErrorMessage</tag-class>
 		<body-content>empty</body-content>
 	</tag>
 </taglib>

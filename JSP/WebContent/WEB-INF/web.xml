@@ -4,7 +4,7 @@
 <servlet>
 	<display-name>StartupServlet</display-name>
 	<servlet-name>StartupServlet</servlet-name>
-	<servlet-class>servlet.StartupServlet</servlet-class>
+	<servlet-class>controller.servlet.StartupServlet</servlet-class>
 	<load-on-startup>1</load-on-startup>
 </servlet>
 

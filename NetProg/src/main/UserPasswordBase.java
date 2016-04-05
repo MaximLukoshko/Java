@@ -41,6 +41,7 @@ public class UserPasswordBase {
 			stmt = con.createStatement();
 			String refreshQuery = "update " + table + " set " + userOnlineStatusField + "='0'";
 			stmt.executeUpdate(refreshQuery);
+			System.out.println(con);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
