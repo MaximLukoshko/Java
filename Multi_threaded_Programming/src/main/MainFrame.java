@@ -36,12 +36,13 @@ public class MainFrame extends JFrame {
 
 	private Field field = new Field(this);
 
+	private boolean ChangingSpeed = false;
+
 	void SetPosition() {
 		setSize(WIDTH, HEIGHT);
 
 		Toolkit kit = Toolkit.getDefaultToolkit();
-		setLocation((kit.getScreenSize().width - WIDTH) / 2,
-				(kit.getScreenSize().height - HEIGHT) / 2);
+		setLocation((kit.getScreenSize().width - WIDTH) / 2, (kit.getScreenSize().height - HEIGHT) / 2);
 	}
 
 	void FillFrame() {
@@ -74,21 +75,18 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String Number = JOptionPane.showInputDialog(
-						"Input Balls Number \n from 0 to "
-								+ MAX_BALLS_NUMBER_AT_ADDING, "1");
+				String Number = JOptionPane
+						.showInputDialog("Input Balls Number \n from 0 to " + MAX_BALLS_NUMBER_AT_ADDING, "1");
 				try {
 					Integer numberAddingBalls = Integer.parseInt(Number);
-					if (Integer.valueOf(Number) < 0
-							|| Integer.valueOf(Number) > MAX_BALLS_NUMBER_AT_ADDING) {
+					if (Integer.valueOf(Number) < 0 || Integer.valueOf(Number) > MAX_BALLS_NUMBER_AT_ADDING) {
 						throw new Exception();
 					}
 					for (int i = 0; i < numberAddingBalls; i++) {
 						field.addBall();
 					}
 				} catch (Exception ex) {
-					JOptionPane
-							.showMessageDialog(MainFrame.this, "Check input");
+					JOptionPane.showMessageDialog(MainFrame.this, "Check input");
 				}
 			}
 		};
@@ -103,12 +101,10 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String Number = JOptionPane.showInputDialog(
-						"Input Balls Number \n from 0 to 100", "1");
+				String Number = JOptionPane.showInputDialog("Input Balls Number \n from 0 to 100", "1");
 				try {
 					Integer numberAddingBalls = Integer.parseInt(Number);
-					if (Integer.valueOf(Number) < 0
-							|| Integer.valueOf(Number) > 100) {
+					if (Integer.valueOf(Number) < 0 || Integer.valueOf(Number) > 100) {
 						throw new Exception();
 					}
 					boolean go = true;
@@ -116,8 +112,7 @@ public class MainFrame extends JFrame {
 						go = field.removeBall();
 					}
 				} catch (Exception ex) {
-					JOptionPane
-							.showMessageDialog(MainFrame.this, "Check input");
+					JOptionPane.showMessageDialog(MainFrame.this, "Check input");
 				}
 			}
 		};
@@ -163,7 +158,8 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+				ChangingSpeed = !ChangingSpeed;
+				field.ChangingSpeed(ChangingSpeed);
 
 			}
 		};

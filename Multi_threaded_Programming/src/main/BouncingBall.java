@@ -78,9 +78,9 @@ public class BouncingBall implements Runnable {
 	}
 
 	public void onChangeSpeed(int x1, int y1, int x2, int y2) {
-		if (Math.sqrt((x - x1) * (x - x1 + (y - y1) * (y - y1))) < radius) {
-			speedX = (x2 - x1) / 16;
-			speedY = (y1 - y2) / 16;
+		if (((x - x1) * (x - x1) + (y - y1) * (y - y1)) < radius * radius) {
+			speedX = (x2 - x1) * 10 / field.getWidth();
+			speedY = (y2 - y1) * 10 / field.getHeight();
 			speed = (int) Math.sqrt(speedX * speedX + speedY * speedY);
 		}
 	}
