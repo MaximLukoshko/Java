@@ -13,7 +13,7 @@
 </head>
 <body>
 	<jsp:include page="static/header.jsp"></jsp:include>
-	<comp:findButton processor="jsp_pages/find.jsp" />
+	<comp:findButton processor="find.jsp" />
 	<h1>List of Ads</h1>
 	<c:choose>
 		<c:when test="${sessionScope.authUser!=null	 }">
