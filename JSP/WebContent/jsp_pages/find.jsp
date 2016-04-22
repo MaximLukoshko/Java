@@ -12,15 +12,16 @@
 </head>
 <body>
 	<jsp:include page="static/header.jsp"></jsp:include>
-	<form style="margin: 20px; text-align: center;" method="post">
+	<form style="margin: 20px; text-align: center;"
+		action="<my:findAd key="${param.textForSearching }" var="adListing"/>" method="post">
 		<h2>Text for Searching:</h2>
 		<input type="text" name="textForSearching" value=""> <input
 			type="submit" value="Find">
 	</form>
-
+	<c:if test="${adListing == null }">
+		<my:findAd key="" var="adListing"/>
+	</c:if>
 	<h1>Result:</h1>
-	<my:getAds range="all" var="adListing" sort="${sessionScope.sort}"
-		dir="${sessionScope.dir}" />
 	<comp:adListing adListing="${adListing}" editMode="false" />
 	<%@ include file="static/footer.jsp"%>
 </body>
