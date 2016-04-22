@@ -3,6 +3,8 @@
 <%@taglib prefix="ad" uri="/WEB-INF/taglibs/taglib.tld"%>
 <%@taglib prefix="comp" tagdir="/WEB-INF/tags/"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="comp" tagdir="/WEB-INF/tags/"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,6 +13,7 @@
 </head>
 <body>
 	<jsp:include page="static/header.jsp"></jsp:include>
+	<comp:findButton processor="jsp_pages/find.jsp" />
 	<h1>List of Ads</h1>
 	<c:choose>
 		<c:when test="${sessionScope.authUser!=null	 }">
@@ -42,6 +45,11 @@
 						<c:url value="/jsp_pages/user/register.jsp" />
 					</jsp:attribute>
 				</comp:registerButton>
+					
+					
+					
+					
+					
 					
 					
 					</c:if>

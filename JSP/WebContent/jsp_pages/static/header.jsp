@@ -18,6 +18,7 @@
 		style="font-family: 'Trebuchet'; font-size: 30px; height: 53px; margin-left: 80px;">
 		Bulletin Board "Figa List:)" v.1.0.0</div>
 </div>
+
 <%-- Панель отображается если пользователь аутентифицирован --%>
 <c:if test="${sessionScope.authUser!=null}">
 	<div style="background-color: #ccc; padding: 5px">
