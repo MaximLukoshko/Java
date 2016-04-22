@@ -4,9 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Find Ad</title>
 </head>
 <body>
-
+	<jsp:include page="static/header.jsp"></jsp:include>
+	<form style="margin: 20px; text-align: center;" action="${processor }"
+		method="post">
+		<h2>Text for Searching:</h2>
+		<input type="text" name="textForSearching" value="">
+		<input type="submit" value="Find">
+	</form>
+	<%@ include file="static/footer.jsp"%>
 </body>
 </html>

@@ -24,7 +24,7 @@
 <body>
 	<jsp:include page="../static/header.jsp"></jsp:include>
 	<comp:newButton />
-	<comp:findButton processor="jsp_pages/find.jsp" />
+	<comp:findButton processor="..//find.jsp" />
 	<h1>Personal cabinet</h1>
 	<comp:layout1Column>
 		<my:getAds range="my" var="adListing" sort="${sessionScope.sort}"
